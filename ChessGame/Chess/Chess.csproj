@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
+    <Compile Include="Logic\Board.cs" />
+    <Compile Include="Figures\Constants.cs" />
     <Compile Include="Figures\Horse.cs" />
     <Compile Include="Figures\IFigure.cs" />
     <Compile Include="Figures\ISymbolRepresentation.cs" />
@@ -53,13 +54,15 @@
     <Compile Include="Figures\Rook.cs" />
     <Compile Include="Logic\GameSet.cs" />
     <Compile Include="Logic\UserData.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Logic\Player.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

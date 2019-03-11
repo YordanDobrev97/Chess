@@ -6,10 +6,13 @@
 
     public class UserData
     {
-        private List<string> moves;
+        private Stack<string> moves;
+        private static string firstColor = "Red";
+        private static string secondColor = "Blue";
+
         public UserData()
         {
-            this.moves = new List<string>();
+            this.moves = new Stack<string>();
         }
 
         public string InputUserData()
@@ -25,7 +28,7 @@
 
         private static void ChoiceOfFiguresMessage()
         {
-            Console.Write("Choose color of figures: Black or White? ");
+            Console.Write($"Choose color of figures: {firstColor} or {secondColor}? ");
         }
 
         private void ValidateInputUser(string inputUser)
@@ -34,7 +37,7 @@
             {
                 try
                 {
-                    if (inputUser != "Black" && inputUser != "White")
+                    if (inputUser != firstColor && inputUser != secondColor)
                     {
                         throw new ArgumentException("Invalid figures!");
                     }

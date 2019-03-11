@@ -20,7 +20,9 @@ namespace Chess.Logic
 
             while (!isGameOverPlayer)
             {
-
+                Console.SetCursorPosition(0, 19);
+                Console.Write("Enter your move: ");
+                string moveUser = Console.ReadLine();
             }
         }
     }

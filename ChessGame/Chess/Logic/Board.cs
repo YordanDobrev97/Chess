@@ -23,36 +23,44 @@
 
         private void DrawFigureOfBoard()
         {
-            DrawFirstPartFigures();
-            DrawPawnFigure();
+            Console.BackgroundColor = ConsoleColor.Blue;
+            DrawFirstPartFigures(2, 3);
+            DrawPawnFigure(2, 5);
 
-            
+            ResetColorOfConsole();
+
+            Console.BackgroundColor = ConsoleColor.Red;
+            DrawPawnFigure(2, 15);
+            DrawFirstPartFigures(2, 17);
+
+            ResetColorOfConsole();
         }
 
-        private void DrawPawnFigure()
+        private static void ResetColorOfConsole()
         {
-            int x = 2;
+            Console.ResetColor();
+        }
+
+        private void DrawPawnFigure(int x, int y)
+        {
             for (int i = 0; i < COL_SIZE_BOARD_MATRIX; i++)
             {
                 string currentPaw = this.board[1, i];
-                Console.SetCursorPosition(x, 5);
+                Console.SetCursorPosition(x, y);
                 Console.WriteLine(currentPaw);
                 x += 4;
             }
         }
 
-        private void DrawFirstPartFigures()
+        private void DrawFirstPartFigures(int x, int y)
         {
-            int x = 2;
             for (int i = 0; i < COL_SIZE_BOARD_MATRIX; i++)
             {
                 string currentFigure = board[0, i];
-                Console.SetCursorPosition(x, 3);
+                Console.SetCursorPosition(x, y);
                 Console.WriteLine(currentFigure);
                 x += 4;
             }
-
-
         }
 
         private void FillBoardMatrix()
@@ -77,13 +85,11 @@
         {
             int x = 0;
             int y = 2;
-            for (
-                int row = 1; row <=COL_SIZE_BOARD_MATRIX; row++)
+            for (int row = 1; row <= COL_SIZE_BOARD_MATRIX; row++)
             {
-                for (int col = 1; col <=COL_SIZE_BOARD_MATRIX; col++)
+                for (int col = 1; col <= COL_SIZE_BOARD_MATRIX; col++)
                 {
                     DrawBox(x, y);
-                    
                     x += 4;
                 }
                 x = 0;

@@ -1,12 +1,16 @@
 ﻿namespace ChessEngine
 {
+    using Chess.Common;
+    using Chess.Interfaces;
     using ChessEngine.Engine.Figures;
-    using System;
-
-    public class Board
+    
+    public class Board : IBoard
     {
         private int ROW_SIZE_BOARD_MATRIX = 2;
         private int COL_SIZE_BOARD_MATRIX = 8;
+        private int x;
+        private int y;
+
         private string[,] board;
 
         public Board()
@@ -23,13 +27,15 @@
 
         private void DrawFigureOfBoard()
         {
-            Console.BackgroundColor = ConsoleColor.Blue;
+            ViewUser.SetBackgroundColor(System.ConsoleColor.Red);
+
             DrawFirstPartFigures(2, 3);
             DrawPawnFigure(2, 5);
 
             ResetColorOfConsole();
 
-            Console.BackgroundColor = ConsoleColor.Red;
+            ViewUser.SetBackgroundColor(System.ConsoleColor.Blue);
+
             DrawPawnFigure(2, 15);
             DrawFirstPartFigures(2, 17);
 
@@ -38,7 +44,7 @@
 
         private static void ResetColorOfConsole()
         {
-            Console.ResetColor();
+            ViewUser.ResetColorConsole();
         }
 
         private void DrawPawnFigure(int x, int y)
@@ -46,8 +52,8 @@
             for (int i = 0; i < COL_SIZE_BOARD_MATRIX; i++)
             {
                 string currentPaw = this.board[1, i];
-                Console.SetCursorPosition(x, y);
-                Console.WriteLine(currentPaw);
+                ViewUser.SetCursorPosition(x, y);
+                ViewUser.WriteLine(currentPaw);
                 x += 4;
             }
         }
@@ -57,8 +63,8 @@
             for (int i = 0; i < COL_SIZE_BOARD_MATRIX; i++)
             {
                 string currentFigure = board[0, i];
-                Console.SetCursorPosition(x, y);
-                Console.WriteLine(currentFigure);
+                ViewUser.SetCursorPosition(x, y);
+                ViewUser.WriteLine(currentFigure);
                 x += 4;
             }
         }
@@ -99,12 +105,12 @@
 
         private void DrawBox(int x, int y)
         {
-            Console.SetCursorPosition(x, y);
-            Console.WriteLine("----");
-            Console.SetCursorPosition(x, y + 1);
-            Console.WriteLine("|  ");
-            Console.SetCursorPosition(x, y + 2);
-            Console.Write("----");
+            ViewUser.SetCursorPosition(x, y);
+            ViewUser.WriteLine("----");
+            ViewUser.SetCursorPosition(x, y + 1);
+            ViewUser.WriteLine("|  ");
+            ViewUser.SetCursorPosition(x, y + 2);
+            ViewUser.WriteLine("----");
         }
     }
 }

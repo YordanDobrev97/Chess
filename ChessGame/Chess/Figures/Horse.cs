@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-using Chess.Figures;
-
+﻿
 namespace ChessEngine.Engine.Figures
 {
-    public class Horse : ISymbolRepresentation, IFigure
+    using System.Collections.Generic;
+    using Chess.Figures;
+    using Chess.Interfaces;
+
+    public class Horse : ISymbolRepresentation, IFigure, IMoving
     {
         private List<string> validMoves;
 
@@ -19,13 +21,15 @@ namespace ChessEngine.Engine.Figures
         public int Healt => Constants.HealFigure;
 
         public List<string> ValidMoves => this.validMoves;
-
-        public void AddValidMove()
+        
+        public void Move(int count)
         {
-            for (int i = 1; i <=8; i++)
-            {
-                this.validMoves.Add($"P{i}");
-            }
+            
+        }
+
+        public void Validate()
+        {
+            
         }
     }
 }

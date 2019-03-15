@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,27 +43,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Contracts.cs" />
+    <Compile Include="Common\ViewUser.cs" />
+    <Compile Include="Interfaces\IContracts.cs" />
+    <Compile Include="Controller\MessageExceptionUser.cs" />
+    <Compile Include="Interfaces\IBoard.cs" />
+    <Compile Include="Interfaces\IMoving.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IUserData.cs" />
     <Compile Include="Logic\Board.cs" />
-    <Compile Include="Figures\Constants.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Figures\Horse.cs" />
-    <Compile Include="Figures\IFigure.cs" />
-    <Compile Include="Figures\ISymbolRepresentation.cs" />
+    <Compile Include="Interfaces\IFigure.cs" />
+    <Compile Include="Interfaces\ISymbolRepresentation.cs" />
     <Compile Include="Figures\King.cs" />
     <Compile Include="Figures\Officer.cs" />
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="Figures\Queen.cs" />
     <Compile Include="Figures\Rook.cs" />
     <Compile Include="Logic\GameSet.cs" />
-    <Compile Include="Logic\UserData.cs" />
+    <Compile Include="Common\UserData.cs" />
     <Compile Include="Logic\Player.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

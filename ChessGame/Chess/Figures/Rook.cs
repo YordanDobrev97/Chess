@@ -1,9 +1,10 @@
 ﻿using Chess.Figures;
+using Chess.Interfaces;
 using System.Collections.Generic;
 
 namespace ChessEngine.Engine.Figures
 {
-    public class Rook : ISymbolRepresentation, IFigure
+    public class Rook : ISymbolRepresentation, IFigure, IMoving
     {
         private List<string> validMoves;
 
@@ -15,12 +16,16 @@ namespace ChessEngine.Engine.Figures
         public string Representation => Constants.RookRepresentation;
         public string Name => "Rook";
         public int Healt => Constants.HealFigure;
-
         public List<string> ValidMoves => this.validMoves;
 
-        public void AddValidMove()
+        public void Move(int count)
         {
-            //TODO...
+            
+        }
+
+        public void Validate()
+        {
+            
         }
     }
 }

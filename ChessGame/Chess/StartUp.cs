@@ -2,7 +2,7 @@
 {
     using Chess.Logic;
 
-    public class StartUp
+    class StartUp
     {
         public static void Main()
         {

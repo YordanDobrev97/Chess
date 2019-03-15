@@ -1,8 +1,10 @@
-﻿using ChessEngine.Engine.Figures;
-
+﻿
 namespace Chess
 {
-    public class Player
+    using Chess.Interfaces;
+    using ChessEngine.Engine.Figures;
+
+    public class Player : IPlayer
     {
         private Rook firstRook;
         private Horse firstHorse;

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using Chess.Figures;
-
-namespace ChessEngine.Engine.Figures
+﻿namespace ChessEngine.Engine.Figures
 {
-    public class King : ISymbolRepresentation, IFigure
+    using System.Collections.Generic;
+    using Chess.Figures;
+    using Chess.Interfaces;
+
+    public class King : ISymbolRepresentation, IFigure, IMoving
     {
         private List<string> validMoves;
 
@@ -19,7 +20,16 @@ namespace ChessEngine.Engine.Figures
 
         public void AddValidMove()
         {
-            //TODO...
+        }
+
+        public void Move(int count)
+        {
+            
+        }
+
+        public void Validate()
+        {
+            
         }
     }
 }

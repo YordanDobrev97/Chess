@@ -1,14 +1,17 @@
-﻿using System;
-using ChessEngine;
-
-namespace Chess.Logic
+﻿namespace Chess.Logic
 {
+    using Chess.Common;
+    using ChessEngine;
+
     public static class GameSet
     {
+        private const int x = 0;
+        private const int y = 19;
+
         public static void Start()
         {
-
             bool isGameOverPlayer = false;
+
             UserData userData = new UserData();
             string selectedUserFigure = userData.InputUserData();
 
@@ -18,12 +21,36 @@ namespace Chess.Logic
             Board board = new Board();
             board.LoadingGame();
 
+            bool isTriedWrongMoveUser = false;
+
             while (!isGameOverPlayer)
             {
-                Console.SetCursorPosition(0, 19);
-                Console.Write("Enter your move: ");
-                string moveUser = Console.ReadLine();
+                ViewUser.SetCursorPosition(x, y);
+                ViewUser.MessageUser("Enter your move: ");
+
+                string moveUser = ViewUser.ConsoleReadLine();
+
+                if (!Contracts.IsValidateMoveOfUserValidateMoveOfUser(moveUser))
+                {
+                    ViewUser.ConsoleClear();
+                    ViewUser.ViewUserInvalidMoveMessage();
+                    board.LoadingGame();
+                    isTriedWrongMoveUser = true;
+                }
+                else
+                {
+                    if (isTriedWrongMoveUser)
+                    {
+                        ViewUser.ConsoleClear();
+                        board.LoadingGame();
+                    }
+                    else
+                    {
+                        UserData.MoveFigure(moveUser);
+                    }
+                }
             }
         }
+        
     }
 }

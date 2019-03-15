@@ -1,26 +1,36 @@
-﻿using Chess.Figures;
-using System.Collections.Generic;
-
-namespace ChessEngine.Engine.Figures
+﻿namespace ChessEngine.Engine.Figures
 {
-    public class Pawn : ISymbolRepresentation, IFigure
-    {
-        private List<string> validMoves;
+    using Chess.Common;
+    using Chess.Figures;
+    using Chess.Interfaces;
 
+    public class Pawn : ISymbolRepresentation, IFigure, IMoving
+    {
+        private const int MAX_MOVE = 2;
         public Pawn()
         {
-            this.validMoves = new List<string>();
         }
 
         public string Representation => Constants.PawnRepresentation;
         public string Name => "Pawn";
         public int Healt => Constants.HealFigure;
 
-        public List<string> ValidMoves => this.validMoves;
-
-        public void AddValidMove()
+        public void Move(int count)
         {
-            //TODO...
+            if (count > MAX_MOVE)
+            {
+                ViewUser.MessageUser("Invalid Move Of Pawn");
+            }
+            else
+            {
+                ViewUser.SetCursorPosition(2, 15);
+
+            }
+        }
+
+        public void Validate()
+        {
+            
         }
     }
 }

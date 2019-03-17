@@ -30,7 +30,7 @@
 
                 string moveUser = ViewUser.ConsoleReadLine();
 
-                if (!Contracts.IsValidateMoveOfUserValidateMoveOfUser(moveUser))
+                if (!Contracts.IsValidMoveOfUser(moveUser))
                 {
                     ViewUser.ConsoleClear();
                     ViewUser.ViewUserInvalidMoveMessage();

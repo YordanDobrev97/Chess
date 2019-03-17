@@ -2,7 +2,7 @@
 {
     public class Contracts : IContracts
     {
-        public static bool IsValidateMoveOfUserValidateMoveOfUser(string moveUser)
+        public static bool IsValidMoveOfUser(string moveUser)
         {
             bool isValid = false;
             string typeFigure = moveUser.Split(' ')[0];

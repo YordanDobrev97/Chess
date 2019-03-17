@@ -4,33 +4,14 @@
     using Chess.Figures;
     using Chess.Interfaces;
 
-    public class Pawn : ISymbolRepresentation, IFigure, IMoving
+    public class Pawn : ISymbolRepresentation, IFigure, IRule
     {
         private const int MAX_MOVE = 2;
-        public Pawn()
-        {
-        }
-
+        
         public string Representation => Constants.PawnRepresentation;
         public string Name => "Pawn";
         public int Healt => Constants.HealFigure;
 
-        public void Move(int count)
-        {
-            if (count > MAX_MOVE)
-            {
-                ViewUser.MessageUser("Invalid Move Of Pawn");
-            }
-            else
-            {
-                ViewUser.SetCursorPosition(2, 15);
-
-            }
-        }
-
-        public void Validate()
-        {
-            
-        }
+        public string RulePerMove { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

@@ -4,28 +4,12 @@ using System.Collections.Generic;
 
 namespace ChessEngine.Engine.Figures
 {
-    public class Rook : ISymbolRepresentation, IFigure, IMoving
+    public class Rook : ISymbolRepresentation, IFigure, IRule
     {
-        private List<string> validMoves;
-
-        public Rook()
-        {
-            this.validMoves = new List<string>();
-        }
-
         public string Representation => Constants.RookRepresentation;
         public string Name => "Rook";
         public int Healt => Constants.HealFigure;
-        public List<string> ValidMoves => this.validMoves;
 
-        public void Move(int count)
-        {
-            
-        }
-
-        public void Validate()
-        {
-            
-        }
+        public string RulePerMove { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

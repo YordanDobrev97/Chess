@@ -5,31 +5,14 @@ namespace ChessEngine.Engine.Figures
     using Chess.Figures;
     using Chess.Interfaces;
 
-    public class Horse : ISymbolRepresentation, IFigure, IMoving
+    public class Horse : ISymbolRepresentation, IFigure, IRule
     {
-        private List<string> validMoves;
-
-        public Horse()
-        {
-            this.validMoves = new List<string>();
-        }
-
         public string Representation => Constants.HorseRepresentation;
 
         public string Name => "Horse";
 
         public int Healt => Constants.HealFigure;
 
-        public List<string> ValidMoves => this.validMoves;
-        
-        public void Move(int count)
-        {
-            
-        }
-
-        public void Validate()
-        {
-            
-        }
+        public string RulePerMove { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

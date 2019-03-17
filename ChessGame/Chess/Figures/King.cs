@@ -4,32 +4,12 @@
     using Chess.Figures;
     using Chess.Interfaces;
 
-    public class King : ISymbolRepresentation, IFigure, IMoving
+    public class King : ISymbolRepresentation, IFigure, IRule
     {
-        private List<string> validMoves;
-
-        public King()
-        {
-            this.validMoves = new List<string>();
-        }
-
         public string Representation => Constants.KingRepresentation;
         public string Name => "King";
         public int Healt => Constants.HealFigure;
-        public List<string> ValidMoves => this.validMoves;
 
-        public void AddValidMove()
-        {
-        }
-
-        public void Move(int count)
-        {
-            
-        }
-
-        public void Validate()
-        {
-            
-        }
+        public string RulePerMove { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Contracts.cs" />
+    <Compile Include="Common\ValidMove.cs" />
     <Compile Include="Common\ViewUser.cs" />
     <Compile Include="Interfaces\IContracts.cs" />
     <Compile Include="Controller\MessageExceptionUser.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Interfaces\IMoving.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IUserData.cs" />
+    <Compile Include="Interfaces\IRule.cs" />
     <Compile Include="Logic\Board.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Figures\Horse.cs" />

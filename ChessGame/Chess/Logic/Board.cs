@@ -8,14 +8,12 @@
     {
         private int ROW_SIZE_BOARD_MATRIX = 2;
         private int COL_SIZE_BOARD_MATRIX = 8;
-        private int x;
-        private int y;
-
-        private string[,] board;
+       
+        private static string[,] board;
 
         public Board()
         {
-            this.board = new string[ROW_SIZE_BOARD_MATRIX, COL_SIZE_BOARD_MATRIX];
+            board = new string[ROW_SIZE_BOARD_MATRIX, COL_SIZE_BOARD_MATRIX];
         }
 
         public void LoadingGame()
@@ -51,7 +49,7 @@
         {
             for (int i = 0; i < COL_SIZE_BOARD_MATRIX; i++)
             {
-                string currentPaw = this.board[1, i];
+                string currentPaw = board[1, i];
                 ViewUser.SetCursorPosition(x, y);
                 ViewUser.WriteLine(currentPaw);
                 x += 4;
@@ -71,14 +69,14 @@
 
         private void FillBoardMatrix()
         {
-            this.board[0, 0] = new Rook().Representation;
-            this.board[0, 1] = new Horse().Representation;
-            this.board[0, 2] = new Officer().Representation;
-            this.board[0, 3] = new Queen().Representation;
-            this.board[0, 4] = new King().Representation;
-            this.board[0, 5] = new Officer().Representation;
-            this.board[0, 6] = new Horse().Representation;
-            this.board[0, 7] = new Rook().Representation;
+            board[0, 0] = new Rook().Representation;
+            board[0, 1] = new Horse().Representation;
+            board[0, 2] = new Officer().Representation;
+            board[0, 3] = new Queen().Representation;
+            board[0, 4] = new King().Representation;
+            board[0, 5] = new Officer().Representation;
+            board[0, 6] = new Horse().Representation;
+            board[0, 7] = new Rook().Representation;
 
             for (int i = 0; i < 8; i++)
             {
@@ -111,6 +109,11 @@
             ViewUser.WriteLine("|  ");
             ViewUser.SetCursorPosition(x, y + 2);
             ViewUser.WriteLine("----");
+        }
+
+        public static string[,] GetBoard()
+        {
+            return board;
         }
     }
 }

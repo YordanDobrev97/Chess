@@ -2,7 +2,7 @@
 {
     using Chess.Common;
     using Chess.Interfaces;
-    using ChessEngine.Engine.Figures;
+    using ChessEngine;
     using System.Collections.Generic;
 
 
@@ -90,12 +90,19 @@
         {
             string[] moveUserParams = moveUser.Split(' ');
             char move = moveUserParams[0][0];
-            int count = moveUserParams[0][1] - '0';
+            int numberFigure = moveUserParams[0][1] - '0';
+            int count = int.Parse(moveUserParams[1]);
             switch (move)
             {
                 case 'P':
-                    IMoving figure = new Pawn();
-                    figure.Move(count);
+                    if(ValidMove.IsValidMovePawn(moveUserParams[0]))
+                    {
+                        string[,] board = Board.GetBoard();
+                        string getNumbePawn = board[1,count];
+
+                        //TODO...
+                        //Add move pawn up
+                    }
                     break;
             }
         }

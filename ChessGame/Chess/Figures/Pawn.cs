@@ -12,6 +12,12 @@
         public string Name => "Pawn";
         public int Healt => Constants.HealFigure;
 
-        public string RulePerMove { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public string RulePerMove
+        {
+            get
+            {
+                return "UP";
+            }
+        }
     }
 }

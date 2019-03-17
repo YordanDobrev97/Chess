@@ -2,6 +2,6 @@
 {
     public interface IRule
     {
-        string RulePerMove { get; set; }
+        string RulePerMove { get; }
     }
 }

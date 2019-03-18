@@ -105,7 +105,7 @@
             }
         }
 
-        public static void MoveFigure(string moveUser)
+        public static void GetParseInputUser(string moveUser)
         {
             string[] moveUserParams = moveUser.Split(' ');
             char move = moveUserParams[0][0];
@@ -115,7 +115,8 @@
             switch (move)
             {
                 case 'P':
-                    if(ValidMove.IsValidMovePawn(moveUserParams[0]) && ValidMove.IsValidCountPawn(count))
+                    if(ValidMove.IsValidMovePawn(moveUserParams[0]) 
+                        && ValidMove.IsValidCountPawn(count))
                     {
                         int position = intervalValues[numberFigure - 1];
                         MoveEngine.MovePawn(position, 15);

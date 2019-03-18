@@ -45,7 +45,7 @@
                     }
                     else
                     {
-                        UserData.MoveFigure(moveUser);
+                        UserData.GetParseInputUser(moveUser);
                     }
                 }
             }

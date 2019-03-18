@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Contracts.cs" />
+    <Compile Include="Common\DrawBoardConsole.cs" />
     <Compile Include="Common\ValidMove.cs" />
     <Compile Include="Common\ViewUser.cs" />
     <Compile Include="Interfaces\IContracts.cs" />

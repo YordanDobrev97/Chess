@@ -47,7 +47,7 @@
     <Compile Include="Common\ValidMove.cs" />
     <Compile Include="Common\ViewUser.cs" />
     <Compile Include="Interfaces\IContracts.cs" />
-    <Compile Include="Controller\MessageExceptionUser.cs" />
+    <Compile Include="Logic\MessageExceptionUser.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Interfaces\IMoving.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
@@ -65,6 +65,8 @@
     <Compile Include="Figures\Rook.cs" />
     <Compile Include="Logic\GameSet.cs" />
     <Compile Include="Common\UserData.cs" />
+    <Compile Include="Interfaces\IGameSet.cs" />
+    <Compile Include="Logic\MoveEngine.cs" />
     <Compile Include="Logic\Player.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

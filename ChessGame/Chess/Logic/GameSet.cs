@@ -3,23 +3,22 @@
     using Chess.Common;
     using ChessEngine;
 
-    public static class GameSet
+    public class GameSet : IGameSet
     {
         private const int x = 0;
         private const int y = 19;
 
-        public static void Start()
+        public void Start()
         {
             bool isGameOverPlayer = false;
 
             UserData userData = new UserData();
-            string selectedUserFigure = userData.InputUserData();
+            string selectedFigure = userData.InputUserData();
 
             Player firstPlayer = new Player();
-            Player secondPlayer = new Player();
-
+            
             Board board = new Board();
-            board.LoadingGame();
+            board.LoadingBoard();
 
             bool isTriedWrongMoveUser = false;
 
@@ -34,7 +33,7 @@
                 {
                     ViewUser.ConsoleClear();
                     ViewUser.ViewUserInvalidMoveMessage();
-                    board.LoadingGame();
+                    board.LoadingBoard();
                     isTriedWrongMoveUser = true;
                 }
                 else
@@ -42,7 +41,7 @@
                     if (isTriedWrongMoveUser)
                     {
                         ViewUser.ConsoleClear();
-                        board.LoadingGame();
+                        board.LoadingBoard();
                     }
                     else
                     {

@@ -9,14 +9,14 @@
         private int ROW_SIZE_BOARD_MATRIX = 2;
         private int COL_SIZE_BOARD_MATRIX = 8;
        
-        private static string[,] board;
+        private string[,] board;
 
         public Board()
         {
             board = new string[ROW_SIZE_BOARD_MATRIX, COL_SIZE_BOARD_MATRIX];
         }
 
-        public void LoadingGame()
+        public void LoadingBoard()
         {
             FillBoardMatrix();
             DrawBoardConsole();
@@ -30,17 +30,17 @@
             DrawFirstPartFigures(2, 3);
             DrawPawnFigure(2, 5);
 
-            ResetColorOfConsole();
+            ResetColor();
 
             ViewUser.SetBackgroundColor(System.ConsoleColor.Blue);
 
             DrawPawnFigure(2, 15);
             DrawFirstPartFigures(2, 17);
 
-            ResetColorOfConsole();
+            ResetColor();
         }
 
-        private static void ResetColorOfConsole()
+        private static void ResetColor()
         {
             ViewUser.ResetColorConsole();
         }
@@ -109,11 +109,6 @@
             ViewUser.WriteLine("|  ");
             ViewUser.SetCursorPosition(x, y + 2);
             ViewUser.WriteLine("----");
-        }
-
-        public static string[,] GetBoard()
-        {
-            return board;
         }
     }
 }

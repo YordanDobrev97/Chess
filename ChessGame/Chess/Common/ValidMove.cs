@@ -21,5 +21,10 @@ namespace Chess.Common
 
             return validMovePerPawn.Contains(move);
         }
+
+        public static bool IsValidCountPawn(int count)
+        {
+            return count == 1 || count == 2;
+        }
     }
 }

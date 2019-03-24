@@ -2,6 +2,6 @@
 {
     public interface IBoard
     {
-        void LoadingBoard();
+        void LoadingFigures();
     }
 }

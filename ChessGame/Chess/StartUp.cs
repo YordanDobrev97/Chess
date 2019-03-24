@@ -1,14 +1,15 @@
 ﻿namespace Chess
 {
     using Chess.Logic;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
+    using System;
 
     public class StartUp
     {
         public static void Main()
         {
-            GameSet gameSet = new GameSet();
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+            EntryPointGame gameSet = new EntryPointGame();
             gameSet.Start();
         }
     }

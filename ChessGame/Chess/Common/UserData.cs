@@ -13,6 +13,7 @@
         private string secondColor;
         private const int MAX_WIDTH_LEFT = 30;
         private readonly static List<int> intervalValues = new List<int>();
+        private static string chooseFigureOfUser;
 
         public string FirstColor
         {
@@ -36,6 +37,14 @@
             private set
             {
                 this.secondColor = "Blue";
+            }
+        }
+
+        public static string ChooseFigureOfUser
+        {
+            get
+            {
+                return chooseFigureOfUser;
             }
         }
 
@@ -64,15 +73,24 @@
 
         public string InputUserData()
         {
-            ChoiceOfFiguresMessage();
-            string inputFigure = ViewUser.ConsoleReadLine();
-            ValidateInputUser(inputFigure);
+            //refactoring!!!
+            ChooseColorFigure();
+            string colorFigureOfUser = ViewUser.ConsoleReadLine();
+
+            SetChooseFigureOfUser(colorFigureOfUser);
+
+            ValidateInputUser(colorFigureOfUser);
             ViewUser.ConsoleClear();
 
-            return inputFigure;
+            return colorFigureOfUser;
         }
 
-        private void ChoiceOfFiguresMessage()
+        private void SetChooseFigureOfUser(string inputFigure)
+        {
+            chooseFigureOfUser = inputFigure;
+        }
+
+        private void ChooseColorFigure()
         {
             ViewUser.MessageUser($"Choose color of figures: {FirstColor} or {SecondColor}? ");
         }
@@ -99,7 +117,7 @@
                     ViewUser.ConsoleClear();
                     ViewUser.MessageUser("Please valid color figure!");
                     ViewUser.SleepConsole(1000);
-                    ChoiceOfFiguresMessage();
+                    ChooseColorFigure();
                     inputUser = ViewUser.ConsoleReadLine();
                 }
             }
@@ -107,6 +125,7 @@
 
         public static void GetParseInputUser(string moveUser)
         {
+            //looking...
             string[] moveUserParams = moveUser.Split(' ');
             char move = moveUserParams[0][0];
             int numberFigure = moveUserParams[0][1] - '0';
@@ -115,14 +134,11 @@
             switch (move)
             {
                 case 'P':
-                    if(ValidMove.IsValidMovePawn(moveUserParams[0]) 
-                        && ValidMove.IsValidCountPawn(count))
+                    if(ValidMovement.IsValidMovePawn(moveUserParams[0]) 
+                        && ValidMovement.IsValidCountPawn(count))
                     {
                         int position = intervalValues[numberFigure - 1];
-                        MoveEngine.MovePawn(position, 15);
-                        //TODO...
-                        //Add remove old pawn and save new pawn with new position
-
+                        MovementEngine.MovePawn(position, 15);
                     }
                     else
                     {

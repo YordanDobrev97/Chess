@@ -6,7 +6,7 @@
 
     public static class ViewUser
     {
-        public static void ViewUserInvalidMoveMessage()
+        public static void ViewUserInvalidMovementMessage()
         {
             Console.WriteLine("Sorry, Invalid move!");
         }
@@ -30,7 +30,7 @@
 
         public static void SetBackgroundColor(ConsoleColor color)
         {
-            Console.BackgroundColor = color;
+            Console.ForegroundColor = color;
         }
 
         public static void ConsoleClear()

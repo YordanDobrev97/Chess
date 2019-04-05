@@ -1,7 +1,0 @@
-C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\Chess\bin\Debug\Chess.exe.config
-C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\Chess\bin\Debug\Chess.exe
-C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\Chess\bin\Debug\Chess.pdb
-C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\Chess\obj\Debug\Engine.csprojAssemblyReference.cache
-C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\Chess\obj\Debug\Engine.csproj.CoreCompileInputs.cache
-C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\Chess\obj\Debug\Chess.exe
-C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\Chess\obj\Debug\Chess.pdb

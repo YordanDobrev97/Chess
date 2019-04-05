@@ -1,0 +1,11 @@
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\bin\Debug\netcoreapp2.0\ChessEngine.deps.json
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\bin\Debug\netcoreapp2.0\ChessEngine.runtimeconfig.json
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\bin\Debug\netcoreapp2.0\ChessEngine.runtimeconfig.dev.json
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\bin\Debug\netcoreapp2.0\ChessEngine.dll
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\bin\Debug\netcoreapp2.0\ChessEngine.pdb
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\obj\Debug\netcoreapp2.0\ChessEngine.csprojAssemblyReference.cache
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\obj\Debug\netcoreapp2.0\ChessEngine.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\obj\Debug\netcoreapp2.0\ChessEngine.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\obj\Debug\netcoreapp2.0\ChessEngine.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\obj\Debug\netcoreapp2.0\ChessEngine.dll
+C:\Users\DELL\Desktop\Chess game\ChessEngine\Chess\ChessGame\ChessEngine\obj\Debug\netcoreapp2.0\ChessEngine.pdb

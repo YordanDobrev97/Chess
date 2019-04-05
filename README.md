@@ -1,9 +1,4 @@
 # Chess
 **Console game - chess**
 
-I using:
-OPP principles
-Design Patterns
-
-![screenshootView](https://user-images.githubusercontent.com/42092212/54492505-d75ae800-48cf-11e9-8574-67db78533163.png)
-
+![background-chess](https://user-images.githubusercontent.com/42092212/55656841-101c1c00-5801-11e9-9b5a-2c4dc94f27f8.png)

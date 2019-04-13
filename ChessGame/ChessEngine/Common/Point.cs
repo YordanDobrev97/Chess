@@ -1,6 +1,6 @@
 ﻿namespace ChessEngine.Common
 {
-    public struct Point
+    public class Point
     {
         public Point(int x, int y)
         {

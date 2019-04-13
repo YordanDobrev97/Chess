@@ -8,6 +8,7 @@
 
     public class Drawing
     {
+        private const int MAX_FIGURE_TOTAL = 32;
         private int numericsOfBoardRow = 8;
         private char letterOfBoardCol = 'a';
         private int numericXValue = 0;
@@ -24,56 +25,47 @@
         private int postion = 0;
         private bool isCanCordinateFigure = false;
         private bool isFirstPlayer = true;
-        private Dictionary<List<IFigure>, Point> cordinatesFigures;
+        private bool isAddingAllFigures = false;
+        private static Dictionary<List<IFigure>, Point> cordinatesFigures;
 
         public Drawing()
         {
-            this.cordinatesFigures = new Dictionary<List<IFigure>, Point>();
+            cordinatesFigures = new Dictionary<List<IFigure>, Point>();
+            this.isAddingAllFigures = cordinatesFigures.Count == MAX_FIGURE_TOTAL;
         }
 
+        /// <summary>
+        /// Returns cordinates of figures
+        /// </summary>
+        public static Dictionary<List<IFigure>, Point> CordinatesFigures
+        {
+            get
+            {
+                return cordinatesFigures;
+            }
+            set
+            {
+                cordinatesFigures = value ?? throw new ArgumentException("Value not can be null!");
+            }
+        }
+
+        public static bool IsCanChangeCordinatesOfFigures { get; set; }
+
+        /// <summary>
+        /// Drawing figures of console
+        /// </summary>
         public void DrawPlayground()
         {
-            var figuresFront = new IFigure[]
-            {
-                new Rook( "Rook1Front"),
-                new Кnight("Knight1Front"),
-                new Bishop("Bishop1Front"),
-                new Queen("QueenFront"),
-                new King("KingFront"),
-                new Bishop("Bishop2Front"),
-                new Кnight("Knight2Front"),
-                new Rook("Rook2Front"),
-                new Pawn("Pawn1Front"),
-                new Pawn("Pawn2Front"),
-                new Pawn("Pawn3Front"),
-                new Pawn("Pawn4Front"),
-                new Pawn("Pawn5Front"),
-                new Pawn("Pawn6Front"),
-                new Pawn("Pawn7Front"),
-                new Pawn("Pawn8Front"),
+            startPointX = 2;
+            startPointY = 1;
+            postion = 0;
+            postionFigureX = 5;
+            postionFigureY = 2;
+            this.isAddingAllFigures = cordinatesFigures.Count == MAX_FIGURE_TOTAL;
 
+            var figuresFront = GetFiguresOfPlayer(true);
 
-            };
-
-            var figuresBack = new IFigure[]
-            {
-                new Pawn("Pawn1Back"),
-                new Pawn("Pawn2Back"),
-                new Pawn("Pawn3Back"),
-                new Pawn("Pawn4Back"),
-                new Pawn("Pawn5Back"),
-                new Pawn("Pawn6Back"),
-                new Pawn("Pawn7Back"),
-                new Pawn("Pawn8Back"),
-                new Rook("Rook1Back"),
-                new Кnight("Knight1Back"),
-                new Bishop("Bishop1Back"),
-                new Queen("QueenBack"),
-                new King("KingBack"),
-                new Bishop("Bishop2Back"),
-                new Кnight("Knight2Back"),
-                new Rook("Rook2Back")
-            };
+            var figuresBack = GetFiguresOfPlayer(false);
 
             for (int row = 1; row <= SIZE_ROW; row++)
             {
@@ -84,14 +76,14 @@
 
                 DrawBox(startPointX, startPointY);
 
-                if (IsCanSaveCordinateFirstPlayer(row))
+                if (IsCanSaveCordinateFirstPlayer(row) && !isAddingAllFigures)
                 {
                     SaveFigureCordinates(figuresFront, postion, postionFigureX, postionFigureY);
                     postionFigureX += 9;
                     postion++;
                     isCanCordinateFigure = true;
                 }
-                else if (IsCanSaveCordinateSecondPlayer(row))
+                else if (IsCanSaveCordinateSecondPlayer(row) && !isAddingAllFigures)
                 {
                     isFirstPlayer = false;
                     SaveFigureCordinates(figuresBack, postion, postionFigureX, postionFigureY);
@@ -105,7 +97,7 @@
                     isCanCordinateFigure = false;
                 }
 
-                DrawNumerics(numericXValue, numericYValue, numericsOfBoardRow);
+                //DrawNumerics(numericXValue, numericYValue, numericsOfBoardRow);
                 for (int i = 1; i < SIZE_COLUM; i++)
                 {
                     startPointX += 9;
@@ -126,20 +118,20 @@
 
                     }
 
-                    DrawCurrentLetter(isLastRowForPrintLetterOfBoardConsole,
-                        startXLetterOfBoard, startPointY, letterOfBoardCol);
+                    //DrawCurrentLetter(isLastRowForPrintLetterOfBoardConsole,
+                    //    startXLetterOfBoard, startPointY, letterOfBoardCol);
 
-                    if (isLastRowForPrintLetterOfBoardConsole)
-                    {
-                        startXLetterOfBoard += 9;
-                        letterOfBoardCol++;
-                    }
+                    //if (isLastRowForPrintLetterOfBoardConsole)
+                    //{
+                    //    startXLetterOfBoard += 9;
+                    //    letterOfBoardCol++;
+                    //}
 
-                    if (i == 7 && row == SIZE_ROW)
-                    {
-                        DrawCurrentLetter(isLastRowForPrintLetterOfBoardConsole,
-                        startXLetterOfBoard, startPointY, letterOfBoardCol);
-                    }
+                    //if (i == 7 && row == SIZE_ROW)
+                    //{
+                    //    DrawCurrentLetter(isLastRowForPrintLetterOfBoardConsole,
+                    //    startXLetterOfBoard, startPointY, letterOfBoardCol);
+                    //}
                 }
 
                 postionFigureX = 5;
@@ -150,6 +142,59 @@
                 numericsOfBoardRow--;
                 Console.WriteLine();
             }
+        }
+
+        private static IFigure[] GetFiguresOfPlayer(bool isFirstPlayer)
+        {
+            var backFlagFigure = isFirstPlayer ? "Front" : "Back";
+
+            if (isFirstPlayer)
+            {
+                return new IFigure[]
+               {
+                    new Rook($"Rook1{backFlagFigure}"),
+                    new Кnight($"Knight1{backFlagFigure}"),
+                    new Bishop($"Bishop1{backFlagFigure}"),
+                    new Queen($"Queen{backFlagFigure}"),
+                    new King($"King{backFlagFigure}"),
+                    new Bishop($"Bishop2{backFlagFigure}"),
+                    new Кnight($"Knight2{backFlagFigure}"),
+                    new Rook($"Rook2{backFlagFigure}"),
+                    new Pawn($"Pawn1{backFlagFigure}"),
+                    new Pawn($"Pawn2{backFlagFigure}"),
+                    new Pawn($"Pawn3{backFlagFigure}"),
+                    new Pawn($"Pawn4{backFlagFigure}"),
+                    new Pawn($"Pawn5{backFlagFigure}"),
+                    new Pawn($"Pawn6{backFlagFigure}"),
+                    new Pawn($"Pawn7{backFlagFigure}"),
+                    new Pawn($"Pawn8{backFlagFigure}"),
+                };
+            }
+
+            return new IFigure[]
+            {
+                new Pawn($"Pawn1{backFlagFigure}"),
+                new Pawn($"Pawn2{backFlagFigure}"),
+                new Pawn($"Pawn3{backFlagFigure}"),
+                new Pawn($"Pawn4{backFlagFigure}"),
+                new Pawn($"Pawn5{backFlagFigure}"),
+                new Pawn($"Pawn6{backFlagFigure}"),
+                new Pawn($"Pawn7{backFlagFigure}"),
+                new Pawn($"Pawn8{backFlagFigure}"),
+                new Rook($"Rook1{backFlagFigure}"),
+                new Кnight($"Knight1{backFlagFigure}"),
+                new Bishop($"Bishop1{backFlagFigure}"),
+                new Queen($"Queen{backFlagFigure}"),
+                new King($"King{backFlagFigure}"),
+                new Bishop($"Bishop2{backFlagFigure}"),
+                new Кnight($"Knight2{backFlagFigure}"),
+                new Rook($"Rook2{backFlagFigure}"),
+            };
+        }
+
+        internal static object GetProperty(Drawing obj, string nameProperty)
+        {
+            return obj.GetType().GetProperty(nameProperty).GetValue(obj);
         }
 
         public void DrawFigures()
@@ -175,7 +220,55 @@
             return row == 1 || row == 2;
         }
 
-        private void SaveFigureCordinates(IFigure[] figures, int postion, int postionFigureX, int postionFigureY)
+        private static Tuple<int, int> ChangeCordinatesOfPawn(string newPostion)
+        {
+            Drawing.IsCanChangeCordinatesOfFigures = true;
+            switch (newPostion)
+            {
+                case "a3":
+                    return new Tuple<int, int>(5, 17);
+
+            }
+            return new Tuple<int, int>(0, 0);
+        }
+
+        public static void SaveFigureCordinates(string newPosition)
+        {
+            var newCordinatesOfPawn = ChangeCordinatesOfPawn(newPosition);
+
+            if (IsFirstPlayerPlay())
+            {
+                var currentPawn = GetFiguresOfPlayer(false);
+                var figuresWithCordinates = cordinatesFigures;
+                IFigure figureForChange = null;
+                //Point point = new Point();
+                foreach (var item in figuresWithCordinates)
+                {
+                    var equalName = item.Key[0].Name == currentPawn[0].Name;
+                    if (equalName)
+                    {
+                        //point = item.Value;
+                        var point = figuresWithCordinates.Values.ToList()[16];
+                        point.X = newCordinatesOfPawn.Item1;
+                        point.Y = newCordinatesOfPawn.Item2;
+                        break;
+                    }
+                }
+                
+            }
+            else
+            {
+
+            }
+            
+        }
+
+        private static bool IsFirstPlayerPlay()
+        {
+            return true;
+        }
+
+        private static void SaveFigureCordinates(IFigure[] figures, int postion, int postionFigureX, int postionFigureY)
         {
             if (postion > figures.Length - 1)
             {

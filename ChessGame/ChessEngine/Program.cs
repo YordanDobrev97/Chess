@@ -8,6 +8,9 @@ namespace ChessEngine
     {
         static void Main()
         {
+            Console.WindowHeight = 28;
+            Console.WindowWidth = 84;
+
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Game.Start();
         }

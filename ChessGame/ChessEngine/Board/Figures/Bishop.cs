@@ -1,4 +1,6 @@
-﻿namespace ChessEngine.Board.Figures
+﻿using System.Collections.Generic;
+
+namespace ChessEngine.Board.Figures
 {
     public class Bishop : IFigure
     {

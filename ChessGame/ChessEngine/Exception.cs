@@ -13,5 +13,10 @@ namespace ChessEngine
         {
             throw new ArgumentException("This figure is block from other!");
         }
+
+        public static void ThrowExceptionFigureWrong()
+        {
+            throw new ArgumentException("Sorry, this  current figure not our!");
+        }
     }
 }

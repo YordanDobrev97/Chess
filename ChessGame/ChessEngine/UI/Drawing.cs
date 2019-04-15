@@ -227,12 +227,18 @@
             {
                 case "a3":
                     return new Tuple<int, int>(5, 17);
+                case "a4":
+                    return new Tuple<int, int>(5, 14);
+                case "a5":
+                    return new Tuple<int, int>(5, 11);
+                case "a6":
+                    return new Tuple<int, int>(5, 8);
 
             }
             return new Tuple<int, int>(0, 0);
         }
 
-        public static void SaveFigureCordinates(string newPosition)
+        public static void SaveFigureCordinates(string newPosition, int figureNumber)
         {
             var newCordinatesOfPawn = ChangeCordinatesOfPawn(newPosition);
 
@@ -244,7 +250,7 @@
                 //Point point = new Point();
                 foreach (var item in figuresWithCordinates)
                 {
-                    var equalName = item.Key[0].Name == currentPawn[0].Name;
+                    var equalName = item.Key[0].Name == currentPawn[figureNumber].Name;
                     if (equalName)
                     {
                         //point = item.Value;

@@ -12,9 +12,7 @@ namespace ChessEngine.Board
         private Dictionary<IFigure[], Point> freeCoordinates = new Dictionary<IFigure[], Point>();
 
         public void SaveCordinatesFigure(IFigure figure)
-        {
-            
+        {   
         }
-
     }
 }

@@ -7,5 +7,7 @@ namespace ChessEngine.Board.Figures
         string StringRepresentation { get; }
 
         string Name { get; set; }
+
+        bool IsBeginState { get; }
     }
 }

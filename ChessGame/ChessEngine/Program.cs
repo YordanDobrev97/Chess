@@ -1,6 +1,4 @@
-﻿using ChessEngine.UI;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace ChessEngine
 {
@@ -8,8 +6,11 @@ namespace ChessEngine
     {
         static void Main()
         {
-            Console.WindowHeight = 28;
-            Console.WindowWidth = 84;
+            Console.Title = "My Chess";
+
+            Console.BufferHeight = 30;
+            Console.WindowHeight = 30;
+            Console.WindowWidth = 86;
 
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Game.Start();

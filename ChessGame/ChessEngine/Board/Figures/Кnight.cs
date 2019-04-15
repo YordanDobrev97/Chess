@@ -11,5 +11,7 @@ namespace ChessEngine.Board.Figures
         public string StringRepresentation => "♘";
 
         public string Name { get; set; }
+
+        public bool IsBeginState => true;
     }
 }

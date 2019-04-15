@@ -34,9 +34,6 @@
             this.isAddingAllFigures = cordinatesFigures.Count == MAX_FIGURE_TOTAL;
         }
 
-        /// <summary>
-        /// Returns cordinates of figures
-        /// </summary>
         public static Dictionary<List<IFigure>, Point> CordinatesFigures
         {
             get
@@ -220,7 +217,7 @@
             return row == 1 || row == 2;
         }
 
-        private static Tuple<int, int> ChangeCordinatesOfPawn(string newPostion)
+        private static Tuple<int, int> ChangeCordinatesOfPawnFirstPlayer(string newPostion)
         {
             Drawing.IsCanChangeCordinatesOfFigures = true;
             switch (newPostion)
@@ -238,40 +235,57 @@
             return new Tuple<int, int>(0, 0);
         }
 
-        public static void SaveFigureCordinates(string newPosition, int figureNumber)
+        private static Tuple<int, int> ChangeCordinatesOfPawnSecondPlayer(string newPosition)
         {
-            var newCordinatesOfPawn = ChangeCordinatesOfPawn(newPosition);
-
-            if (IsFirstPlayerPlay())
+            switch (newPosition)
             {
-                var currentPawn = GetFiguresOfPlayer(false);
-                var figuresWithCordinates = cordinatesFigures;
-                IFigure figureForChange = null;
-                //Point point = new Point();
-                foreach (var item in figuresWithCordinates)
-                {
-                    var equalName = item.Key[0].Name == currentPawn[figureNumber].Name;
-                    if (equalName)
-                    {
-                        //point = item.Value;
-                        var point = figuresWithCordinates.Values.ToList()[16];
-                        point.X = newCordinatesOfPawn.Item1;
-                        point.Y = newCordinatesOfPawn.Item2;
-                        break;
-                    }
-                }
-                
+                case "a6":
+                    return new Tuple<int, int>(5, 8);
+            }
+            return new Tuple<int, int>(0, 0);
+        }
+
+        public static void SaveFigureCordinates(string newPosition, int figureNumber, bool isFirstPlayer)
+        {
+            Tuple<int, int> newCordinatesOfPawn = null;
+            if (isFirstPlayer)
+            {
+                newCordinatesOfPawn = ChangeCordinatesOfPawnFirstPlayer(newPosition);
             }
             else
             {
-
+                newCordinatesOfPawn = ChangeCordinatesOfPawnSecondPlayer(newPosition);
             }
-            
+
+            var figuresWithCordinates = cordinatesFigures;
+
+            if (isFirstPlayer)
+            {
+                var currentPawn = GetFiguresOfPlayer(false);
+                ChangeCordinatesOfCurrentFigure(figureNumber, newCordinatesOfPawn, figuresWithCordinates, currentPawn);
+            }
+            else
+            {
+                var currentPawn = GetFiguresOfPlayer(true);
+                ChangeCordinatesOfCurrentFigure(figureNumber, newCordinatesOfPawn, figuresWithCordinates, currentPawn);
+            }
         }
 
-        private static bool IsFirstPlayerPlay()
+        private static void ChangeCordinatesOfCurrentFigure(int figureNumber, Tuple<int, int> newCordinatesOfPawn, Dictionary<List<IFigure>, Point> figuresWithCordinates, IFigure[] currentPawn)
         {
-            return true;
+            int counter = 0;
+            foreach (var item in figuresWithCordinates)
+            {
+                var equalName = item.Key[0].Name == currentPawn[figureNumber].Name;
+                if (equalName)
+                {
+                    var point = figuresWithCordinates.Values.ToList()[counter];
+                    point.X = newCordinatesOfPawn.Item1;
+                    point.Y = newCordinatesOfPawn.Item2;
+                    break;
+                }
+                counter++;
+            }
         }
 
         private static void SaveFigureCordinates(IFigure[] figures, int postion, int postionFigureX, int postionFigureY)

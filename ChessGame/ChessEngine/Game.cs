@@ -34,35 +34,39 @@
                 }
                 else
                 {
-
-                    switch (oldPostion)
-                    {
-                        case "a7":
-                            try
-                            {
-                                if (ValidMoving.ValidMovePawn(newPosition))
-                                {
-                                    Drawing.SaveFigureCordinates(newPosition, 8, IsFirstPlayer);
-                                    Console.Clear();
-                                    drawing.DrawPlayground();
-                                    drawing.DrawFigures();
-                                }
-                            }
-                            catch (System.Exception)
-                            {
-
-                                throw;
-                            }
-                            break;
-                    }
+                    MovingFigureOfSecondPlayer(drawing, oldPostion, newPosition);
 
                     IsFirstPlayer = true;
                 }
-                
+
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.Write("Enter your move: ");
                 inputUser = Console.ReadLine();
+            }
+        }
+
+        private static void MovingFigureOfSecondPlayer(Drawing drawing, string oldPostion, string newPosition)
+        {
+            switch (oldPostion)
+            {
+                case "a7":
+                    try
+                    {
+                        if (ValidMoving.ValidMovePawn(newPosition))
+                        {
+                            Drawing.SaveFigureCordinates(newPosition, 8, IsFirstPlayer);
+                            Console.Clear();
+                            drawing.DrawPlayground();
+                            drawing.DrawFigures();
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+
+                        throw;
+                    }
+                    break;
             }
         }
 

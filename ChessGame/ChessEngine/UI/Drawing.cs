@@ -4,72 +4,32 @@
     using ChessEngine.Common;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
-    public class Drawing
+    public class Drawing : Engine
     {
-        private const int MAX_FIGURE_TOTAL = 32;
-        private int numericsOfBoardRow = 8;
-        private char letterOfBoardCol = 'a';
-        private int numericXValue = 0;
-        private int numericYValue = 2;
-        private int startXLetterOfBoard = 5;
-        private int postionFigureX = 5;
-        private int postionFigureY = 2;
-        private bool isLastRowForPrintLetterOfBoardConsole = false;
-        private const int DEFAULT_VALUE = 2;
-        private int SIZE_ROW = StandartConstants.SIZE_ROW_BOARD;
-        private int SIZE_COLUM = StandartConstants.SIZE_COL_BOARD;
-        private int startPointX = 2;
-        private int startPointY = 1;
-        private int postion = 0;
-        private bool isCanCordinateFigure = false;
-        private bool isFirstPlayer = true;
-        private bool isAddingAllFigures = false;
-        private static Dictionary<List<IFigure>, Point> cordinatesFigures;
-
-        public Drawing()
-        {
-            cordinatesFigures = new Dictionary<List<IFigure>, Point>();
-            this.isAddingAllFigures = cordinatesFigures.Count == MAX_FIGURE_TOTAL;
-        }
-
-        public static Dictionary<List<IFigure>, Point> CordinatesFigures
-        {
-            get
-            {
-                return cordinatesFigures;
-            }
-            set
-            {
-                cordinatesFigures = value ?? throw new ArgumentException("Value not can be null!");
-            }
-        }
-
-        public static bool IsCanChangeCordinatesOfFigures { get; set; }
-
         /// <summary>
         /// Drawing figures of console
         /// </summary>
         public void DrawPlayground()
         {
-            startPointX = 2;
-            startPointY = 1;
-            postion = 0;
-            postionFigureX = 5;
-            postionFigureY = 2;
-            this.isAddingAllFigures = cordinatesFigures.Count == MAX_FIGURE_TOTAL;
+            var startPointX = Engine.StartPointX = 2;
+            var startPointY = Engine.StartPointY = 1;
+            var postion = Engine.Position = 0;
+            var postionFigureX = Engine.PositionFigureX = 5;
+            var postionFigureY = Engine.PositionFigureY = 2;
 
-            var figuresFront = GetFiguresOfPlayer(true);
+            var isAddingAllFigures = cordinatesFigures.Count == Engine.MaxFigure;
 
-            var figuresBack = GetFiguresOfPlayer(false);
+            var figuresFront = Engine.GetFiguresOfPlayer();
 
-            for (int row = 1; row <= SIZE_ROW; row++)
+            var figuresBack = Engine.GetFigureOfSecondPlayer();
+
+            for (int row = 1; row <= StandartConstants.SIZE_ROW_BOARD; row++)
             {
-                if (row == SIZE_ROW)
-                {
-                    isLastRowForPrintLetterOfBoardConsole = true;
-                }
+                //if (row == StandartConstants.SIZE_ROW_BOARD)
+                //{
+                //    isLastRowForPrintLetterOfBoardConsole = true;
+                //}
 
                 DrawBox(startPointX, startPointY);
 
@@ -78,42 +38,42 @@
                     SaveFigureCordinates(figuresFront, postion, postionFigureX, postionFigureY);
                     postionFigureX += 9;
                     postion++;
-                    isCanCordinateFigure = true;
+                    //isCanCordinateFigure = true;
                 }
                 else if (IsCanSaveCordinateSecondPlayer(row) && !isAddingAllFigures)
                 {
-                    isFirstPlayer = false;
+                    //isFirstPlayer = false;
                     SaveFigureCordinates(figuresBack, postion, postionFigureX, postionFigureY);
                     postionFigureX += 9;
                     postion++;
-                    isCanCordinateFigure = true;
+                    //isCanCordinateFigure = true;
                 }
                 else
                 {
                     postion = 0;
-                    isCanCordinateFigure = false;
+                    //isCanCordinateFigure = false;
                 }
 
                 //DrawNumerics(numericXValue, numericYValue, numericsOfBoardRow);
-                for (int i = 1; i < SIZE_COLUM; i++)
+                for (int i = 1; i < StandartConstants.SIZE_COL_BOARD; i++)
                 {
                     startPointX += 9;
                     DrawBox(startPointX, startPointY);
 
-                    if (isCanCordinateFigure)
-                    {
-                        if (isFirstPlayer)
-                        {
-                            SaveFigureCordinates(figuresFront, postion, postionFigureX, postionFigureY);
-                        }
-                        else
-                        {
-                            SaveFigureCordinates(figuresBack, postion, postionFigureX, postionFigureY);
-                        }
-                        postionFigureX += 9;
-                        postion++;
+                    //if (isCanChangeCordinateFigure)
+                    //{
+                    //    if (isFirstPlayer)
+                    //    {
+                    //        SaveFigureCordinates(figuresFront, postion, postionFigureX, postionFigureY);
+                    //    }
+                    //    else
+                    //    {
+                    //        SaveFigureCordinates(figuresBack, postion, postionFigureX, postionFigureY);
+                    //    }
+                    //    postionFigureX += 9;
+                    //    postion++;
 
-                    }
+                    //}
 
                     //DrawCurrentLetter(isLastRowForPrintLetterOfBoardConsole,
                     //    startXLetterOfBoard, startPointY, letterOfBoardCol);
@@ -133,65 +93,12 @@
 
                 postionFigureX = 5;
                 postionFigureY += 3;
-                startPointX = DEFAULT_VALUE;
+                startPointX = Engine.DefaultValue;
                 startPointY += 3;
-                numericYValue += 3;
-                numericsOfBoardRow--;
+                //numericYValue += 3;
+                //numericsOfBoardRow--;
                 Console.WriteLine();
             }
-        }
-
-        private static IFigure[] GetFiguresOfPlayer(bool isFirstPlayer)
-        {
-            var backFlagFigure = isFirstPlayer ? "Front" : "Back";
-
-            if (isFirstPlayer)
-            {
-                return new IFigure[]
-               {
-                    new Rook($"Rook1{backFlagFigure}"),
-                    new Кnight($"Knight1{backFlagFigure}"),
-                    new Bishop($"Bishop1{backFlagFigure}"),
-                    new Queen($"Queen{backFlagFigure}"),
-                    new King($"King{backFlagFigure}"),
-                    new Bishop($"Bishop2{backFlagFigure}"),
-                    new Кnight($"Knight2{backFlagFigure}"),
-                    new Rook($"Rook2{backFlagFigure}"),
-                    new Pawn($"Pawn1{backFlagFigure}"),
-                    new Pawn($"Pawn2{backFlagFigure}"),
-                    new Pawn($"Pawn3{backFlagFigure}"),
-                    new Pawn($"Pawn4{backFlagFigure}"),
-                    new Pawn($"Pawn5{backFlagFigure}"),
-                    new Pawn($"Pawn6{backFlagFigure}"),
-                    new Pawn($"Pawn7{backFlagFigure}"),
-                    new Pawn($"Pawn8{backFlagFigure}"),
-                };
-            }
-
-            return new IFigure[]
-            {
-                new Pawn($"Pawn1{backFlagFigure}"),
-                new Pawn($"Pawn2{backFlagFigure}"),
-                new Pawn($"Pawn3{backFlagFigure}"),
-                new Pawn($"Pawn4{backFlagFigure}"),
-                new Pawn($"Pawn5{backFlagFigure}"),
-                new Pawn($"Pawn6{backFlagFigure}"),
-                new Pawn($"Pawn7{backFlagFigure}"),
-                new Pawn($"Pawn8{backFlagFigure}"),
-                new Rook($"Rook1{backFlagFigure}"),
-                new Кnight($"Knight1{backFlagFigure}"),
-                new Bishop($"Bishop1{backFlagFigure}"),
-                new Queen($"Queen{backFlagFigure}"),
-                new King($"King{backFlagFigure}"),
-                new Bishop($"Bishop2{backFlagFigure}"),
-                new Кnight($"Knight2{backFlagFigure}"),
-                new Rook($"Rook2{backFlagFigure}"),
-            };
-        }
-
-        internal static object GetProperty(Drawing obj, string nameProperty)
-        {
-            return obj.GetType().GetProperty(nameProperty).GetValue(obj);
         }
 
         public void DrawFigures()
@@ -205,103 +112,6 @@
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine(stringRepresentationOfFigure);
             }
-        }
-
-        private bool IsCanSaveCordinateSecondPlayer(int row)
-        {
-            return row == 7 || row == 8;
-        }
-
-        private static bool IsCanSaveCordinateFirstPlayer(int row)
-        {
-            return row == 1 || row == 2;
-        }
-
-        private static Tuple<int, int> ChangeCordinatesOfPawnFirstPlayer(string newPostion)
-        {
-            Drawing.IsCanChangeCordinatesOfFigures = true;
-            switch (newPostion)
-            {
-                case "a3":
-                    return new Tuple<int, int>(5, 17);
-                case "a4":
-                    return new Tuple<int, int>(5, 14);
-                case "a5":
-                    return new Tuple<int, int>(5, 11);
-                case "a6":
-                    return new Tuple<int, int>(5, 8);
-
-            }
-            return new Tuple<int, int>(0, 0);
-        }
-
-        private static Tuple<int, int> ChangeCordinatesOfPawnSecondPlayer(string newPosition)
-        {
-            switch (newPosition)
-            {
-                case "a6":
-                    return new Tuple<int, int>(5, 8);
-            }
-            return new Tuple<int, int>(0, 0);
-        }
-
-        public static void SaveFigureCordinates(string newPosition, int figureNumber, bool isFirstPlayer)
-        {
-            Tuple<int, int> newCordinatesOfPawn = null;
-            if (isFirstPlayer)
-            {
-                newCordinatesOfPawn = ChangeCordinatesOfPawnFirstPlayer(newPosition);
-            }
-            else
-            {
-                newCordinatesOfPawn = ChangeCordinatesOfPawnSecondPlayer(newPosition);
-            }
-
-            var figuresWithCordinates = cordinatesFigures;
-
-            if (isFirstPlayer)
-            {
-                var currentPawn = GetFiguresOfPlayer(false);
-                ChangeCordinatesOfCurrentFigure(figureNumber, newCordinatesOfPawn, figuresWithCordinates, currentPawn);
-            }
-            else
-            {
-                var currentPawn = GetFiguresOfPlayer(true);
-                ChangeCordinatesOfCurrentFigure(figureNumber, newCordinatesOfPawn, figuresWithCordinates, currentPawn);
-            }
-        }
-
-        private static void ChangeCordinatesOfCurrentFigure(int figureNumber, Tuple<int, int> newCordinatesOfPawn, Dictionary<List<IFigure>, Point> figuresWithCordinates, IFigure[] currentPawn)
-        {
-            int counter = 0;
-            foreach (var item in figuresWithCordinates)
-            {
-                var equalName = item.Key[0].Name == currentPawn[figureNumber].Name;
-                if (equalName)
-                {
-                    var point = figuresWithCordinates.Values.ToList()[counter];
-                    point.X = newCordinatesOfPawn.Item1;
-                    point.Y = newCordinatesOfPawn.Item2;
-                    break;
-                }
-                counter++;
-            }
-        }
-
-        private static void SaveFigureCordinates(IFigure[] figures, int postion, int postionFigureX, int postionFigureY)
-        {
-            if (postion > figures.Length - 1)
-            {
-                postion = 0;
-            }
-
-            Console.SetCursorPosition(postionFigureX, postionFigureY);
-            var currentFigureFront = figures[postion];
-            Point currentPointOfRow = new Point(postionFigureX, postionFigureY);
-            var figure = new List<IFigure>();
-            figure.Add(currentFigureFront);
-
-            cordinatesFigures.Add(figure, currentPointOfRow);
         }
 
         private void DrawCurrentLetter(bool isLastRowForPrintLetterOfBoardConsole, int startPointX, int startPointY, char letterOfBoardCol)
@@ -336,11 +146,6 @@
 
             SetCursorOfConsole(x, y + 1);
             Console.WriteLine(new string('=', dashesCount));
-        }
-
-        private static void SetCursorOfConsole(int x, int y)
-        {
-            Console.SetCursorPosition(x, y);
         }
     }
 }

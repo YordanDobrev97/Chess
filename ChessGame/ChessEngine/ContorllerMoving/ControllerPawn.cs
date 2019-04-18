@@ -37,7 +37,7 @@ namespace ChessEngine.ContorllerMoving
 
         private static bool IsBlockFromOtherFigure(string newPostion)
         {
-            var cordinates = Drawing.CordinatesFigures.Values;
+            var cordinates = Engine.cordinatesFigures.Values;
             return false;
         }
     }

@@ -18,5 +18,10 @@ namespace ChessEngine
         {
             throw new ArgumentException("Sorry, this  current figure not our!");
         }
+
+        internal static void ThrowExceptionNotSetValidValue()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

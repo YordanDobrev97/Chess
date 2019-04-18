@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ChessEngine.Board.Figures
+﻿namespace ChessEngine.Board.Figures
 {
     public class Bishop : IFigure
     {
@@ -12,6 +10,7 @@ namespace ChessEngine.Board.Figures
         public string StringRepresentation => "♗";
 
         public string Name { get; set; }
+
         public bool IsBeginState => true;
     }
 }

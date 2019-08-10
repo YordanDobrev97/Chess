@@ -765,11 +765,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\ChessEngine\\Chess\\ChessGame\\ChessEngine\\ChessEngine.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\ChessEngine\\ChessEngine.csproj",
       "projectName": "ChessEngine",
-      "projectPath": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\ChessEngine\\Chess\\ChessGame\\ChessEngine\\ChessEngine.csproj",
+      "projectPath": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\ChessEngine\\ChessEngine.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\ChessEngine\\Chess\\ChessGame\\ChessEngine\\obj\\",
+      "outputPath": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\ChessEngine\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

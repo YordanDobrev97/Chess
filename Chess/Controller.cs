@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Chess.Figures;
 using Chess.Interfaces;
 
 namespace Chess
@@ -8,12 +7,12 @@ namespace Chess
     public abstract class Controller
     {
         public const int DEFAULT_VALUE = 8;
-
-        private static IFigure[,] board = new IFigure[DEFAULT_VALUE, DEFAULT_VALUE];
         
         public static void Start()
         {
-            IntilizateFigures();
+            Board board = new Board();
+            board.MoveFigure("a2", "a3"); // test move pawn
+
             Painter.DrawBoard();
             Painter.DrawFigures();
 
@@ -81,37 +80,6 @@ namespace Chess
             var currentFigure = new Tuple<IFigure>(figure);
             Painter.cordinatesOfFigures[currentFigure] = new Dictionary<int, int>();
             Painter.cordinatesOfFigures[currentFigure].Add(positionWitdh, positionHeight);
-        }
-
-        private static void IntilizatePawns(int dimension)
-        {
-            for (int i = 0; i < DEFAULT_VALUE; i++)
-            {
-                board[dimension, i] = new Pawn();
-            }
-        }
-
-        private static void IntilizateFigures()
-        {
-            board[0, 0] = new Rook();
-            board[0, 1] = new Knight();
-            board[0, 2] = new Bishop();
-            board[0, 3] = new Queen();
-            board[0, 4] = new King();
-            board[0, 5] = new Bishop();
-            board[0, 6] = new Knight();
-            board[0, 7] = new Rook();
-            IntilizatePawns(1); // pawns of first player
-
-            IntilizatePawns(6); // pawns of second player
-            board[7, 0] = new Rook();
-            board[7, 1] = new Knight();
-            board[7, 2] = new Bishop();
-            board[7, 3] = new Queen();
-            board[7, 4] = new King();
-            board[7, 5] = new Bishop();
-            board[7, 6] = new Knight();
-            board[7, 7] = new Rook();
         }
     }
 }

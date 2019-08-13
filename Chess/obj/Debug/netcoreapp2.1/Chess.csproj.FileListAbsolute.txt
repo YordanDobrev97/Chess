@@ -9,3 +9,14 @@ C:\Users\DELL\Documents\Desktop\Chess game\Chess\Chess\obj\Debug\netcoreapp2.1\C
 C:\Users\DELL\Documents\Desktop\Chess game\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.AssemblyInfo.cs
 C:\Users\DELL\Documents\Desktop\Chess game\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.dll
 C:\Users\DELL\Documents\Desktop\Chess game\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.pdb
+D:\GitHub Local\Chess\Chess\bin\Debug\netcoreapp2.1\Chess.deps.json
+D:\GitHub Local\Chess\Chess\bin\Debug\netcoreapp2.1\Chess.runtimeconfig.json
+D:\GitHub Local\Chess\Chess\bin\Debug\netcoreapp2.1\Chess.runtimeconfig.dev.json
+D:\GitHub Local\Chess\Chess\bin\Debug\netcoreapp2.1\Chess.dll
+D:\GitHub Local\Chess\Chess\bin\Debug\netcoreapp2.1\Chess.pdb
+D:\GitHub Local\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.csprojAssemblyReference.cache
+D:\GitHub Local\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.csproj.CoreCompileInputs.cache
+D:\GitHub Local\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.AssemblyInfoInputs.cache
+D:\GitHub Local\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.AssemblyInfo.cs
+D:\GitHub Local\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.dll
+D:\GitHub Local\Chess\Chess\obj\Debug\netcoreapp2.1\Chess.pdb

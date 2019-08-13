@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Chess
@@ -9,6 +10,8 @@ namespace Chess
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.OutputEncoding = Encoding.UTF8;
+            Console.SetWindowSize(84,28);
+            Console.SetBufferSize(84,28);
             Controller.Start();
         }
     }

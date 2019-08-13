@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\Chess\\Chess.csproj": {}
+    "D:\\GitHub Local\\Chess\\Chess\\Chess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\Chess\\Chess.csproj": {
+    "D:\\GitHub Local\\Chess\\Chess\\Chess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\Chess\\Chess.csproj",
+        "projectUniqueName": "D:\\GitHub Local\\Chess\\Chess\\Chess.csproj",
         "projectName": "Chess",
-        "projectPath": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\Chess\\Chess.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\Documents\\Desktop\\Chess game\\Chess\\Chess\\obj\\",
+        "projectPath": "D:\\GitHub Local\\Chess\\Chess\\Chess.csproj",
+        "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub Local\\Chess\\Chess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,6 +42,7 @@
         "netcoreapp2.1": {
           "dependencies": {
             "Microsoft.NETCore.App": {
+              "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true

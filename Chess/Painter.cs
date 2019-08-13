@@ -51,7 +51,7 @@ namespace Chess
 
         public static void DrawFigures()
         {
-            Controller.SaveDefaultCordinatesFigures<IFigure>();
+            Controller.SaveDefaultCoordinatesFigures<IFigure>();
             var keys = cordinatesOfFigures.Keys;
 
             foreach (var item in keys)

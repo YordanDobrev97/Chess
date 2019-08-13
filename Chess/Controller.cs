@@ -25,20 +25,20 @@ namespace Chess
             }
         }
 
-        public static void SaveDefaultCordinatesFigures<T>()
+        public static void SaveDefaultCoordinatesFigures<T>()
         {
-            CordinatesOfFirstPlayer<T>();
+            CoordinatesOfFirstPlayer<T>();
 
-            CordinatesOfSecondPlayer<T>();
+            CoordinatesOfSecondPlayer<T>();
         }
 
-        private static void CordinatesOfSecondPlayer<T>()
+        private static void CoordinatesOfSecondPlayer<T>()
         {
             int startValuePawnPosition = 5;
             for (int i = 0; i < 8; i++)
             {
                 var currentPawn = Painter.figuresOfSecondPlayer[i];
-                SaveDefaultCordinatesFigures<T>(currentPawn, startValuePawnPosition, 20);
+                SaveDefaultCoordinatesFigures<T>(currentPawn, startValuePawnPosition, 20);
                 startValuePawnPosition += 10;
             }
 
@@ -47,19 +47,19 @@ namespace Chess
             for (int i = 0; i < 8; i++)
             {
                 var currentFigure = Painter.figuresOfSecondPlayer[startIndex];
-                SaveDefaultCordinatesFigures<T>(currentFigure, positionFigure, 23);
+                SaveDefaultCoordinatesFigures<T>(currentFigure, positionFigure, 23);
                 positionFigure += 10;
                 startIndex++;
             }
         }
 
-        private static void CordinatesOfFirstPlayer<T>()
+        private static void CoordinatesOfFirstPlayer<T>()
         {
             int position = 5; // default start value
             for (int i = 0; i < 8; i++)
             {
                 var figure = Painter.figuresOfFirstPlayer[i]; //figures[i];
-                SaveDefaultCordinatesFigures<T>(figure, position, 2);
+                SaveDefaultCoordinatesFigures<T>(figure, position, 2);
                 position += 10;
             }
 
@@ -69,13 +69,13 @@ namespace Chess
             for (int i = 0; i < 8; i++)
             {
                 var pawn = Painter.figuresOfFirstPlayer[startIndex]; // get pawn
-                SaveDefaultCordinatesFigures<T>(pawn, pawnStartValue, 5);
+                SaveDefaultCoordinatesFigures<T>(pawn, pawnStartValue, 5);
                 pawnStartValue += 10;
                 startIndex++;
             }
         }
 
-        private static void SaveDefaultCordinatesFigures<T>(IFigure figure, int positionWitdh, int positionHeight)
+        private static void SaveDefaultCoordinatesFigures<T>(IFigure figure, int positionWitdh, int positionHeight)
         {
             var currentFigure = new Tuple<IFigure>(figure);
             Painter.cordinatesOfFigures[currentFigure] = new Dictionary<int, int>();

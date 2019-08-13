@@ -7,7 +7,7 @@ namespace Chess
 {
     public class Painter
     {
-        public static Dictionary<Tuple<IFigure>, Dictionary<int, int>> cordinatesOfFigures = new Dictionary<Tuple<IFigure>, Dictionary<int, int>>();
+        public static Dictionary<Tuple<IFigure>, Dictionary<int, int>> coordinatesOfFigures = new Dictionary<Tuple<IFigure>, Dictionary<int, int>>();
 
         public static IFigure[] figuresOfFirstPlayer =
         {
@@ -52,11 +52,11 @@ namespace Chess
         public static void DrawFigures()
         {
             Controller.SaveDefaultCoordinatesFigures<IFigure>();
-            var keys = cordinatesOfFigures.Keys;
+            var keys = coordinatesOfFigures.Keys;
 
             foreach (var item in keys)
             {
-                var currentFigure = cordinatesOfFigures[item];
+                var currentFigure = coordinatesOfFigures[item];
 
                 foreach (var valueFigure in currentFigure)
                 {
@@ -68,12 +68,12 @@ namespace Chess
 
         public static void DrawBoard()
         {
-            int startValueCountPaip = 2;
+            int  countSpacePaip = 2;
             Console.WriteLine();
 
             for (int col = 0; col < Controller.DEFAULT_VALUE; col++)
             {
-                DrawBox(startValueCountPaip);
+                DrawBox(countSpacePaip);
             }
         }
 

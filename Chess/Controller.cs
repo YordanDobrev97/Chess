@@ -63,7 +63,7 @@ namespace Chess
                 position += 10;
             }
 
-            //save cordinates of pawns
+            //save coordinates of pawns
             int pawnStartValue = 5;
             int startIndex = 8;
             for (int i = 0; i < 8; i++)
@@ -75,11 +75,11 @@ namespace Chess
             }
         }
 
-        private static void SaveDefaultCoordinatesFigures<T>(IFigure figure, int positionWitdh, int positionHeight)
+        private static void SaveDefaultCoordinatesFigures<T>(IFigure figure, int positionWidth, int positionHeight)
         {
             var currentFigure = new Tuple<IFigure>(figure);
-            Painter.cordinatesOfFigures[currentFigure] = new Dictionary<int, int>();
-            Painter.cordinatesOfFigures[currentFigure].Add(positionWitdh, positionHeight);
+            Painter.coordinatesOfFigures[currentFigure] = new Dictionary<int, int>();
+            Painter.coordinatesOfFigures[currentFigure].Add(positionWidth, positionHeight);
         }
     }
 }

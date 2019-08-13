@@ -9,7 +9,7 @@ namespace Chess
 
         public Board()
         {
-            IntilizateFigures();
+            InitializeFigures();
         }
 
         public void MoveFigure(string currentPostion, string newPosition)
@@ -20,7 +20,7 @@ namespace Chess
             IFigure currentFigure = board[row, col];
         }
 
-        private static void IntilizatePawns(int dimension)
+        private static void InitializePawns(int dimension)
         {
             for (int i = 0; i < Controller.DEFAULT_VALUE; i++)
             {
@@ -28,7 +28,7 @@ namespace Chess
             }
         }
 
-        private static void IntilizateFigures()
+        private static void InitializeFigures()
         {
             board[0, 0] = new Rook();
             board[0, 1] = new Knight();
@@ -38,9 +38,9 @@ namespace Chess
             board[0, 5] = new Bishop();
             board[0, 6] = new Knight();
             board[0, 7] = new Rook();
-            IntilizatePawns(1); // pawns of first player
+            InitializePawns(1); // pawns of first player
 
-            IntilizatePawns(6); // pawns of second player
+            InitializePawns(6); // pawns of second player
             board[7, 0] = new Rook();
             board[7, 1] = new Knight();
             board[7, 2] = new Bishop();

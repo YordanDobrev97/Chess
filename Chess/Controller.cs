@@ -68,17 +68,20 @@ namespace Chess
         public static void Start()
         {
             SetConsoleSettings();
-            Board board = new Board();
-            board.MoveFigure("a2", "a3"); // test move pawn
             Painter.DrawBoard();
-            Painter.DrawFigures();
+            Painter.DrawFigures(true);
 
+            Board board = new Board();
+            
             while (true)
             {
                 Console.SetCursorPosition(2, 26);
 
                 Console.Write("Enter your move: ");
-                string userMove = Console.ReadLine();
+                string[] userMove = Console.ReadLine().Split();
+                string currentPosition = userMove[0];
+                string newPosition = userMove[1];
+                board.MoveFigure(currentPosition, newPosition);
             }
         }
         public static void SetConsoleSettings()
@@ -149,7 +152,8 @@ namespace Chess
             for (int i = 0; i < 8; i++)
             {
                 var currentPawn = Painter.figuresOfSecondPlayer[i];
-                SaveDefaultCoordinatesFigures<T>(currentPawn, startValuePawnPosition, 20);
+                currentPawn.Position.Width = startValuePawnPosition;
+                currentPawn.Position.Height = 20;
                 startValuePawnPosition += 10;
             }
 
@@ -158,7 +162,8 @@ namespace Chess
             for (int i = 0; i < 8; i++)
             {
                 var currentFigure = Painter.figuresOfSecondPlayer[startIndex];
-                SaveDefaultCoordinatesFigures<T>(currentFigure, positionFigure, 23);
+                currentFigure.Position.Width = positionFigure;
+                currentFigure.Position.Height = 23;
                 positionFigure += 10;
                 startIndex++;
             }
@@ -170,7 +175,8 @@ namespace Chess
             for (int i = 0; i < 8; i++)
             {
                 var figure = Painter.figuresOfFirstPlayer[i]; //figures[i];
-                SaveDefaultCoordinatesFigures<T>(figure, position, 2);
+                figure.Position.Width = position;
+                figure.Position.Height = 2;
                 position += 10;
             }
 
@@ -180,17 +186,11 @@ namespace Chess
             for (int i = 0; i < 8; i++)
             {
                 var pawn = Painter.figuresOfFirstPlayer[startIndex]; // get pawn
-                SaveDefaultCoordinatesFigures<T>(pawn, pawnStartValue, 5);
+                pawn.Position.Width = pawnStartValue;
+                pawn.Position.Height = 5;
                 pawnStartValue += 10;
                 startIndex++;
             }
-        }
-
-        private static void SaveDefaultCoordinatesFigures<T>(IFigure figure, int positionWidth, int positionHeight)
-        {
-            var currentFigure = new Tuple<IFigure>(figure);
-            Painter.coordinatesOfFigures[currentFigure] = new Dictionary<int, int>();
-            Painter.coordinatesOfFigures[currentFigure].Add(positionWidth, positionHeight);
         }
     }
 }

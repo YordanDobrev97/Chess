@@ -4,6 +4,6 @@
     {
         string StringRepresentation { get; }
 
-        //Position Position { get; set; }
+        Position Position { get; set; }
     }
 }

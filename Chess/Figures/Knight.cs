@@ -6,6 +6,6 @@ namespace Chess.Figures
     {
         public string StringRepresentation => "♞";
 
-        //public Position Position { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public Position Position { get; set; } = new Position();
     }
 }

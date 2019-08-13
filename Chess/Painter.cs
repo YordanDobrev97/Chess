@@ -7,8 +7,6 @@ namespace Chess
 {
     public class Painter
     {
-        public static Dictionary<Tuple<IFigure>, Dictionary<int, int>> coordinatesOfFigures = new Dictionary<Tuple<IFigure>, Dictionary<int, int>>();
-
         public static IFigure[] figuresOfFirstPlayer =
         {
             new Rook(),
@@ -49,21 +47,20 @@ namespace Chess
             new Rook(),
         };
 
-        public static void DrawFigures()
+        public static void DrawFigures(bool isDefault)
         {
-            Controller.SaveDefaultCoordinatesFigures<IFigure>();
-            var keys = coordinatesOfFigures.Keys;
-
-            foreach (var item in keys)
+            Console.Clear();
+            DrawBoard();
+            if (isDefault)
             {
-                var currentFigure = coordinatesOfFigures[item];
-
-                foreach (var valueFigure in currentFigure)
-                {
-                    Console.SetCursorPosition(valueFigure.Key, valueFigure.Value);
-                    Console.Write(item.Item1.StringRepresentation);
-                }
+                Controller.SaveDefaultCoordinatesFigures<IFigure>();
             }
+
+            var figuresOfSecondPlayer = Painter.figuresOfSecondPlayer;
+            var figuresOfFirstPlayer = Painter.figuresOfFirstPlayer;
+
+            PrintFiguresOfSecondPlayer(figuresOfSecondPlayer);
+            PrintFiguresOfSecondPlayer(figuresOfFirstPlayer);
         }
 
         public static void DrawBoard()
@@ -74,6 +71,18 @@ namespace Chess
             for (int col = 0; col < Controller.DEFAULT_VALUE; col++)
             {
                 DrawBox(countSpacePaip);
+            }
+        }
+
+        private static void PrintFiguresOfSecondPlayer(IFigure[] figures)
+        {
+            foreach (var figure in figures)
+            {
+                int width = figure.Position.Width;
+                int height = figure.Position.Height;
+
+                Console.SetCursorPosition(width, height);
+                Console.Write(figure.StringRepresentation);
             }
         }
 

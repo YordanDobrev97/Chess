@@ -5,7 +5,7 @@ namespace Chess
 {
     public class Board
     {
-        public readonly static IFigure[,] board = new IFigure[Controller.DEFAULT_VALUE, Controller.DEFAULT_VALUE];
+        public static IFigure[,] board = new IFigure[Controller.DEFAULT_VALUE, Controller.DEFAULT_VALUE];
 
         public Board()
         {
@@ -18,6 +18,16 @@ namespace Chess
             int row = Controller.DEFAULT_VALUE - (currentPostion[1] - '0');
 
             IFigure currentFigure = board[row, col];
+
+            int newCol = newPosition[0] - 'a';
+            int newRow = Controller.DEFAULT_VALUE - (newPosition[1] - '0');
+
+            Board.board[row, col] = null;
+            Board.board[newRow, newCol] = currentFigure;
+
+            currentFigure.Position.Height -= 3;
+
+            Painter.DrawFigures(false);
         }
 
         private static void InitializePawns(int dimension)
@@ -30,25 +40,30 @@ namespace Chess
 
         private static void InitializeFigures()
         {
-            board[0, 0] = new Rook();
-            board[0, 1] = new Knight();
-            board[0, 2] = new Bishop();
-            board[0, 3] = new Queen();
-            board[0, 4] = new King();
-            board[0, 5] = new Bishop();
-            board[0, 6] = new Knight();
-            board[0, 7] = new Rook();
-            InitializePawns(1); // pawns of first player
+            int end = 8;
+            int row = 0;
+            int col = 0;
+            for (int i = 0; i < Painter.figuresOfFirstPlayer.Length; i++)
+            {
+                if (i == end)
+                {
+                    row++;
+                    col = 0;
+                }
+                board[row, col++] = Painter.figuresOfFirstPlayer[i];
+            }
 
-            InitializePawns(6); // pawns of second player
-            board[7, 0] = new Rook();
-            board[7, 1] = new Knight();
-            board[7, 2] = new Bishop();
-            board[7, 3] = new Queen();
-            board[7, 4] = new King();
-            board[7, 5] = new Bishop();
-            board[7, 6] = new Knight();
-            board[7, 7] = new Rook();
+            row = 6;
+            col = 0;
+            for (int i = 0; i < Painter.figuresOfSecondPlayer.Length; i++)
+            {
+                if (i == end)
+                {
+                    row++;
+                    col = 0;
+                }
+                board[row, col++] = Painter.figuresOfSecondPlayer[i];
+            }
         }
     }
 }

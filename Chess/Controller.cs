@@ -8,6 +8,15 @@ namespace Chess
     public abstract class Controller
     {
         public const int DEFAULT_VALUE = 8;
+        private const int STD_OUTPUT_HANDLE = -11;
+        private const int TMPF_TRUETYPE = 4;
+        private const int LF_FACESIZE = 32;
+        private static IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
+        private const int MF_BYCOMMAND = 0x00000000;
+        private const int SC_CLOSE = 0xF060;
+        private const int SC_MINIMIZE = 0xF020;
+        private const int SC_MAXIMIZE = 0xF030;
+        private const int SC_SIZE = 0xF000;
         //Const, struct and dll imported files needed for more advannced settings on the console 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal unsafe struct CONSOLE_FONT_INFO_EX
@@ -31,10 +40,6 @@ namespace Chess
                 Y = y;
             }
         }
-        private const int STD_OUTPUT_HANDLE = -11;
-        private const int TMPF_TRUETYPE = 4;
-        private const int LF_FACESIZE = 32;
-        private static IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool SetCurrentConsoleFontEx(
@@ -51,11 +56,6 @@ namespace Chess
             IntPtr hOut,
             uint dwFontNum
         );
-        private const int MF_BYCOMMAND = 0x00000000;
-        public const int SC_CLOSE = 0xF060;
-        public const int SC_MINIMIZE = 0xF020;
-        public const int SC_MAXIMIZE = 0xF030;
-        public const int SC_SIZE = 0xF000;
 
         [DllImport("user32.dll")]
         public static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);

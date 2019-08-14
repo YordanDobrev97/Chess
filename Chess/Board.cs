@@ -12,10 +12,10 @@ namespace Chess
             InitializeFigures();
         }
 
-        public void MoveFigure(string currentPostion, string newPosition)
+        public void MoveFigure(string currentPosition, string newPosition)
         {
-            int col = currentPostion[0] - 'a';
-            int row = Controller.DEFAULT_VALUE - (currentPostion[1] - '0');
+            int col = currentPosition[0] - 'a';
+            int row = Controller.DEFAULT_VALUE - (currentPosition[1] - '0');
 
             IFigure currentFigure = board[row, col];
 

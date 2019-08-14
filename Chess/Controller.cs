@@ -84,7 +84,8 @@ namespace Chess
                 board.MoveFigure(currentPosition, newPosition);
             }
         }
-        public static void SetConsoleSettings()
+
+        private static void SetConsoleSettings()
         {
             //SetWindowSize and SetBufferSize should be the same, otherwise the scrollbar will appear
             //If resize is not prevented in this method the scrollbar will appear if resize by user!
@@ -114,7 +115,8 @@ namespace Chess
         }
         //Font name
         private const string FONT_NAME = "MS Gothic";
-        public static void SetConsoleFont(string fontName = FONT_NAME)
+
+        private static void SetConsoleFont(string fontName = FONT_NAME)
         {
             unsafe
             {

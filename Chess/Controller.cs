@@ -63,6 +63,7 @@ namespace Chess
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
+
         public static void Start()
         {
             SetConsoleSettings();
@@ -151,6 +152,7 @@ namespace Chess
             }
             
         }
+
         public static void SaveDefaultCoordinatesFigures<T>()
         {
             CoordinatesOfFirstPlayer<T>();

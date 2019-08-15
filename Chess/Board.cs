@@ -1,6 +1,8 @@
 ﻿using Chess.Figures;
 using Chess.Interfaces;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Chess
 {
@@ -28,7 +30,8 @@ namespace Chess
             {
                 case "Pawn":
                     int currentMovePawn = newPosition[1] - '0';
-                    if (!Validator.IsValidMoveOfPawn(row, col, currentMovePawn, newCol))
+                    int currentRow = currentPosition[1] - '0';
+                    if (!Validator.IsValidMoveOfPawn(currentRow, col, currentMovePawn, newCol))
                     {
                         throw new ArgumentException("Invalid move of pawn! Try again");
                     }
@@ -46,6 +49,9 @@ namespace Chess
                     {
                         SingleMove(currentFigure);
                     }
+
+                    pawn.HasInitialState = false;
+                    board[newRow, newCol] = pawn;
                     break;
             }
 

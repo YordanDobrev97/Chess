@@ -1,4 +1,5 @@
-﻿using Chess.Interfaces;
+﻿using Chess.Figures;
+using Chess.Interfaces;
 
 namespace Chess
 {
@@ -16,17 +17,51 @@ namespace Chess
             int col = currentPosition[0] - 'a';
             int row = Controller.DEFAULT_VALUE - (currentPosition[1] - '0');
 
-            IFigure currentFigure = board[row, col];
-
             int newCol = newPosition[0] - 'a';
             int newRow = Controller.DEFAULT_VALUE - (newPosition[1] - '0');
+
+            IFigure currentFigure = board[row, col];
+            var type = currentFigure.GetType().Name;
 
             Board.board[row, col] = null;
             Board.board[newRow, newCol] = currentFigure;
 
-            currentFigure.Position.Height -= 3;
+            switch (type)
+            {
+                case "Pawn":
+                    var pawn = currentFigure as Pawn;
+
+                    if (HasDoubleMoveFromUser(newRow, pawn))
+                    {
+                        DoubleMove(currentFigure);
+                    }
+                    else
+                    {
+                        SingleMove(currentFigure);
+                    }
+
+
+                    break;
+            }
+
+
 
             Painter.DrawFigures(false);
+        }
+
+        private static void DoubleMove(IFigure currentFigure)
+        {
+            currentFigure.Position.Height -= 6;
+        }
+
+        private static bool HasDoubleMoveFromUser(int newRow, Pawn pawn)
+        {
+            return pawn.HasInitialState && newRow == 4;
+        }
+
+        private static void SingleMove(IFigure currentFigure)
+        {
+            currentFigure.Position.Height -= 3;
         }
 
         private static void InitializeFigures()

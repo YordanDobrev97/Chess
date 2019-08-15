@@ -1,5 +1,4 @@
-﻿using Chess.Figures;
-using Chess.Interfaces;
+﻿using Chess.Interfaces;
 
 namespace Chess
 {

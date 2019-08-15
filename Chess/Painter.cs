@@ -65,12 +65,25 @@ namespace Chess
 
         public static void DrawBoard()
         {
-            int  countSpacePaip = 2;
+            int countSpacePaip = 2;
             Console.WriteLine();
 
+            int row = 0;
+            int num = 8;
             for (int col = 0; col < Controller.DEFAULT_VALUE; col++)
             {
-                DrawBox(countSpacePaip);
+                DrawBox(countSpacePaip, row, num);
+                row++;
+                num--;
+            }
+
+            int countSpace = 5;
+            
+            for (char symbol = 'a'; symbol <='h'; symbol++)
+            {
+                Console.SetCursorPosition(countSpace, 25);
+                Console.Write(symbol);
+                countSpace+= 10;
             }
         }
 
@@ -99,13 +112,14 @@ namespace Chess
             }
         }
 
-        private static void DrawBox(int countSpacePaip)
+        private static void DrawBox(int countSpacePaip, int row, int num)
         {
             Console.Write(new string(' ', countSpacePaip));
             DrawFront();
 
             Console.WriteLine();
-            Console.Write(new string(' ', countSpacePaip));
+            Console.Write(num);
+            Console.Write(new string(' ', countSpacePaip - 1));
 
             for (int col = 0; col < Controller.DEFAULT_VALUE; col++)
             {
@@ -114,7 +128,7 @@ namespace Chess
                 {
                     Console.Write(" ");
                 }
-				
+
                 Console.Write("|");
                 Console.Write(new string(' ', 2));
             }

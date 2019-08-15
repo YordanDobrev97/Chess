@@ -75,7 +75,7 @@ namespace Chess
             
             while (true)
             {
-                Console.SetCursorPosition(2, 26);
+                Console.SetCursorPosition(2, 27);
 
                 Console.Write("Enter your move: ");
                 string[] userMove = Console.ReadLine().Split();
@@ -89,8 +89,8 @@ namespace Chess
         {
             //SetWindowSize and SetBufferSize should be the same, otherwise the scrollbar will appear
             //If resize is not prevented in this method the scrollbar will appear if resize by user!
-            Console.SetWindowSize(84, 28);
-            Console.SetBufferSize(84, 28);
+            Console.SetWindowSize(84, 30);
+            Console.SetBufferSize(84, 30);
             //Set the font
             SetConsoleFont();
             //Prevent user from closing/minimizing/maximizing/resizing the console

@@ -30,14 +30,6 @@ namespace Chess
             Painter.DrawFigures(false);
         }
 
-        private static void InitializePawns(int dimension)
-        {
-            for (int i = 0; i < Controller.DEFAULT_VALUE; i++)
-            {
-                board[dimension, i] = new Pawn();
-            }
-        }
-
         private static void InitializeFigures()
         {
             int end = 8;

@@ -1,5 +1,6 @@
 ﻿using Chess.Figures;
 using Chess.Interfaces;
+using System;
 
 namespace Chess
 {
@@ -23,12 +24,18 @@ namespace Chess
             IFigure currentFigure = board[row, col];
             var type = currentFigure.GetType().Name;
 
-            Board.board[row, col] = null;
-            Board.board[newRow, newCol] = currentFigure;
-
             switch (type)
             {
                 case "Pawn":
+                    int currentMovePawn = newPosition[1] - '0';
+                    if (!Validator.IsValidMoveOfPawn(row, col, currentMovePawn, newCol))
+                    {
+                        throw new ArgumentException("Invalid move of pawn! Try again");
+                    }
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = currentFigure;
+
                     var pawn = currentFigure as Pawn;
 
                     if (HasDoubleMoveFromUser(newRow, pawn))
@@ -39,12 +46,8 @@ namespace Chess
                     {
                         SingleMove(currentFigure);
                     }
-
-
                     break;
             }
-
-
 
             Painter.DrawFigures(false);
         }

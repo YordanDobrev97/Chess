@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Chess.Interfaces;
 
 namespace Chess
 {
@@ -81,7 +79,19 @@ namespace Chess
                 string[] userMove = Console.ReadLine().Split();
                 string currentPosition = userMove[0];
                 string newPosition = userMove[1];
-                board.MoveFigure(currentPosition, newPosition);
+
+                try
+                {
+                    board.MoveFigure(currentPosition, newPosition);
+                }
+                catch (Exception exception)
+                {
+                    Console.Clear();
+                    Painter.DrawBoard();
+                    Painter.DrawFigures(false);
+                    Console.SetCursorPosition(2, 29);
+                    Console.WriteLine(exception.Message);
+                }   
             }
         }
 

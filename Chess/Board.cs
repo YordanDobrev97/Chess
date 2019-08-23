@@ -1,8 +1,6 @@
 ﻿using Chess.Figures;
 using Chess.Interfaces;
-using System;
-using System.Linq;
-using System.Reflection;
+using System.Threading;
 
 namespace Chess
 {
@@ -26,7 +24,7 @@ namespace Chess
             IFigure currentFigure = board[row, col];
             var type = currentFigure.GetType().Name;
 
-
+            bool hasTakingPawn = false;
             switch (type)
             {
                 case "Pawn":
@@ -35,9 +33,16 @@ namespace Chess
                     if (!Validator.IsValidMoveOfPawn(currentFigure, currentRow, 
                         col, currentMovePawn, newCol, isFirstPlayer))
                     {
-                        throw new ArgumentException("Invalid move of pawn! Try again");
+                        Exception.ThrowInvalidMoveException();
                     }
 
+                    if (board[newRow, newCol] is Pawn)
+                    {
+                        hasTakingPawn = true;
+                        string takenPlayer = isFirstPlayer ? "First player" : "Second player";
+                        System.Console.WriteLine($"The pawn was taken from {takenPlayer}");
+                        Thread.Sleep(1000);
+                    }
                     board[row, col] = null;
                     board[newRow, newCol] = currentFigure;
 
@@ -49,7 +54,7 @@ namespace Chess
                     }
                     else
                     {
-                        SingleMove(currentFigure, isFirstPlayer);
+                        SingleMove(currentFigure, isFirstPlayer, hasTakingPawn);
                     }
 
                     pawn.HasInitialState = false;
@@ -71,10 +76,14 @@ namespace Chess
             return pawn.HasInitialState && newRow == 4;
         }
 
-        private static void SingleMove(IFigure currentFigure, bool isFirstPlayer)
+        private static void SingleMove(IFigure currentFigure, bool isFirstPlayer, bool hasTaking)
         {
             if (isFirstPlayer)
             {
+                if (hasTaking)
+                {
+                    currentFigure.Position.Width += 10;
+                }
                 currentFigure.Position.Height -= 3;
             }
             else

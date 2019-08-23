@@ -1,11 +1,10 @@
 ﻿using Chess.Figures;
 using Chess.Interfaces;
 using System;
-using System.Collections.Generic;
 
 namespace Chess
 {
-    public class Painter
+    public abstract class Painter
     {
         public static IFigure[] figuresOfFirstPlayer =
         {

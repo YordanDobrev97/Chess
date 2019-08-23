@@ -3,11 +3,11 @@ using Chess.Interfaces;
 
 namespace Chess
 {
-    public class Validator
+    public abstract class Validator
     {
         public static bool IsValidMoveOfPawn(IFigure pawn, int row, int col, int newRow, int newCol, bool isFirstPlayer)
         {
-
+            //out of range from board
             if (!MovePawnInRangeBoard(newRow))
             {
                 return false;
@@ -31,23 +31,23 @@ namespace Chess
             int move = 1;
             if (isFirstPlayer)
             {
-                //has double move
+                //has double move (first player)
                 if (((Pawn)pawn).HasInitialState && newRow == move + 1)
                 {
                     return false;
                 }
 
-                // has single move
+                // has single move (first player)
                 return (currentRow + move) != newRow;
             }
 
-            //has double move
+            //has double move (second player)
             if (((Pawn)pawn).HasInitialState && newRow == move - 1)
             {
                 return false;
             }
 
-            // has single move
+            // has single move (second player)
             return (currentRow - move) != newRow;
 
         }

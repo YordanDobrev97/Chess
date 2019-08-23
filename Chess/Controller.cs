@@ -1,5 +1,4 @@
-﻿using NAudio.Wave;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace Chess
@@ -73,11 +72,11 @@ namespace Chess
 
             Board board = new Board();
 
+            string player = "First";
             while (true)
             {
-
                 Painter.SetCursorPositionConsole(2, 27);
-                Painter.WriteConsole("Enter your move: ");
+                Painter.WriteConsole($"{player} player your move: ");
                 string[] userMove = Console.ReadLine().Split();
                 string currentPosition = userMove[0];
                 string newPosition = userMove[1];
@@ -89,13 +88,15 @@ namespace Chess
                     if (isFirstPlayer)
                     {
                         isFirstPlayer = false;
+                        player = "Second";
                     }
                     else
                     {
                         isFirstPlayer = true;
+                        player = "First";
                     }
                 }
-                catch (Exception exception)
+                catch (System.Exception exception)
                 {
                     Painter.ClearConsole();
                     Painter.DrawBoard();

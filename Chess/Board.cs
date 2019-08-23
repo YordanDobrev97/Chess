@@ -15,7 +15,7 @@ namespace Chess
             InitializeFigures();
         }
 
-        public void MoveFigure(string currentPosition, string newPosition)
+        public void MoveFigure(string currentPosition, string newPosition, bool isFirstPlayer)
         {
             int col = currentPosition[0] - 'a';
             int row = Controller.DEFAULT_VALUE - (currentPosition[1] - '0');
@@ -26,12 +26,14 @@ namespace Chess
             IFigure currentFigure = board[row, col];
             var type = currentFigure.GetType().Name;
 
+
             switch (type)
             {
                 case "Pawn":
                     int currentMovePawn = newPosition[1] - '0';
                     int currentRow = currentPosition[1] - '0';
-                    if (!Validator.IsValidMoveOfPawn(currentRow, col, currentMovePawn, newCol))
+                    if (!Validator.IsValidMoveOfPawn(currentFigure, currentRow, 
+                        col, currentMovePawn, newCol, isFirstPlayer))
                     {
                         throw new ArgumentException("Invalid move of pawn! Try again");
                     }
@@ -47,11 +49,12 @@ namespace Chess
                     }
                     else
                     {
-                        SingleMove(currentFigure);
+                        SingleMove(currentFigure, isFirstPlayer);
                     }
 
                     pawn.HasInitialState = false;
                     board[newRow, newCol] = pawn;
+
                     break;
             }
 
@@ -68,9 +71,16 @@ namespace Chess
             return pawn.HasInitialState && newRow == 4;
         }
 
-        private static void SingleMove(IFigure currentFigure)
+        private static void SingleMove(IFigure currentFigure, bool isFirstPlayer)
         {
-            currentFigure.Position.Height -= 3;
+            if (isFirstPlayer)
+            {
+                currentFigure.Position.Height -= 3;
+            }
+            else
+            {
+                currentFigure.Position.Height += 3;
+            }
         }
 
         private static void InitializeFigures()

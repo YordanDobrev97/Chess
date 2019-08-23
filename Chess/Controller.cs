@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Chess
@@ -6,6 +7,7 @@ namespace Chess
     public abstract class Controller
     {
         public const int DEFAULT_VALUE = 8;
+        private static bool isFirstPlayer = true;
         private const int STD_OUTPUT_HANDLE = -11;
         private const int TMPF_TRUETYPE = 4;
         private const int LF_FACESIZE = 32;
@@ -48,7 +50,6 @@ namespace Chess
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern IntPtr GetStdHandle(int dwType);
 
-
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern int SetConsoleFont(
             IntPtr hOut,
@@ -71,27 +72,36 @@ namespace Chess
             Painter.DrawFigures(true);
 
             Board board = new Board();
-            
+
             while (true)
             {
-                Console.SetCursorPosition(2, 27);
 
-                Console.Write("Enter your move: ");
+                Painter.SetCursorPositionConsole(2, 27);
+                Painter.WriteConsole("Enter your move: ");
                 string[] userMove = Console.ReadLine().Split();
                 string currentPosition = userMove[0];
                 string newPosition = userMove[1];
 
                 try
                 {
-                    board.MoveFigure(currentPosition, newPosition);
+                    board.MoveFigure(currentPosition, newPosition, isFirstPlayer);
+
+                    if (isFirstPlayer)
+                    {
+                        isFirstPlayer = false;
+                    }
+                    else
+                    {
+                        isFirstPlayer = true;
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Console.Clear();
+                    Painter.ClearConsole();
                     Painter.DrawBoard();
                     Painter.DrawFigures(false);
-                    Console.SetCursorPosition(2, 29);
-                    Console.WriteLine(exception.Message);
+                    Painter.SetCursorPositionConsole(2, 29);
+                    Painter.WriteConsole(exception.Message);
                 }   
             }
         }
@@ -100,8 +110,8 @@ namespace Chess
         {
             //SetWindowSize and SetBufferSize should be the same, otherwise the scrollbar will appear
             //If resize is not prevented in this method the scrollbar will appear if resize by user!
-            Console.SetWindowSize(84, 30);
-            Console.SetBufferSize(84, 30);
+            Painter.SetWindowSize(84, 30);
+            Painter.SetBufferSize(84, 30);
             //Set the font
             SetConsoleFont();
             //Prevent user from closing/minimizing/maximizing/resizing the console

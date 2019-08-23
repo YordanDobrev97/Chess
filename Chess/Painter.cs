@@ -47,6 +47,31 @@ namespace Chess
             new Rook(),
         };
 
+        public static void WriteConsole(string input)
+        {
+            Console.Write(input);
+        }
+
+        public static void SetCursorPositionConsole(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+        }
+
+        public static void ClearConsole()
+        {
+            Console.Clear();
+        }
+
+        public static void SetWindowSize(int width, int height)
+        {
+            Console.SetWindowSize(width, height);
+        }
+
+        public static void SetBufferSize(int width, int height)
+        {
+            Console.SetBufferSize(width, width);
+        }
+
         public static void DrawFigures(bool isDefault)
         {
             Console.Clear();
@@ -59,8 +84,8 @@ namespace Chess
             var figuresOfSecondPlayer = Painter.figuresOfSecondPlayer;
             var figuresOfFirstPlayer = Painter.figuresOfFirstPlayer;
 
-            PrintFiguresOfSecondPlayer(figuresOfSecondPlayer);
-            PrintFiguresOfSecondPlayer(figuresOfFirstPlayer);
+            PrintFiguresOfPlayer(figuresOfFirstPlayer);
+            PrintFiguresOfPlayer(figuresOfSecondPlayer);
         }
 
         public static void DrawBoard()
@@ -87,7 +112,7 @@ namespace Chess
             }
         }
 
-        private static void PrintFiguresOfSecondPlayer(IFigure[] figures)
+        private static void PrintFiguresOfPlayer(IFigure[] figures)
         {
             foreach (var figure in figures)
             {

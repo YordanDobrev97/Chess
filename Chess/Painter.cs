@@ -69,7 +69,7 @@ namespace Chess
 
         public static void SetBufferSize(int width, int height)
         {
-            Console.SetBufferSize(width, width);
+            Console.SetBufferSize(width, height);
         }
 
         public static void DrawFigures(bool isDefault)

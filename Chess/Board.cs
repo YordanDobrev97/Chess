@@ -15,11 +15,11 @@ namespace Chess
 
         public void MoveFigure(string currentPosition, string newPosition, bool isFirstPlayer)
         {
-            int col = currentPosition[0] - 'a';
-            int row = Controller.DEFAULT_VALUE - (currentPosition[1] - '0');
+            int col = GetPositionCol(currentPosition);
+            int row = GetPositionRow(currentPosition);
 
-            int newCol = newPosition[0] - 'a';
-            int newRow = Controller.DEFAULT_VALUE - (newPosition[1] - '0');
+            int newCol = GetPositionCol(newPosition);
+            int newRow = GetPositionRow(newPosition);
 
             IFigure currentFigure = board[row, col];
             var type = currentFigure.GetType().Name;
@@ -30,7 +30,8 @@ namespace Chess
                 case "Pawn":
                     int currentMovePawn = newPosition[1] - '0';
                     int currentRow = currentPosition[1] - '0';
-                    if (!Validator.IsValidMoveOfPawn(currentFigure, currentRow, 
+
+                    if (!Validator.IsValidMoveOfPawn(currentFigure, currentRow,
                         col, currentMovePawn, newCol, isFirstPlayer))
                     {
                         Exception.ThrowInvalidMoveException();
@@ -43,6 +44,7 @@ namespace Chess
                         System.Console.WriteLine($"The pawn was taken from {takenPlayer}");
                         Thread.Sleep(1000);
                     }
+
                     board[row, col] = null;
                     board[newRow, newCol] = currentFigure;
 
@@ -64,6 +66,16 @@ namespace Chess
             }
 
             Painter.DrawFigures(false);
+        }
+
+        private static int GetPositionRow(string currentPosition)
+        {
+            return Controller.DEFAULT_VALUE - (currentPosition[1] - '0');
+        }
+
+        private static int GetPositionCol(string currentPosition)
+        {
+            return currentPosition[0] - 'a';
         }
 
         private static void DoubleMove(IFigure currentFigure)

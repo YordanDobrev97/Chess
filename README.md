@@ -1,4 +1,4 @@
 # Chess
 **Console game - chess**
 
-![background-chess](https://user-images.githubusercontent.com/42092212/63078863-8ebe5e00-bf45-11e9-8f5f-d4dc6736eb7f.png)
+![background-chess](https://user-images.githubusercontent.com/42092212/64476298-b1831180-d195-11e9-8c33-150ac8df3611.png)

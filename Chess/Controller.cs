@@ -4,20 +4,24 @@
     {
         private static bool isFirstPlayer = true;
         public const int DEFAULT_VALUE = 8;
-        
         public static void Start()
         {
             SystemSetting.SetSettingOfFontMsGothic();
             Painter.DrawBoard();
             Painter.DrawFigures(true);
+            Painter.DrawFieldWithAliveFigures();
 
             Board board = new Board();
 
-            string player = "First";
+            Player peshoPlayer = new Player("Pesho");
+            Player goshoPlayer = new Player("Gosho");
+            string player = peshoPlayer.Name;
+
             while (true)
             {
                 Painter.SetCursorPositionConsole(2, 27);
-                Painter.WriteConsole($"{player} player your move: ");
+                Painter.WriteConsole($"{player} You're on the move ");
+
                 string[] userMove = Painter.ReadFromConsole().Split();
                 string currentPosition = userMove[0];
                 string newPosition = userMove[1];
@@ -29,13 +33,15 @@
                     if (isFirstPlayer)
                     {
                         isFirstPlayer = false;
-                        player = "Second";
+                        player = goshoPlayer.Name;
                     }
                     else
                     {
                         isFirstPlayer = true;
-                        player = "First";
+                        player = peshoPlayer.Name;
                     }
+
+                    Painter.DrawFieldWithAliveFigures();
                 }
                 catch (System.Exception exception)
                 {

@@ -70,8 +70,8 @@ namespace Chess
         {
             //SetWindowSize and SetBufferSize should be the same, otherwise the scrollbar will appear
             //If resize is not prevented in this method the scrollbar will appear if resize by user!
-            Painter.SetWindowSize(82, 28);
-            Painter.SetBufferSize(82, 28);
+            Painter.SetWindowSize(120, 29);
+            Painter.SetBufferSize(120, 29);
 
             //Set the font
             SetConsoleFont();

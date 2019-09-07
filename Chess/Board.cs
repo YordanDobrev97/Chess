@@ -61,7 +61,6 @@ namespace Chess
 
                     pawn.HasInitialState = false;
                     board[newRow, newCol] = pawn;
-
                     break;
             }
 

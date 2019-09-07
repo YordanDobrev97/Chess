@@ -82,6 +82,45 @@ namespace Chess
             Console.SetBufferSize(width, height);
         }
 
+        public static void DrawFieldWithAliveFigures()
+        {
+            Console.SetCursorPosition(85, 1);
+            Console.Write("Dead figures");
+
+            Console.SetCursorPosition(87, 3);
+            Console.Write("Pesho");
+
+            Console.SetCursorPosition(103, 3);
+            Console.Write("Gosho");
+
+            Console.SetCursorPosition(85, 4);
+
+            for (int i = 0; i < 6; i++)
+            {
+                Console.Write("-----");
+            }
+
+            int currentRow = 5;
+            
+            for (int i = 0; i < 20; i++)
+            {
+                Console.SetCursorPosition(85, currentRow);
+                for (int j = 0; j < 2; j++)
+                {
+                    Console.Write("|");
+                    Console.Write(new string(' ', 13));
+                }
+                Console.WriteLine("|");
+                currentRow++;
+            }
+
+            Console.SetCursorPosition(85, currentRow);
+            for (int i = 0; i < 6; i++)
+            {
+                Console.Write("-----");
+            }
+        }
+
         public static void DrawFigures(bool isDefault)
         {
             Console.Clear();

@@ -1,6 +1,5 @@
 ﻿using Chess.Figures;
 using Chess.Interfaces;
-using System.Threading;
 
 namespace Chess
 {
@@ -37,12 +36,13 @@ namespace Chess
                         Exception.ThrowInvalidMoveException();
                     }
 
+                    //is have other pawn
                     if (board[newRow, newCol] is Pawn)
                     {
                         hasTakingPawn = true;
                         string takenPlayer = isFirstPlayer ? "First player" : "Second player";
-                        System.Console.WriteLine($"The pawn was taken from {takenPlayer}");
-                        Thread.Sleep(1000);
+                        Painter.WriteConsole($"The pawn was taken from {takenPlayer}");
+                        Painter.Sleep(1000);
                     }
 
                     board[row, col] = null;

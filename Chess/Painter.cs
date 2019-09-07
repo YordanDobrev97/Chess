@@ -1,6 +1,7 @@
 ﻿using Chess.Figures;
 using Chess.Interfaces;
 using System;
+using System.Threading;
 
 namespace Chess
 {
@@ -51,6 +52,11 @@ namespace Chess
             Console.Write(input);
         }
 
+        public static string ReadFromConsole()
+        {
+            return Console.ReadLine();
+        }
+
         public static void SetCursorPositionConsole(int x, int y)
         {
             Console.SetCursorPosition(x, y);
@@ -66,6 +72,11 @@ namespace Chess
             Console.SetWindowSize(width, height);
         }
 
+        public static void Sleep(int time)
+        {
+            Thread.Sleep(time);
+        }
+
         public static void SetBufferSize(int width, int height)
         {
             Console.SetBufferSize(width, height);
@@ -77,7 +88,7 @@ namespace Chess
             DrawBoard();
             if (isDefault)
             {
-                Controller.SaveDefaultCoordinatesFigures<IFigure>();
+                Controller.SaveDefaultCoordinatesFigures();
             }
 
             var figuresOfSecondPlayer = Painter.figuresOfSecondPlayer;

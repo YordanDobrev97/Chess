@@ -1,9 +1,11 @@
-﻿namespace Chess
+﻿using Chess.Common;
+
+namespace Chess
 {
     public abstract class Controller
     {
         private static bool isFirstPlayer = true;
-        public const int DEFAULT_VALUE = 8;
+
         public static void Start()
         {
             SystemSetting.SetSettingOfFontMsGothic();
@@ -15,11 +17,16 @@
 
             Player peshoPlayer = new Player("Pesho");
             Player goshoPlayer = new Player("Gosho");
+
+            Painter.GetPlayerName(peshoPlayer);
+
             string player = peshoPlayer.Name;
 
             while (true)
             {
-                Painter.SetCursorPositionConsole(2, 27);
+                Painter.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
+                    GlobalConstants.CursorHeightPositionOfConsole);
+
                 Painter.WriteConsole($"{player} You're on the move ");
 
                 string[] userMove = Painter.ReadFromConsole().Split();
@@ -47,8 +54,9 @@
                 {
                     Painter.ClearConsole();
                     Painter.DrawBoard();
-                    Painter.DrawFigures(false);
-                    Painter.SetCursorPositionConsole(2, 29);
+                    Painter.DrawFigures(!GlobalConstants.DefaultSaveCordinatesFigures);
+                    Painter.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
+                        GlobalConstants.CursorHeightPositionOfConsole + 2);
                     Painter.WriteConsole(exception.Message);
                 }   
             }
@@ -63,47 +71,49 @@
 
         private static void CoordinatesOfSecondPlayer()
         {
-            int startValuePawnPosition = 5;
-            for (int i = 0; i < 8; i++)
+            int startValuePawnPosition = GlobalConstants.StartValuePawnPosition;
+
+            for (int i = 0; i < GlobalConstants.EndRowOfBoard; i++)
             {
                 var currentPawn = Painter.figuresOfSecondPlayer[i];
                 currentPawn.Position.Width = startValuePawnPosition;
-                currentPawn.Position.Height = 20;
-                startValuePawnPosition += 10;
+                currentPawn.Position.Height = GlobalConstants.CurrentPawnPositionHeight;
+                startValuePawnPosition += GlobalConstants.IncrementStartValuePawnPosition;
             }
 
-            int startIndex = 8;
-            int positionFigure = 5;
-            for (int i = 0; i < 8; i++)
+            int startIndex = GlobalConstants.EndRowOfBoard;
+            int positionFigure = GlobalConstants.StartValuePawnPosition;
+
+            for (int i = 0; i < GlobalConstants.EndRowOfBoard; i++)
             {
                 var currentFigure = Painter.figuresOfSecondPlayer[startIndex];
                 currentFigure.Position.Width = positionFigure;
-                currentFigure.Position.Height = 23;
-                positionFigure += 10;
+                currentFigure.Position.Height = GlobalConstants.PositionHeight;
+                positionFigure += GlobalConstants.IncrementStartValuePawnPosition;
                 startIndex++;
             }
         }
 
         private static void CoordinatesOfFirstPlayer()
         {
-            int startDefaultPosition = 5;
-            for (int i = 0; i < 8; i++)
+            int startDefaultPosition = GlobalConstants.StartValuePawnPosition;
+
+            for (int i = 0; i < GlobalConstants.EndRowOfBoard; i++)
             {
                 var figure = Painter.figuresOfFirstPlayer[i];
                 figure.Position.Width = startDefaultPosition;
                 figure.Position.Height = 2;
-                startDefaultPosition += 10;
+                startDefaultPosition += GlobalConstants.IncrementStartValuePawnPosition;
             }
 
-            //save coordinates of pawns
-            int pawnStartValue = 5;
-            int startIndex = 8;
-            for (int i = 0; i < 8; i++)
+            int pawnStartValue = GlobalConstants.StartValuePawnPosition;
+            int startIndex = GlobalConstants.EndRowOfBoard;
+            for (int i = 0; i < GlobalConstants.EndRowOfBoard; i++)
             {
                 var pawn = Painter.figuresOfFirstPlayer[startIndex];
                 pawn.Position.Width = pawnStartValue;
-                pawn.Position.Height = 5;
-                pawnStartValue += 10;
+                pawn.Position.Height = GlobalConstants.StartValuePawnPosition; ;
+                pawnStartValue += GlobalConstants.IncrementStartValuePawnPosition;
                 startIndex++;
             }
         }

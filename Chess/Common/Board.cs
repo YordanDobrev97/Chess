@@ -1,11 +1,12 @@
-﻿using Chess.Figures;
+﻿using Chess.Common;
+using Chess.Figures;
 using Chess.Interfaces;
 
 namespace Chess
 {
     public class Board
     {
-        public static IFigure[,] board = new IFigure[Controller.DEFAULT_VALUE, Controller.DEFAULT_VALUE];
+        public static IFigure[,] board = new IFigure[GlobalConstants.DefaultValueSizeOfBoard, GlobalConstants.DefaultValueSizeOfBoard];
 
         public Board()
         {
@@ -42,7 +43,7 @@ namespace Chess
                         hasTakingPawn = true;
                         string takenPlayer = isFirstPlayer ? "First player" : "Second player";
                         Painter.WriteConsole($"The pawn was taken from {takenPlayer}");
-                        Painter.Sleep(1000);
+                        Painter.Sleep(GlobalConstants.TimeSleepConsole);
                     }
 
                     board[row, col] = null;
@@ -69,7 +70,7 @@ namespace Chess
 
         private static int GetPositionRow(string currentPosition)
         {
-            return Controller.DEFAULT_VALUE - (currentPosition[1] - '0');
+            return GlobalConstants.DefaultValueSizeOfBoard - (currentPosition[1] - '0');
         }
 
         private static int GetPositionCol(string currentPosition)
@@ -79,12 +80,12 @@ namespace Chess
 
         private static void DoubleMove(IFigure currentFigure)
         {
-            currentFigure.Position.Height -= 6;
+            currentFigure.Position.Height -= GlobalConstants.CurrentFigurePositionHeight;
         }
 
         private static bool HasDoubleMoveFromUser(int newRow, Pawn pawn)
         {
-            return pawn.HasInitialState && newRow == 4;
+            return pawn.HasInitialState && newRow == GlobalConstants.RowDoubleMoveUser;
         }
 
         private static void SingleMove(IFigure currentFigure, bool isFirstPlayer, bool hasTaking)
@@ -93,39 +94,41 @@ namespace Chess
             {
                 if (hasTaking)
                 {
-                    currentFigure.Position.Width += 10;
+                    currentFigure.Position.Width += GlobalConstants.IncrementPositionWidthSingleMove;
                 }
-                currentFigure.Position.Height -= 3;
+                currentFigure.Position.Height -= GlobalConstants.DecrementPositionHeightSingleMove;
             }
             else
             {
-                currentFigure.Position.Height += 3;
+                currentFigure.Position.Height += GlobalConstants.DecrementPositionHeightSingleMove;
             }
         }
 
         private static void InitializeFigures()
         {
-            int end = 8;
-            int row = 0;
-            int col = 0;
+            int end = GlobalConstants.EndRowOfBoard;
+            int row = GlobalConstants.StartRowOfBoard;
+            int col = GlobalConstants.StartColOfBoard;
+
             for (int i = 0; i < Painter.figuresOfFirstPlayer.Length; i++)
             {
                 if (i == end)
                 {
                     row++;
-                    col = 0;
+                    col = GlobalConstants.StartColOfBoard;
                 }
                 board[row, col++] = Painter.figuresOfFirstPlayer[i];
             }
 
-            row = 6;
-            col = 0;
+            row = GlobalConstants.EndRowOfBoard - 2;
+            col = GlobalConstants.StartColOfBoard;
+
             for (int i = 0; i < Painter.figuresOfSecondPlayer.Length; i++)
             {
                 if (i == end)
                 {
                     row++;
-                    col = 0;
+                    col = GlobalConstants.StartColOfBoard;
                 }
                 board[row, col++] = Painter.figuresOfSecondPlayer[i];
             }

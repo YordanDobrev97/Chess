@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Chess
@@ -7,8 +8,8 @@ namespace Chess
     {
         public static void Main()
         {
-            //More advanced console settings can be changed programmatically in
-            //the Controller class
+            ////More advanced console settings can be changed programmatically in
+            ////the SystemSetting class
             Console.Title = "Chess";
             Console.ForegroundColor = ConsoleColor.Green;
             Console.OutputEncoding = Encoding.UTF8;

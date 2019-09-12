@@ -1,4 +1,5 @@
-﻿using Chess.Figures;
+﻿using Chess.Common;
+using Chess.Figures;
 using Chess.Interfaces;
 using System;
 using System.Threading;
@@ -82,40 +83,55 @@ namespace Chess
             Console.SetBufferSize(width, height);
         }
 
+        public static Player GetPlayerName(Player player)
+        {
+            return player;
+        }
+
         public static void DrawFieldWithAliveFigures()
         {
-            Console.SetCursorPosition(85, 1);
+            Console.SetCursorPosition(GlobalConstants.WidthPositionDeadFigure,
+                GlobalConstants.HeightPositionDeadFigure);
+
             Console.Write("Dead figures");
 
-            Console.SetCursorPosition(87, 3);
-            Console.Write("Pesho");
+            Console.SetCursorPosition(GlobalConstants.WidthNameFirstPlayerPosition, 
+                GlobalConstants.HeightNamePlayerPosition);
 
-            Console.SetCursorPosition(103, 3);
-            Console.Write("Gosho");
+            Console.WriteLine("Pesho");
 
-            Console.SetCursorPosition(85, 4);
+            Console.SetCursorPosition(GlobalConstants.WidthNameSecondPlayerPosition,
+                GlobalConstants.HeightNamePlayerPosition);
+            Console.WriteLine("Gosho");
 
-            for (int i = 0; i < 6; i++)
+            Console.SetCursorPosition(GlobalConstants.WidthPositionDrawAliveFigure, 
+                GlobalConstants.HeightPositionDrawAliveFigure);
+
+            for (int i = 0; i < GlobalConstants.LengthDrawAliveFigure; i++)
             {
                 Console.Write("-----");
             }
 
-            int currentRow = 5;
+            int currentRow = GlobalConstants.LengthDrawAliveFigure + 1;
             
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < GlobalConstants.RowSizeDrawAliveFigure; i++)
             {
-                Console.SetCursorPosition(85, currentRow);
-                for (int j = 0; j < 2; j++)
+                Console.SetCursorPosition(GlobalConstants.WidthPositionDrawAliveFigure,
+                    currentRow);
+
+                for (int j = 0; j < GlobalConstants.ColSizeDrawAliveFigure; j++)
                 {
                     Console.Write("|");
-                    Console.Write(new string(' ', 13));
+                    Console.Write(new string(' ', GlobalConstants.SpaceDrawAliveFigure));
                 }
                 Console.WriteLine("|");
                 currentRow++;
             }
 
-            Console.SetCursorPosition(85, currentRow);
-            for (int i = 0; i < 6; i++)
+            Console.SetCursorPosition(GlobalConstants.WidthPositionDrawAliveFigure, 
+                currentRow);
+
+            for (int i = 0; i < GlobalConstants.LengthDrawAliveFigure; i++)
             {
                 Console.Write("-----");
             }
@@ -125,6 +141,7 @@ namespace Chess
         {
             Console.Clear();
             DrawBoard();
+
             if (isDefault)
             {
                 Controller.SaveDefaultCoordinatesFigures();
@@ -139,25 +156,26 @@ namespace Chess
 
         public static void DrawBoard()
         {
-            int countSpacePaip = 2;
+            int countSpacePaip = GlobalConstants.CountSpacePaipDrawBoard;
             Console.WriteLine();
 
             int row = 0;
-            int num = 8;
-            for (int col = 0; col < Controller.DEFAULT_VALUE; col++)
+            int num = GlobalConstants.DefaultValueSizeOfBoard;
+
+            for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
             {
                 DrawBox(countSpacePaip, row, num);
                 row++;
                 num--;
             }
 
-            int countSpace = 5;
+            int countSpace = GlobalConstants.StartCountSpaces;
             
             for (char symbol = 'a'; symbol <='h'; symbol++)
             {
-                Console.SetCursorPosition(countSpace, 25);
+                Console.SetCursorPosition(countSpace, GlobalConstants.WidthCursorPositionDrawFigures);
                 Console.Write(symbol);
-                countSpace+= 10;
+                countSpace += GlobalConstants.IncrementStartValuePawnPosition;
             }
         }
 
@@ -175,14 +193,14 @@ namespace Chess
 
         private static void DrawFront()
         {
-            for (int col = 0; col < Controller.DEFAULT_VALUE; col++)
+            for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
             {
-                for (int i = 0; i < Controller.DEFAULT_VALUE; i++)
+                for (int i = 0; i < GlobalConstants.DefaultValueSizeOfBoard; i++)
                 {
                     Console.Write("=");
                 }
 
-                Console.Write(new string(' ', 2));
+                Console.Write(new string(' ', GlobalConstants.CountSpacePaipDrawBoard));
             }
         }
 
@@ -195,10 +213,10 @@ namespace Chess
             Console.Write(num);
             Console.Write(new string(' ', countSpacePaip - 1));
 
-            for (int col = 0; col < Controller.DEFAULT_VALUE; col++)
+            for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
             {
                 Console.Write("|");
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < GlobalConstants.CountSpaceDrawBox; i++)
                 {
                     Console.Write(" ");
                 }

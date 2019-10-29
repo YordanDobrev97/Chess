@@ -64,5 +64,6 @@
 
         public static int SpaceDrawAliveFigure = 13;
 
+        public static bool IsFirstPlayer = true;
     }
 }

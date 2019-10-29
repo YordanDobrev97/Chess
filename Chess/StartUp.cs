@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Chess.Core;
+using Chess.Interfaces;
+using System;
 using System.Text;
 
 namespace Chess
@@ -14,7 +15,8 @@ namespace Chess
             Console.ForegroundColor = ConsoleColor.Green;
             Console.OutputEncoding = Encoding.UTF8;
 
-            Controller.Start();
+            IGame currentGame = new ConsoleGame();
+            currentGame.Start();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Chess.Common;
 using Chess.Figures;
 using Chess.Interfaces;
+using Chess.IO;
 
 namespace Chess
 {
@@ -8,12 +9,12 @@ namespace Chess
     {
         public static IFigure[,] board = new IFigure[GlobalConstants.DefaultValueSizeOfBoard, GlobalConstants.DefaultValueSizeOfBoard];
 
-        public Board()
+        public Board(Player firstPlayer, Player secondPlayer)
         {
-            InitializeFigures();
+            InitializeFigures(firstPlayer, secondPlayer);
         }
 
-        public void MoveFigure(string currentPosition, string newPosition, bool isFirstPlayer)
+        public void MoveFigure(Player player, string currentPosition, string newPosition, bool isFirstPlayer)
         {
             int col = GetPositionCol(currentPosition);
             int row = GetPositionRow(currentPosition);
@@ -23,7 +24,7 @@ namespace Chess
 
             IFigure currentFigure = board[row, col];
             var type = currentFigure.GetType().Name;
-
+            
             bool hasTakingPawn = false;
             switch (type)
             {
@@ -37,12 +38,11 @@ namespace Chess
                         Exception.ThrowInvalidMoveException();
                     }
 
-                    //is have other pawn
                     if (board[newRow, newCol] is Pawn)
                     {
                         hasTakingPawn = true;
                         string takenPlayer = isFirstPlayer ? "First player" : "Second player";
-                        Painter.WriteConsole($"The pawn was taken from {takenPlayer}");
+                        ConsoleIO.WriteConsole($"The pawn was taken from {takenPlayer}");
                         Painter.Sleep(GlobalConstants.TimeSleepConsole);
                     }
 
@@ -65,7 +65,7 @@ namespace Chess
                     break;
             }
 
-            Painter.DrawFigures(false);
+            //Painter.DrawFigures(false);
         }
 
         private static int GetPositionRow(string currentPosition)
@@ -75,6 +75,7 @@ namespace Chess
 
         private static int GetPositionCol(string currentPosition)
         {
+            //а2
             return currentPosition[0] - 'a';
         }
 
@@ -104,33 +105,33 @@ namespace Chess
             }
         }
 
-        private static void InitializeFigures()
+        private static void InitializeFigures(Player firstPlayer, Player secondPlayer)
         {
             int end = GlobalConstants.EndRowOfBoard;
             int row = GlobalConstants.StartRowOfBoard;
             int col = GlobalConstants.StartColOfBoard;
 
-            for (int i = 0; i < Painter.figuresOfFirstPlayer.Length; i++)
+            for (int i = 0; i < firstPlayer.Figures.Count; i++)
             {
                 if (i == end)
                 {
                     row++;
                     col = GlobalConstants.StartColOfBoard;
                 }
-                board[row, col++] = Painter.figuresOfFirstPlayer[i];
+                board[row, col++] = firstPlayer.Figures[i];
             }
 
             row = GlobalConstants.EndRowOfBoard - 2;
             col = GlobalConstants.StartColOfBoard;
 
-            for (int i = 0; i < Painter.figuresOfSecondPlayer.Length; i++)
+            for (int i = 0; i < secondPlayer.Figures.Count; i++)
             {
                 if (i == end)
                 {
                     row++;
                     col = GlobalConstants.StartColOfBoard;
                 }
-                board[row, col++] = Painter.figuresOfSecondPlayer[i];
+                board[row, col++] = secondPlayer.Figures[i];
             }
         }
     }

@@ -65,5 +65,7 @@
         public static int SpaceDrawAliveFigure = 13;
 
         public static bool IsFirstPlayer = true;
+
+        public static string InvalidMoveOfFigure = "This move is invalid";
     }
 }

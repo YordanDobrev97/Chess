@@ -15,8 +15,4 @@
     <PackageReference Include="NAudio" Version="1.9.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
 </Project>

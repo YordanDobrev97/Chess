@@ -1,20 +1,21 @@
-﻿using Chess.Common;
-using Chess.Figures;
-using Chess.Interfaces;
-using Chess.IO;
-
-namespace Chess
+﻿namespace Chess
 {
+    using Chess.Common;
+    using Chess.Core;
+    using Chess.Figures;
+    using Chess.Interfaces;
+    using System;
+
     public class Board
     {
         public static IFigure[,] board = new IFigure[GlobalConstants.DefaultValueSizeOfBoard, GlobalConstants.DefaultValueSizeOfBoard];
 
-        public Board(Player firstPlayer, Player secondPlayer)
+        public Board(IPlayer firstPlayer, IPlayer secondPlayer)
         {
             InitializeFigures(firstPlayer, secondPlayer);
         }
 
-        public void MoveFigure(Player player, string currentPosition, string newPosition, bool isFirstPlayer)
+        public void MoveFigure(string currentPosition, string newPosition, bool isFirstPlayer)
         {
             int col = GetPositionCol(currentPosition);
             int row = GetPositionRow(currentPosition);
@@ -23,49 +24,13 @@ namespace Chess
             int newRow = GetPositionRow(newPosition);
 
             IFigure currentFigure = board[row, col];
-            var type = currentFigure.GetType().Name;
-            
-            bool hasTakingPawn = false;
-            switch (type)
+
+            if (currentFigure == null)
             {
-                case "Pawn":
-                    int currentMovePawn = newPosition[1] - '0';
-                    int currentRow = currentPosition[1] - '0';
-
-                    if (!Validator.IsValidMoveOfPawn(currentFigure, currentRow,
-                        col, currentMovePawn, newCol, isFirstPlayer))
-                    {
-                        Exception.ThrowInvalidMoveException();
-                    }
-
-                    if (board[newRow, newCol] is Pawn)
-                    {
-                        hasTakingPawn = true;
-                        string takenPlayer = isFirstPlayer ? "First player" : "Second player";
-                        ConsoleIO.WriteConsole($"The pawn was taken from {takenPlayer}");
-                        Painter.Sleep(GlobalConstants.TimeSleepConsole);
-                    }
-
-                    board[row, col] = null;
-                    board[newRow, newCol] = currentFigure;
-
-                    var pawn = currentFigure as Pawn;
-
-                    if (HasDoubleMoveFromUser(newRow, pawn))
-                    {
-                        DoubleMove(currentFigure);
-                    }
-                    else
-                    {
-                        SingleMove(currentFigure, isFirstPlayer, hasTakingPawn);
-                    }
-
-                    pawn.HasInitialState = false;
-                    board[newRow, newCol] = pawn;
-                    break;
+                throw new ArgumentException("Invalid move!");
             }
 
-            //Painter.DrawFigures(false);
+            currentFigure.Move(isFirstPlayer, row, col, newRow, newCol, board, currentFigure);        
         }
 
         private static int GetPositionRow(string currentPosition)
@@ -105,7 +70,7 @@ namespace Chess
             }
         }
 
-        private static void InitializeFigures(Player firstPlayer, Player secondPlayer)
+        private static void InitializeFigures(IPlayer firstPlayer, IPlayer secondPlayer)
         {
             int end = GlobalConstants.EndRowOfBoard;
             int row = GlobalConstants.StartRowOfBoard;

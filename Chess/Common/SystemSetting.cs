@@ -1,13 +1,15 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace Chess
+﻿namespace Chess
 {
+    using Chess.IO;
+    using System;
+    using System.Runtime.InteropServices;
+
     public sealed class SystemSetting
     {
+
         private const int STD_OUTPUT_HANDLE = -11;
         private const int TMPF_TRUETYPE = 4;
-        private const int LF_FACESIZE = 32;
+        private const int LF_FACESIZE = 35;
         private static IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
         private const int MF_BYCOMMAND = 0x00000000;
         private const int SC_CLOSE = 0xF060;
@@ -61,6 +63,7 @@ namespace Chess
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
+
         public static void SetSettingOfFontMsGothic()
         {
             SetConsoleSettings();
@@ -70,8 +73,8 @@ namespace Chess
         {
             //SetWindowSize and SetBufferSize should be the same, otherwise the scrollbar will appear
             //If resize is not prevented in this method the scrollbar will appear if resize by user!
-            Painter.SetWindowSize(120, 29);
-            Painter.SetBufferSize(120, 29);
+            ConsoleIO.SetWindowSize(86, 29);
+            ConsoleIO.SetBufferSize(86, 29);
 
             //Set the font
             SetConsoleFont();

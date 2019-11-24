@@ -1,10 +1,10 @@
-﻿using System;
-using Chess.Common;
-using Chess.Figures;
-using Chess.Interfaces;
-
-namespace Chess
+﻿namespace Chess
 {
+    using System;
+    using Chess.Common;
+    using Chess.Figures;
+    using Chess.Interfaces;
+
     public abstract class Validator
     {
         public static bool IsValidMoveOfPawn(IFigure pawn, int row, int col, int newRow, 

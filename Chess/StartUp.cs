@@ -1,22 +1,32 @@
-﻿using Chess.Core;
-using Chess.Interfaces;
-using System;
-using System.Text;
-
-namespace Chess
+﻿namespace Chess
 {
+    using Chess.Core;
+    using Chess.Interfaces;
+    using System;
+    using System.Text;
+
     public class StartUp
     {
         public static void Main()
         {
-            ////More advanced console settings can be changed programmatically in
-            ////the SystemSetting class
-            Console.Title = "Chess";
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.OutputEncoding = Encoding.UTF8;
+            //Console.OutputEncoding = Encoding.UTF8;
+            //SystemSetting.SetSettingOfFontMsGothic();
+            
+            //Console.WriteLine("♙ ");
+
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Console.ForegroundColor = ConsoleColor.Gray;
+            //Console.BackgroundColor = ConsoleColor.DarkYellow;
+            //Console.WriteLine("♚ ");
+            
+
+            //Console.WriteLine("♚");
 
             IGame currentGame = new ConsoleGame();
-            currentGame.Start();
+            currentGame.StartGame();
         }
     }
 }

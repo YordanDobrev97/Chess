@@ -1,42 +1,18 @@
-﻿using Chess.Common;
-using System;
-using System.Threading;
-
-namespace Chess
+﻿namespace Chess
 {
+    using Chess.Common;
+    using Chess.Interfaces;
+    using System;
+    using System.Linq;
+
     public abstract class Painter
     {
-        public static void SetCursorPositionConsole(int x, int y)
-        {
-            Console.SetCursorPosition(x, y);
-        }
-
-        public static void ClearConsole()
-        {
-            Console.Clear();
-        }
-
-        public static void SetWindowSize(int width, int height)
-        {
-            Console.SetWindowSize(width, height);
-        }
-
-        public static void Sleep(int time)
-        {
-            Thread.Sleep(time);
-        }
-
-        public static void SetBufferSize(int width, int height)
-        {
-            Console.SetBufferSize(width, height);
-        }
-
-        public static Player GetPlayerName(Player player)
+        public static FirstPlayer GetPlayerName(FirstPlayer player)
         {
             return player;
         }
 
-        public static void DrawFigures(bool isDefault, Player player)
+        public static void DrawFigures(bool isDefault, IPlayer player, int numberPlayer)
         {
             //Console.Clear();
             //DrawBoard();
@@ -46,11 +22,12 @@ namespace Chess
                 //Pl.SaveDefaultCoordinatesFigures();
             }
             
-            PrintFiguresOfPlayer(player);
+            PrintFiguresOfPlayer(player, numberPlayer);
         }
 
         public static void DrawBoard()
         {
+            //TODO Add ConsolePainter
             int countSpacePaip = GlobalConstants.CountSpacePaipDrawBoard;
             Console.WriteLine();
 
@@ -74,7 +51,7 @@ namespace Chess
             }
         }
 
-        private static void PrintFiguresOfPlayer(Player player)
+        private static void PrintFiguresOfPlayer(IPlayer player, int numberPlayer)
         {
             foreach (var figure in player.Figures)
             {
@@ -82,7 +59,13 @@ namespace Chess
                 int height = figure.Position.Height;
 
                 Console.SetCursorPosition(width, height);
-                Console.Write(figure.StringRepresentation);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                var typeColor = (ConsoleColor)Enum.GetValues(typeof(Color)).GetValue(numberPlayer);
+
+                //ConsoleColor color = (ConsoleColor)typeColor;
+               Console.ForegroundColor = typeColor;
+
+                Console.Write(figure.StringRepresentation + " ");
             }
         }
 

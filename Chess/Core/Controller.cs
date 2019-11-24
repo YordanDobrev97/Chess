@@ -1,16 +1,17 @@
-﻿using Chess.Common;
-using Chess.IO;
-
-namespace Chess
+﻿namespace Chess
 {
+    using Chess.Common;
+    using Chess.Interfaces;
+    using Chess.IO;
+
     public class Controller
     {
-        private Player peshoPlayer;
-        private Player goshoPlayer;
+        private IPlayer peshoPlayer;
+        private IPlayer goshoPlayer;
         private Board board;
-        private Player currentPlayer;
+        private IPlayer currentPlayer;
 
-        public Controller(Player peshoPlayer, Player goshoPlayer, Player currentPlayer, Board board)
+        public Controller(IPlayer peshoPlayer, IPlayer goshoPlayer, IPlayer currentPlayer, Board board)
         {
             this.peshoPlayer = peshoPlayer;
             this.goshoPlayer = goshoPlayer;
@@ -22,8 +23,8 @@ namespace Chess
         {
             while (true)
             {
-                Painter.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
-                    GlobalConstants.CursorHeightPositionOfConsole);
+                ConsoleIO.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
+                        GlobalConstants.CursorHeightPositionOfConsole);
 
                 ConsoleIO.WriteConsole($"{currentPlayer.Name} You're on the move ");
 
@@ -33,32 +34,33 @@ namespace Chess
 
                 try
                 {
-                    board.MoveFigure(currentPlayer, currentPosition,  newPosition,GlobalConstants.IsFirstPlayer);
+                    board.MoveFigure(currentPosition,  newPosition,GlobalConstants.IsFirstPlayer);
 
-                    Painter.ClearConsole();
+                    ConsoleIO.ClearConsole();
                     Painter.DrawBoard();
-                    Painter.DrawFigures(false, peshoPlayer);
-                    Painter.DrawFigures(false, goshoPlayer);
+                    Painter.DrawFigures(false, peshoPlayer, 0);
+                    Painter.DrawFigures(false, goshoPlayer, 1);
 
                     if (GlobalConstants.IsFirstPlayer)
                     {
                         GlobalConstants.IsFirstPlayer = false;
-                        currentPlayer = goshoPlayer;
+                        currentPlayer = peshoPlayer;
                     }
                     else
                     {
                         GlobalConstants.IsFirstPlayer = true;
-                        currentPlayer = peshoPlayer;
+                        currentPlayer = goshoPlayer;
                     }
                 }
                 catch (System.Exception exception)
                 {
-                    Painter.ClearConsole();
-                    Painter.DrawBoard();
-                    Painter.DrawFigures(!GlobalConstants.DefaultSaveCordinatesFigures, currentPlayer);
-                    Painter.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
-                        GlobalConstants.CursorHeightPositionOfConsole + 2);
+                    ConsoleIO.SetCursorPositionConsole(82, 5);
                     ConsoleIO.WriteConsole(exception.Message);
+                    ConsoleIO.Sleep(3000);
+                    ConsoleIO.ClearConsole();
+                    Painter.DrawBoard();
+                    Painter.DrawFigures(true, peshoPlayer, 0);
+                    Painter.DrawFigures(true, goshoPlayer, 1);
                 }
             }
         }

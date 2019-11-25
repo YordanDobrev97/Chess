@@ -19,13 +19,14 @@
 
         public void Move(bool isFirstPlayer,int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
         {
+            //TODO Add any jump! 
+            if (board[newRow, newCol] != null)
+            {
+                throw new ArgumentException("Invalid move, there is another figure!");
+            }
+
             if (isFirstPlayer)
             {
-                if (board[newRow, newCol] != null)
-                {
-                    throw new ArgumentException("Invalid move, there is another figure!");
-                }
-
                 if (IsMoveLeft(col, newCol))
                 {
                     figure.Position.Width -= 10;
@@ -38,7 +39,15 @@
                 figure.Position.Height -= 3;
 
             }
-            //TODO..
+            else
+            {
+                if (IsMoveLeft(col, newCol))
+                {
+                    figure.Position.Width -= 10;
+                }
+
+                figure.Position.Height += 3;
+            }
             board[row, col] = null;
             board[newRow, newCol] = figure; 
         }

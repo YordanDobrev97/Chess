@@ -24,6 +24,23 @@
         {
             Console.ForegroundColor = ConsoleColor.White;
             FullScreen();
+            DrawAdminPanel();
+
+            string userChoice = Console.ReadLine();
+
+            if (userChoice == "Start Game")
+            {
+                Console.Clear();
+                StartGame();
+            }
+            else if (userChoice == "Exit")
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private static void DrawAdminPanel()
+        {
             Console.Write(new string(' ', 20));
             Console.WriteLine(new string('=', 50));
 
@@ -68,18 +85,6 @@
             Console.SetCursorPosition(20, 20);
             Console.WriteLine("Enter your choice: ");
             Console.SetCursorPosition(39, 20);
-
-            string userChoice = Console.ReadLine();
-
-            if (userChoice== "Start Game")
-            {
-                Console.Clear();
-                StartGame();
-            }
-            else if (userChoice == "Exit")
-            {
-                Environment.Exit(0);
-            }
         }
 
         private void StartGame()

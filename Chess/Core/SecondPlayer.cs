@@ -34,7 +34,7 @@
             this.Figures.Add(new Queen());
             this.Figures.Add(new King());
             this.Figures.Add(new Bishop());
-            this.Figures.Add(new King());
+            this.Figures.Add(new Knight());
             this.Figures.Add(new Rook());
 
             this.Figures.Select(x => x.Color = color);

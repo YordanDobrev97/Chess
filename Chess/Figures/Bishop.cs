@@ -26,21 +26,26 @@
                     throw new ArgumentException("Invalid move, there is another figure!");
                 }
 
-                if (IsMoveLeft(row, newRow))
+                if (IsMoveLeft(col, newCol))
                 {
                     figure.Position.Width -= 10;
-                    figure.Position.Height -= 3;
                 }
-                
+                else
+                {
+                    figure.Position.Width += 10;
+                }
+
+                figure.Position.Height -= 3;
+
             }
             //TODO..
             board[row, col] = null;
             board[newRow, newCol] = figure; 
         }
 
-        private static bool IsMoveLeft(int row, int newRow)
+        private static bool IsMoveLeft(int col, int newCol)
         {
-            return newRow < row;
+            return newCol < col;
         }
     }
 }

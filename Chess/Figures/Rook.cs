@@ -23,6 +23,10 @@
             {
                 figure.Position.Height -= 3;
             }
+            else
+            {
+                figure.Position.Height += 3;
+            }
             board[row, col] = null;
             board[newRow, newCol] = figure;
         }

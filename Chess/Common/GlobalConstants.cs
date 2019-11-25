@@ -67,5 +67,7 @@
         public static bool IsFirstPlayer = true;
 
         public static string InvalidMoveOfFigure = "This move is invalid";
+
+        public static string MessageForBusyPlace => "Invalid move, there is another figure!";
     }
 }

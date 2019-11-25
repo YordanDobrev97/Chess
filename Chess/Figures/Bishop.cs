@@ -22,7 +22,7 @@
             //TODO Add any jump! 
             if (board[newRow, newCol] != null)
             {
-                throw new ArgumentException("Invalid move, there is another figure!");
+                throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
             }
 
             if (isFirstPlayer)

@@ -2,6 +2,7 @@
 {
     using Chess.Common;
     using Chess.Interfaces;
+    using System;
 
     public class Rook : IFigure
     {
@@ -13,6 +14,15 @@
 
         public void Move(bool isFirstPlayer, int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
         {
+            if (board[newRow,newCol] != null)
+            {
+                throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
+            }
+
+            if (isFirstPlayer)
+            {
+                figure.Position.Height -= 3;
+            }
             board[row, col] = null;
             board[newRow, newCol] = figure;
         }

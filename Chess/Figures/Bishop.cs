@@ -45,6 +45,10 @@
                 {
                     figure.Position.Width -= 10;
                 }
+                else
+                {
+                    figure.Position.Width += 10;
+                }
 
                 figure.Position.Height += 3;
             }

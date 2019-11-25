@@ -2,8 +2,6 @@
 {
     using Chess.Core;
     using Chess.Interfaces;
-    using System;
-    using System.Text;
 
     public class StartUp
     {

@@ -31,6 +31,19 @@
                 }
                 figure.Position.Height -= 6;
             }
+            else
+            {
+                if (IsLeftMove(col, newCol))
+                {
+                    figure.Position.Width -= 10;
+                }
+                else
+                {
+                    figure.Position.Width += 10;
+                }
+
+                figure.Position.Height += 6;
+            }
 
             board[row, col] = null;
             board[newRow, newCol] = figure;

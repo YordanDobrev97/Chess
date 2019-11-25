@@ -28,7 +28,7 @@
             this.Figures.Add(new Queen());
             this.Figures.Add(new King());
             this.Figures.Add(new Bishop());
-            this.Figures.Add(new King());
+            this.Figures.Add(new Knight());
             this.Figures.Add(new Rook());
 
             for (int i = 0; i < 8; i++)

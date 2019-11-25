@@ -2,8 +2,6 @@
 {
     public interface IGame
     {
-        void StartGame();
-
         void StartMenu();
     }
 }

@@ -22,6 +22,7 @@
 
         public void StartMenu()
         {
+            Console.ForegroundColor = ConsoleColor.White;
             FullScreen();
             Console.Write(new string(' ', 20));
             Console.WriteLine(new string('=', 50));
@@ -81,7 +82,7 @@
             }
         }
 
-        public void StartGame()
+        private void StartGame()
         {
             Console.Title = "Chess";
             Console.ForegroundColor = ConsoleColor.White;

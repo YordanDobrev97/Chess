@@ -2,6 +2,7 @@
 {
     using Chess.Common;
     using Chess.Interfaces;
+    using System;
 
     public class Bishop : IFigure
     {
@@ -20,12 +21,26 @@
         {
             if (isFirstPlayer)
             {
-                figure.Position.Width -= 10;
-                figure.Position.Height -= 3;
+                if (board[newRow, newCol] != null)
+                {
+                    throw new ArgumentException("Invalid move, there is another figure!");
+                }
+
+                if (IsMoveLeft(row, newRow))
+                {
+                    figure.Position.Width -= 10;
+                    figure.Position.Height -= 3;
+                }
+                
             }
             //TODO..
             board[row, col] = null;
             board[newRow, newCol] = figure; 
+        }
+
+        private static bool IsMoveLeft(int row, int newRow)
+        {
+            return newRow < row;
         }
     }
 }

@@ -73,8 +73,8 @@
         {
             //SetWindowSize and SetBufferSize should be the same, otherwise the scrollbar will appear
             //If resize is not prevented in this method the scrollbar will appear if resize by user!
-            ConsoleIO.SetWindowSize(86, 29);
-            ConsoleIO.SetBufferSize(86, 29);
+            ConsoleIO.SetWindowSize(100, 30);
+            ConsoleIO.SetBufferSize(100, 30);
 
             //Set the font
             SetConsoleFont();

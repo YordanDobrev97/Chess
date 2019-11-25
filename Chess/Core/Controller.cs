@@ -3,6 +3,7 @@
     using Chess.Common;
     using Chess.Interfaces;
     using Chess.IO;
+    using System;
 
     public class Controller
     {
@@ -26,6 +27,7 @@
                 ConsoleIO.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
                         GlobalConstants.CursorHeightPositionOfConsole);
 
+                Console.ForegroundColor = ConsoleColor.White;
                 ConsoleIO.WriteConsole($"{currentPlayer.Name} You're on the move ");
 
                 string[] userMove = ConsoleIO.ReadFromConsole().Split();
@@ -54,10 +56,12 @@
                 }
                 catch (System.Exception exception)
                 {
-                    ConsoleIO.SetCursorPositionConsole(82, 5);
+                    ConsoleIO.SetCursorPositionConsole(1, 28);
+                    Console.ForegroundColor = ConsoleColor.Red;
                     ConsoleIO.WriteConsole(exception.Message);
                     ConsoleIO.Sleep(3000);
                     ConsoleIO.ClearConsole();
+                    Console.ForegroundColor = ConsoleColor.White;
                     Painter.DrawBoard();
                     Painter.DrawFigures(true, peshoPlayer, 0);
                     Painter.DrawFigures(true, goshoPlayer, 1);

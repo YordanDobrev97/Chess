@@ -19,7 +19,7 @@
                 throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
             }
 
-            if (isFirstPlayer)
+            if (isFirstPlayer && figure.Color == Color.Yellow)
             {
                 if (IsLeftMove(col, newCol))
                 {
@@ -30,23 +30,30 @@
                     figure.Position.Width += 10;
                 }
                 figure.Position.Height -= 6;
+
+                board[row, col] = null;
+                board[newRow, newCol] = figure;
             }
             else
             {
-                if (IsLeftMove(col, newCol))
+                if (figure.Color == Color.DarkYellow)
                 {
-                    figure.Position.Width -= 10;
-                }
-                else
-                {
-                    figure.Position.Width += 10;
-                }
+                    if (IsLeftMove(col, newCol))
+                    {
+                        figure.Position.Width -= 10;
+                    }
+                    else
+                    {
+                        figure.Position.Width += 10;
+                    }
 
-                figure.Position.Height += 6;
+                    figure.Position.Height += 6;
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = figure;
+                }
+                
             }
-
-            board[row, col] = null;
-            board[newRow, newCol] = figure;
         }
 
         private bool IsLeftMove(int col, int newCol)

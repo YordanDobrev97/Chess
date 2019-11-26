@@ -2,6 +2,7 @@
 {
     using Chess.Common;
     using Chess.Interfaces;
+    using System;
 
     public class Pawn : IFigure
     {
@@ -22,15 +23,32 @@
         {
             if (isFirstPlayer)
             {
-                figure.Position.Height -= 3;
+                if (figure.Color == Color.Yellow)
+                {
+                    figure.Position.Height -= 3;
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = figure;
+                }
+                else
+                {
+                    throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
+                }
             }
             else
             {
-                figure.Position.Height += 3;
+                if (figure.Color == Color.DarkYellow)
+                {
+                    figure.Position.Height += 3;
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = figure;
+                }
+                else
+                {
+                    throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
+                }
             }
-            //TODO...
-            board[row, col] = null;
-            board[newRow, newCol] = figure;
         }
     }
 }

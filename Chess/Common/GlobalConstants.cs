@@ -69,5 +69,7 @@
         public static string InvalidMoveOfFigure = "This move is invalid";
 
         public static string MessageForBusyPlace => "Invalid move, there is another figure!";
+
+        public static string ThisFigureNotMoveMessage = "This figure is not yours and you cannot move it";
     }
 }

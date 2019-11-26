@@ -37,8 +37,7 @@
             this.Figures.Add(new Knight());
             this.Figures.Add(new Rook());
 
-            this.Figures.Select(x => x.Color = color);
-
+            AddColorOfFigures();
 
             int startValuePawnPosition = GlobalConstants.StartValuePawnPosition;
 
@@ -60,6 +59,15 @@
                 currentFigure.Position.Height = GlobalConstants.PositionHeight;
                 positionFigure += GlobalConstants.IncrementStartValuePawnPosition;
                 startIndex++;
+            }
+        }
+
+        private void AddColorOfFigures()
+        {
+            foreach (var item in this.Figures)
+            {
+                var currentFigure = item;
+                currentFigure.Color = Color.Yellow;
             }
         }
     }

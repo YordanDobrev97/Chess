@@ -19,20 +19,27 @@
                 throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
             }
 
-            if (isFirstPlayer && figure.Color == Color.Yellow)
+            if (isFirstPlayer)
             {
-                if (IsLeftMove(col, newCol))
+                if (figure.Color == Color.Yellow)
                 {
-                    figure.Position.Width -= 10;
+                    if (IsLeftMove(col, newCol))
+                    {
+                        figure.Position.Width -= 10;
+                    }
+                    else
+                    {
+                        figure.Position.Width += 10;
+                    }
+                    figure.Position.Height -= 6;
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = figure;
                 }
                 else
                 {
-                    figure.Position.Width += 10;
+                    throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
                 }
-                figure.Position.Height -= 6;
-
-                board[row, col] = null;
-                board[newRow, newCol] = figure;
             }
             else
             {
@@ -52,7 +59,10 @@
                     board[row, col] = null;
                     board[newRow, newCol] = figure;
                 }
-                
+                else
+                {
+                    throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
+                }
             }
         }
 

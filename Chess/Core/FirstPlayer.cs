@@ -3,7 +3,9 @@
     using Chess.Common;
     using Chess.Figures;
     using Chess.Interfaces;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class FirstPlayer : IPlayer
     {
@@ -22,19 +24,31 @@
 
         public void SaveCoordinates()
         {
-            this.Figures.Add(new Rook());
-            this.Figures.Add(new Knight());
-            this.Figures.Add(new Bishop());
-            this.Figures.Add(new Queen());
-            this.Figures.Add(new King());
-            this.Figures.Add(new Bishop());
-            this.Figures.Add(new Knight());
-            this.Figures.Add(new Rook());
+            var firstRook = new Rook();
+            var firstKnight = new Knight();
+            var firstBishop = new Bishop();
+            var queen = new Queen();
+            var king = new King();
+            var secondBishop = new Bishop();
+            var secondKnight = new Knight();
+            var secondRook = new Rook();
+
+            this.Figures.Add(firstRook);
+            this.Figures.Add(firstKnight);
+            this.Figures.Add(firstBishop);
+            this.Figures.Add(queen);
+            this.Figures.Add(king);
+            this.Figures.Add(secondBishop);
+            this.Figures.Add(secondKnight);
+            this.Figures.Add(secondRook);
 
             for (int i = 0; i < 8; i++)
             {
-                this.Figures.Add(new Pawn());
+                var pawn = new Pawn();
+                this.Figures.Add(pawn);
             }
+
+            AddColorOfFigures();
 
             int startDefaultPosition = GlobalConstants.StartValuePawnPosition;
 
@@ -55,6 +69,15 @@
                 pawn.Position.Height = GlobalConstants.StartValuePawnPosition;
                 pawnStartValue += GlobalConstants.IncrementStartValuePawnPosition;
                 startIndex++;
+            }
+        }
+
+        private void AddColorOfFigures()
+        {
+            foreach (var item in this.Figures)
+            {
+                var currentFigure = item;
+                currentFigure.Color = Color.DarkYellow;
             }
         }
     }

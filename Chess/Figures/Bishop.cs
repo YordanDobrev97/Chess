@@ -27,33 +27,51 @@
 
             if (isFirstPlayer)
             {
-                if (IsMoveLeft(col, newCol))
+                if (figure.Color == Color.Yellow)
                 {
-                    figure.Position.Width -= 10;
+                    if (IsMoveLeft(col, newCol))
+                    {
+                        figure.Position.Width -= 10;
+                    }
+                    else
+                    {
+                        figure.Position.Width += 10;
+                    }
+
+                    figure.Position.Height -= 3;
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = figure;
                 }
                 else
                 {
-                    figure.Position.Width += 10;
+                    throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
                 }
-
-                figure.Position.Height -= 3;
-
             }
             else
             {
-                if (IsMoveLeft(col, newCol))
+                if (figure.Color == Color.DarkYellow)
                 {
-                    figure.Position.Width -= 10;
+                    if (IsMoveLeft(col, newCol))
+                    {
+                        figure.Position.Width -= 10;
+                    }
+                    else
+                    {
+                        figure.Position.Width += 10;
+                    }
+
+                    figure.Position.Height += 3;
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = figure;
                 }
                 else
                 {
-                    figure.Position.Width += 10;
+                    throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
                 }
-
-                figure.Position.Height += 3;
             }
-            board[row, col] = null;
-            board[newRow, newCol] = figure; 
+            
         }
 
         private static bool IsMoveLeft(int col, int newCol)

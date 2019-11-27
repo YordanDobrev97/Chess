@@ -19,9 +19,9 @@
 
         public Color Color { get; set; }
 
-        public void Move(bool isFirstPlayer, int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
+        public void Move(bool isSecondPlayer, int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
         {
-            if (isFirstPlayer)
+            if (isSecondPlayer)
             {
                 if (col == newCol && figure.Color == Color.Yellow)
                 {
@@ -32,10 +32,16 @@
                 }
                 else if (CanTurnOffFigureOfОpponent(board, figure, newRow, newCol))
                 {
+                    IFigure figureOut = board[newRow, newCol];
+
+                    var playerFigures = GlobalConstants.FiguresOfFirstPlayer;
+                    playerFigures.Remove(figureOut);
+                    board[newRow, newCol] = null;
+
                     if (IsLeft(col, newCol))
                     {
-                        figure.Position.Width -= 6;
-                        figure.Position.Height += 3;
+                        figure.Position.Width -= 10;
+                        figure.Position.Height -= 3;
                     }
                     else
                     {

@@ -15,7 +15,8 @@
             InitializeFigures(firstPlayer, secondPlayer);
         }
 
-        public void MoveFigure(string currentPosition, string newPosition, bool isFirstPlayer)
+        public void MoveFigure(string currentPosition, string newPosition, 
+            bool isFirstPlayer)
         {
             int col = GetPositionCol(currentPosition);
             int row = GetPositionRow(currentPosition);

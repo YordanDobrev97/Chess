@@ -12,16 +12,56 @@
             return player;
         }
 
+        public static void DrawAdminPanel()
+        {
+            Console.Write(new string(' ', 20));
+            Console.WriteLine(new string('=', 50));
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write(new string(' ', 20));
+                Console.Write("|");
+                Console.Write(new string(' ', 49));
+                Console.Write("|");
+                Console.WriteLine();
+            }
+
+            Console.Write(new string(' ', 20));
+            Console.WriteLine(new string('=', 50));
+
+            Console.SetCursorPosition(42, 2);
+            Console.WriteLine("ADMIN PANEL");
+
+            int x = 6;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Console.SetCursorPosition(0, x);
+                Console.Write(new string(' ', 20));
+                Console.Write("+");
+                Console.Write(new string(' ', 50));
+                Console.WriteLine("+");
+
+                x++;
+            }
+
+            Console.SetCursorPosition(0, 17);
+            Console.Write(new string(' ', 20));
+            Console.WriteLine(new string('=', 50));
+
+            Console.SetCursorPosition(22, 6);
+            Console.WriteLine("Option 1: Start Game");
+
+            Console.SetCursorPosition(22, 7);
+            Console.WriteLine("Option 2: Exit");
+
+            Console.SetCursorPosition(20, 20);
+            Console.WriteLine("Enter your choice: ");
+            Console.SetCursorPosition(39, 20);
+        }
+
         public static void DrawFigures(bool isDefault, IPlayer player, int numberPlayer)
         {
-            //Console.Clear();
-            //DrawBoard();
-
-            if (isDefault)
-            {
-                //Pl.SaveDefaultCoordinatesFigures();
-            }
-            
             PrintFiguresOfPlayer(player, numberPlayer);
         }
 

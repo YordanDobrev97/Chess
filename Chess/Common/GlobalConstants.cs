@@ -1,4 +1,7 @@
-﻿namespace Chess.Common
+﻿using Chess.Interfaces;
+using System.Collections.Generic;
+
+namespace Chess.Common
 {
     public static class GlobalConstants
     {
@@ -71,5 +74,9 @@
         public static string MessageForBusyPlace => "Invalid move, there is another figure!";
 
         public static string ThisFigureNotMoveMessage = "This figure is not yours and you cannot move it";
+
+        public static List<IFigure> FiguresOfFirstPlayer { get; set; }
+
+        public static List<IFigure> FiguresOfSecondPlayer { get; set; }
     }
 }

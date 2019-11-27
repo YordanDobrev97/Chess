@@ -28,7 +28,7 @@
                         GlobalConstants.CursorHeightPositionOfConsole);
 
                 Console.ForegroundColor = ConsoleColor.White;
-                ConsoleIO.WriteConsole($"{currentPlayer.Name} You're on the move ");
+                ConsoleIO.WriteConsole($"{currentPlayer.Name} - You're on the move ");
 
                 string[] userMove = ConsoleIO.ReadFromConsole().Split();
                 string currentPosition = userMove[0];

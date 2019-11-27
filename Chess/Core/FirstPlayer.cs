@@ -16,6 +16,7 @@
             this.Name = name;
             this.color = color;
             this.Figures = new List<IFigure>();
+            GlobalConstants.FiguresOfFirstPlayer = Figures;
         }
 
         public string Name { get; set; }

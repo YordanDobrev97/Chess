@@ -23,9 +23,25 @@
         {
             if (isFirstPlayer)
             {
-                if (figure.Color == Color.Yellow)
+                if (col == newCol && figure.Color == Color.Yellow)
                 {
                     figure.Position.Height -= 3;
+
+                    board[row, col] = null;
+                    board[newRow, newCol] = figure;
+                }
+                else if (CanTurnOffFigureOfОpponent(board, figure, newRow, newCol))
+                {
+                    if (IsLeft(col, newCol))
+                    {
+                        figure.Position.Width -= 6;
+                        figure.Position.Height += 3;
+                    }
+                    else
+                    {
+                        figure.Position.Width += 10;
+                        figure.Position.Height -= 3;
+                    }
 
                     board[row, col] = null;
                     board[newRow, newCol] = figure;
@@ -49,6 +65,17 @@
                     throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
                 }
             }
+        }
+
+        private bool IsLeft(int col, int newCol)
+        {
+            return newCol < col;
+        }
+
+        private bool CanTurnOffFigureOfОpponent(IFigure[,] board, IFigure figure, int newRow, int newCol)
+        {
+            IFigure wishFigure = board[newRow, newCol];
+            return wishFigure.Color != figure.Color;
         }
     }
 }

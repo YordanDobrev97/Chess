@@ -12,17 +12,28 @@
 
         public Color Color { get; set; }
 
-        public void Move(bool isFirstPlayer, int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
+        public void Move(bool isFirstPlayer, int row, int col, int newRow, 
+            int newCol, IFigure[,] board, IFigure figure)
         {
-            if (board[newRow, newCol] != null)
-            {
-                throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
-            }
-
             if (isFirstPlayer)
             {
                 if (figure.Color == Color.Yellow)
                 {
+                    IFigure figureOut = board[newRow, newCol];
+
+                    if (NotFree(board, newRow, newCol) 
+                        && board[newRow,newCol].Color is Color.DarkYellow)
+                    {
+                        var playerFigures = GlobalConstants.FiguresOfFirstPlayer;
+                        playerFigures.Remove(figureOut);
+                        board[newRow, newCol] = null;
+                    }
+
+                    if (board[newRow, newCol] != null)
+                    {
+                        throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
+                    }
+
                     if (IsLeftMove(col, newCol))
                     {
                         figure.Position.Width -= 10;
@@ -64,6 +75,11 @@
                     throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
                 }
             }
+        }
+
+        private bool NotFree(IFigure[,] board, int newRow, int newCol)
+        {
+            return board[newRow, newCol] != null;
         }
 
         private bool IsLeftMove(int col, int newCol)

@@ -17,9 +17,9 @@
 
         public Color Color { get; set; }
 
-        public void Move(bool isFirstPlayer,int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
+        public void Move(bool isFirstPlayer,int row, int col, int newRow, int newCol, 
+            IFigure[,] board, IFigure figure)
         {
-            //TODO Add any jump! 
             if (board[newRow, newCol] != null)
             {
                 throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
@@ -31,7 +31,7 @@
                 {
                     if (IsMoveLeft(col, newCol))
                     {
-                        figure.Position.Width -= 10;
+                        figure.Position.Width -= row - newRow;
                     }
                     else
                     {
@@ -54,14 +54,14 @@
                 {
                     if (IsMoveLeft(col, newCol))
                     {
-                        figure.Position.Width -= 10;
+                        figure.Position.Width -= row - newRow;
                     }
                     else
                     {
                         figure.Position.Width += 10;
                     }
 
-                    figure.Position.Height += 3;
+                    figure.Position.Height += 3 * (row - newRow);
 
                     board[row, col] = null;
                     board[newRow, newCol] = figure;

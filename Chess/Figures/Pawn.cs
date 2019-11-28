@@ -19,16 +19,30 @@
 
         public Color Color { get; set; }
 
-        public void Move(bool isSecondPlayer, int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
+        public void Move(bool isSecondPlayer, int row, int col, int newRow, 
+            int newCol, IFigure[,] board, IFigure figure)
         {
             if (isSecondPlayer)
             {
+                //two move pawn
+                int move = 3; //default value one move up
+                if (row - 2 == newRow && this.HasInitialState)
+                {
+                    move = 6;
+                    this.HasInitialState = false;
+                }
+                else if (row - 2 != newRow && !this.HasInitialState)
+                {
+                    throw new ArgumentException("You can now only make one move!");
+                }
+
                 if (col == newCol && figure.Color == Color.Yellow)
                 {
-                    figure.Position.Height -= 3;
+                    figure.Position.Height -= move;
 
                     board[row, col] = null;
                     board[newRow, newCol] = figure;
+                    this.HasInitialState = false;
                 }
                 else if (CanTurnOffFigureOfОpponent(board, figure, newRow, newCol))
                 {

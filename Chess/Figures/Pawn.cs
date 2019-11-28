@@ -31,7 +31,7 @@
                     move = 6;
                     this.HasInitialState = false;
                 }
-                else if (row - 2 != newRow && !this.HasInitialState)
+                else if (row - 2 == newRow && !this.HasInitialState)
                 {
                     throw new ArgumentException("You can now only make one move!");
                 }

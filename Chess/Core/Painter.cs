@@ -1,7 +1,9 @@
 ﻿namespace Chess
 {
     using Chess.Common;
+    using Chess.Figures;
     using Chess.Interfaces;
+    using Chess.IO;
     using System;
     using System.Linq;
 
@@ -58,6 +60,36 @@
             Console.SetCursorPosition(20, 20);
             Console.WriteLine("Enter your choice: ");
             Console.SetCursorPosition(39, 20);
+        }
+
+        public static IFigure RevivalNewFigure()
+        {
+            ConsoleIO.WriteConsole("Queen: 1   ");
+            ConsoleIO.WriteConsole("Knight: 2  ");
+            ConsoleIO.WriteConsole("Rook: 3    ");
+            ConsoleIO.WriteConsole("Bishop: 4");
+
+            Console.WriteLine();
+            int choiseFigureUser = int.Parse(Console.ReadLine());
+
+            IFigure figure = null;
+            switch (choiseFigureUser)
+            {
+                case 1:
+                    figure = new Queen();
+                    break;
+                case 2:
+                    figure = new Knight();
+                    break;
+                case 3:
+                    figure = new Rook();
+                    break;
+                case 4:
+                    figure = new Bishop();
+                    break;
+            }
+
+            return figure;
         }
 
         public static void DrawFigures(bool isDefault, IPlayer player, int numberPlayer)

@@ -12,7 +12,8 @@
 
         public Color Color { get; set; }
 
-        public void Move(bool isFirstPlayer, int row, int col, int newRow, int newCol, IFigure[,] board, IFigure figure)
+        public void Move(bool isFirstPlayer, int row, int col, int newRow, 
+            int newCol, IFigure[,] board, IFigure figure, bool revivalNewFigure)
         {
             if (board[newRow,newCol] != null)
             {

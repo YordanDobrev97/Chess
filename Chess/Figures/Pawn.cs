@@ -2,6 +2,7 @@
 {
     using Chess.Common;
     using Chess.Interfaces;
+    using Chess.IO;
     using System;
 
     public class Pawn : IFigure
@@ -19,16 +20,32 @@
 
         public Color Color { get; set; }
 
-        public void Move(bool isSecondPlayer, int row, int col, int newRow, 
-            int newCol, IFigure[,] board, IFigure figure)
+        public void Move(bool isSecondPlayer, int row, int col, int newRow,
+            int newCol, IFigure[,] board, IFigure figure, bool revivalNewFigure)
         {
             if (isSecondPlayer)
             {
-                //two move pawn
+                if (newRow == 0 && board[newRow, newCol].Color is Color.DarkYellow)
+                {
+                    IFigure newFigure = Painter.RevivalNewFigure();
+                    //GlobalConstants.FiguresOfSecondPlayer.Remove(board[newRow, newCol]);
+                    newFigure.Color = Color.Yellow;
+                    newFigure.Position.Width = figure.Position.Width;
+                    newFigure.Position.Height = figure.Position.Height;
+                    newFigure.Position.Height -= 3;
+                    ConsoleIO.Sleep(1000);
+                    GlobalConstants.FiguresOfSecondPlayer.Remove(figure);
+                    GlobalConstants.FiguresOfSecondPlayer.Add(newFigure);
+                    board[newRow, newCol] = newFigure;
+                    //newFigure.Move(isSecondPlayer, row, col, newRow, newCol, board,
+                    //    newFigure, true);
+                    return;
+                }
+
                 int move = 3; //default value one move up
                 if (row - 2 == newRow && this.HasInitialState)
                 {
-                    move = 6;
+                    move = move * 2; // double move up
                     this.HasInitialState = false;
                 }
                 else if (row - 2 == newRow && !this.HasInitialState)

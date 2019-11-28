@@ -25,7 +25,7 @@
         {
             if (isSecondPlayer)
             {
-                if (newRow == 0 && board[newRow, newCol].Color is Color.DarkYellow)
+                if (RevivalInNewFigure(newRow, newCol, board))
                 {
                     IFigure newFigure = Painter.RevivalNewFigure();
                     newFigure.Color = Color.Yellow;
@@ -99,6 +99,11 @@
                     throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
                 }
             }
+        }
+
+        private static bool RevivalInNewFigure(int newRow, int newCol, IFigure[,] board)
+        {
+            return newRow == 0 && board[newRow, newCol].Color is Color.DarkYellow;
         }
 
         private bool IsLeft(int col, int newCol)

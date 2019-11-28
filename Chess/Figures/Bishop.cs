@@ -29,16 +29,20 @@
             {
                 if (figure.Color == Color.Yellow)
                 {
+                    int numberStartPosition = GlobalConstants.StartPosition[1] - '0';
+                    int numberDestination = GlobalConstants.Destination[1] - '0';
+
+                    int move = 3;
                     if (IsMoveLeft(col, newCol))
                     {
-                        figure.Position.Width -= row - newRow;
+                        figure.Position.Width -= move * (numberDestination - numberStartPosition);
                     }
                     else
                     {
-                        figure.Position.Width += 10;
+                        figure.Position.Width += (move * (numberDestination - numberStartPosition)) * 3 + numberDestination - numberStartPosition;
                     }
 
-                    figure.Position.Height -= 3;
+                    figure.Position.Height -= (move * (numberDestination - numberStartPosition));
 
                     board[row, col] = null;
                     board[newRow, newCol] = figure;

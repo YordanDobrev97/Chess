@@ -78,5 +78,9 @@ namespace Chess.Common
         public static List<IFigure> FiguresOfFirstPlayer { get; set; }
 
         public static List<IFigure> FiguresOfSecondPlayer { get; set; }
+
+        public static string StartPosition { get; set; }
+
+        public static string Destination { get; set; }
     }
 }

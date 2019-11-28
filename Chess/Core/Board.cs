@@ -1,6 +1,7 @@
 ﻿namespace Chess
 {
     using Chess.Common;
+    using Chess.Figures;
     using Chess.Interfaces;
     using System;
 
@@ -27,6 +28,13 @@
             if (currentFigure == null)
             {
                 throw new ArgumentException("Invalid move!");
+            }
+
+            if (currentFigure is Bishop)
+            {
+                GlobalConstants.StartPosition = currentPosition;
+                GlobalConstants.Destination = newPosition;
+                //HACK
             }
 
             currentFigure.Move(isFirstPlayer, row, col, newRow, newCol, board, currentFigure);        

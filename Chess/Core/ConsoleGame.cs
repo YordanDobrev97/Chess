@@ -5,6 +5,7 @@
     using System;
     using System.Runtime.InteropServices;
     using System.Text;
+
     public class ConsoleGame : IGame
     {
         [DllImport("kernel32.dll", ExactSpelling = true)]
@@ -58,7 +59,7 @@
 
             Board board = new Board(peshoPlayer, goshoPlayer);
 
-            IPlayer currentPlayer = goshoPlayer; //first
+            IPlayer currentPlayer = goshoPlayer; //It starts first
 
             Controller controller = new Controller(peshoPlayer, goshoPlayer, currentPlayer, board);
             controller.Start();

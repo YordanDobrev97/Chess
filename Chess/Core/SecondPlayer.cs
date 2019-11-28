@@ -9,6 +9,7 @@
     public class SecondPlayer : IPlayer
     {
         private Color color;
+
         public SecondPlayer(string name, Color color)
         {
             this.Name = name;

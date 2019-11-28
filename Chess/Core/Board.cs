@@ -1,8 +1,6 @@
 ﻿namespace Chess
 {
     using Chess.Common;
-    using Chess.Core;
-    using Chess.Figures;
     using Chess.Interfaces;
     using System;
 
@@ -41,34 +39,7 @@
 
         private static int GetPositionCol(string currentPosition)
         {
-            //а2
             return currentPosition[0] - 'a';
-        }
-
-        private static void DoubleMove(IFigure currentFigure)
-        {
-            currentFigure.Position.Height -= GlobalConstants.CurrentFigurePositionHeight;
-        }
-
-        private static bool HasDoubleMoveFromUser(int newRow, Pawn pawn)
-        {
-            return pawn.HasInitialState && newRow == GlobalConstants.RowDoubleMoveUser;
-        }
-
-        private static void SingleMove(IFigure currentFigure, bool isFirstPlayer, bool hasTaking)
-        {
-            if (isFirstPlayer)
-            {
-                if (hasTaking)
-                {
-                    currentFigure.Position.Width += GlobalConstants.IncrementPositionWidthSingleMove;
-                }
-                currentFigure.Position.Height -= GlobalConstants.DecrementPositionHeightSingleMove;
-            }
-            else
-            {
-                currentFigure.Position.Height += GlobalConstants.DecrementPositionHeightSingleMove;
-            }
         }
 
         private static void InitializeFigures(IPlayer firstPlayer, IPlayer secondPlayer)

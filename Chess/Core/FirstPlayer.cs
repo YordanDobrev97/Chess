@@ -3,9 +3,7 @@
     using Chess.Common;
     using Chess.Figures;
     using Chess.Interfaces;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class FirstPlayer : IPlayer
     {

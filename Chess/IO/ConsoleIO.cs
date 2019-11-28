@@ -10,9 +10,20 @@
             return Console.ReadLine();
         }
 
-        public static void WriteConsole(string input)
+        public static void WriteConsole<T>(T input)
         {
             Console.Write(input);
+        }
+
+        public static void WriteLineConsole<T>(T input)
+        {
+            WriteConsole(input);
+            Console.WriteLine();
+        }
+
+        public static void ConsoleForegroundColor(ConsoleColor consoleColor)
+        {
+            Console.ForegroundColor = consoleColor;
         }
 
         public static void SetCursorPositionConsole(int x, int y)

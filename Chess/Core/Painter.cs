@@ -5,11 +5,10 @@
     using Chess.Interfaces;
     using Chess.IO;
     using System;
-    using System.Linq;
 
     public abstract class Painter
     {
-        public static FirstPlayer GetPlayerName(FirstPlayer player)
+        public static IPlayer GetPlayerName(IPlayer player)
         {
             return player;
         }
@@ -67,10 +66,9 @@
             ConsoleIO.WriteConsole("Queen: 1   ");
             ConsoleIO.WriteConsole("Knight: 2  ");
             ConsoleIO.WriteConsole("Rook: 3    ");
-            ConsoleIO.WriteConsole("Bishop: 4");
+            ConsoleIO.WriteConsole("Bishop: 4  ");
 
-            Console.WriteLine();
-            int choiseFigureUser = int.Parse(Console.ReadLine());
+            int choiseFigureUser = int.Parse(ConsoleIO.ReadFromConsole());
 
             IFigure figure = null;
             switch (choiseFigureUser)
@@ -99,9 +97,8 @@
 
         public static void DrawBoard()
         {
-            //TODO Add ConsolePainter
             int countSpacePaip = GlobalConstants.CountSpacePaipDrawBoard;
-            Console.WriteLine();
+            ConsoleIO.WriteLineConsole(string.Empty);
 
             int row = 0;
             int num = GlobalConstants.DefaultValueSizeOfBoard;
@@ -117,8 +114,8 @@
             
             for (char symbol = 'a'; symbol <='h'; symbol++)
             {
-                Console.SetCursorPosition(countSpace, GlobalConstants.WidthCursorPositionDrawFigures);
-                Console.Write(symbol);
+                ConsoleIO.SetCursorPositionConsole(countSpace, GlobalConstants.WidthCursorPositionDrawFigures);
+                ConsoleIO.WriteConsole(symbol);
                 countSpace += GlobalConstants.IncrementStartValuePawnPosition;
             }
         }
@@ -130,14 +127,14 @@
                 int width = figure.Position.Width;
                 int height = figure.Position.Height;
 
-                Console.SetCursorPosition(width, height);
-                Console.ForegroundColor = ConsoleColor.Gray;
-                var typeColor = (ConsoleColor)Enum.GetValues(typeof(Color)).GetValue(numberPlayer);
+                ConsoleIO.SetCursorPositionConsole(width, height);
+                ConsoleIO.ConsoleForegroundColor(ConsoleColor.Gray);
+                var typeColor = (ConsoleColor)Enum.GetValues(typeof(Color))
+                    .GetValue(numberPlayer);
 
-                //ConsoleColor color = (ConsoleColor)typeColor;
-               Console.ForegroundColor = typeColor;
+                ConsoleIO.ConsoleForegroundColor(typeColor);
 
-                Console.Write(figure.StringRepresentation + " ");
+                ConsoleIO.WriteConsole(figure.StringRepresentation + " ");
             }
         }
 
@@ -147,39 +144,39 @@
             {
                 for (int i = 0; i < GlobalConstants.DefaultValueSizeOfBoard; i++)
                 {
-                    Console.Write("=");
+                    ConsoleIO.WriteConsole("=");
                 }
 
-                Console.Write(new string(' ', GlobalConstants.CountSpacePaipDrawBoard));
+                ConsoleIO.WriteConsole(new string(' ', GlobalConstants.CountSpacePaipDrawBoard));
             }
         }
 
         private static void DrawBox(int countSpacePaip, int row, int num)
         {
-            Console.Write(new string(' ', countSpacePaip));
+            ConsoleIO.WriteConsole(new string(' ', countSpacePaip));
             DrawFront();
 
-            Console.WriteLine();
-            Console.Write(num);
-            Console.Write(new string(' ', countSpacePaip - 1));
+            ConsoleIO.WriteLineConsole(string.Empty);
+            ConsoleIO.WriteConsole(num);
+            ConsoleIO.WriteConsole(new string(' ', countSpacePaip - 1));
 
             for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
             {
-                Console.Write("|");
+                ConsoleIO.WriteConsole("|");
                 for (int i = 0; i < GlobalConstants.CountSpaceDrawBox; i++)
                 {
-                    Console.Write(" ");
+                    ConsoleIO.WriteConsole(" ");
                 }
 
-                Console.Write("|");
-                Console.Write(new string(' ', 2));
+                ConsoleIO.WriteConsole("|");
+                ConsoleIO.WriteConsole(new string(' ', 2));
             }
 
-            Console.WriteLine();
-            Console.Write(new string(' ', countSpacePaip));
+            ConsoleIO.WriteLineConsole(string.Empty);
+            ConsoleIO.WriteConsole(new string(' ', countSpacePaip));
             DrawFront();
 
-            Console.WriteLine();
+            ConsoleIO.WriteLineConsole(string.Empty);
         }
     }
 }

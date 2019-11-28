@@ -13,19 +13,13 @@
         public Color Color { get; set; }
 
         public void Move(bool isFirstPlayer, int row, int col, int newRow, 
-            int newCol, IFigure[,] board, IFigure figure, bool revivalNewFigure = false)
+            int newCol, IFigure[,] board, IFigure figure)
         {
             if (isFirstPlayer)
             {
                 if (figure.Color == Color.Yellow)
                 {
                     IFigure figureOut = board[newRow, newCol];
-
-                    if (revivalNewFigure)
-                    {
-                        board[newRow, newCol] = figure;
-                        return;
-                    }
 
                     if (NotFree(board, newRow, newCol) 
                         && board[newRow,newCol].Color is Color.DarkYellow)

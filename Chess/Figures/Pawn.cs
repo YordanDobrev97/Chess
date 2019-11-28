@@ -21,14 +21,13 @@
         public Color Color { get; set; }
 
         public void Move(bool isSecondPlayer, int row, int col, int newRow,
-            int newCol, IFigure[,] board, IFigure figure, bool revivalNewFigure)
+            int newCol, IFigure[,] board, IFigure figure)
         {
             if (isSecondPlayer)
             {
                 if (newRow == 0 && board[newRow, newCol].Color is Color.DarkYellow)
                 {
                     IFigure newFigure = Painter.RevivalNewFigure();
-                    //GlobalConstants.FiguresOfSecondPlayer.Remove(board[newRow, newCol]);
                     newFigure.Color = Color.Yellow;
                     newFigure.Position.Width = figure.Position.Width;
                     newFigure.Position.Height = figure.Position.Height;
@@ -37,8 +36,6 @@
                     GlobalConstants.FiguresOfSecondPlayer.Remove(figure);
                     GlobalConstants.FiguresOfSecondPlayer.Add(newFigure);
                     board[newRow, newCol] = newFigure;
-                    //newFigure.Move(isSecondPlayer, row, col, newRow, newCol, board,
-                    //    newFigure, true);
                     return;
                 }
 

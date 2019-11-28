@@ -35,7 +35,7 @@
                     int move = 3;
                     if (IsMoveLeft(col, newCol))
                     {
-                        figure.Position.Width -= move * (numberDestination - numberStartPosition);
+                        figure.Position.Width -= (move * (numberDestination - numberStartPosition)) * 3 + numberDestination - numberStartPosition;
                     }
                     else
                     {

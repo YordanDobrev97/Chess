@@ -23,16 +23,16 @@
             if (isFirstPlayer)
             {
                 int move = 3;
+                int numberStartPosition = GlobalConstants.StartPosition[1] - '0';
+                int numberDestination = GlobalConstants.Destination[1] - '0';
+
                 if (MoveUp(col, newCol, row, newRow))
                 {
-                    int numberStartPosition = GlobalConstants.StartPosition[1] - '0';
-                    int numberDestination = GlobalConstants.Destination[1] - '0';
-
                     figure.Position.Height -= move * (numberDestination - numberStartPosition);
                 }
-                else if (MoveDown())
+                else if (MoveDown(col, newCol, row, newRow))
                 {
-
+                    figure.Position.Height += move * (numberStartPosition - numberDestination); ;
                 }
                 else if (MoveLeft())
                 {
@@ -65,9 +65,9 @@
             throw new NotImplementedException();
         }
 
-        private bool MoveDown()
+        private bool MoveDown(int col, int newCol, int row, int newRow)
         {
-            throw new NotImplementedException();
+            return col == newCol && row < newRow;
         }
 
         private bool MoveUp(int col,int newCol, int row, int newRow)

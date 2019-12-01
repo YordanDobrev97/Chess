@@ -22,7 +22,30 @@
 
             if (isFirstPlayer)
             {
-                figure.Position.Height -= 3;
+                int move = 3;
+                if (MoveUp(col, newCol, row, newRow))
+                {
+                    int numberStartPosition = GlobalConstants.StartPosition[1] - '0';
+                    int numberDestination = GlobalConstants.Destination[1] - '0';
+
+                    figure.Position.Height -= move * (numberDestination - numberStartPosition);
+                }
+                else if (MoveDown())
+                {
+
+                }
+                else if (MoveLeft())
+                {
+
+                }
+                else if (MoveRigt())
+                {
+
+                }
+                else
+                {
+
+                }
             }
             else
             {
@@ -30,6 +53,26 @@
             }
             board[row, col] = null;
             board[newRow, newCol] = figure;
+        }
+
+        private bool MoveRigt()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool MoveLeft()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool MoveDown()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool MoveUp(int col,int newCol, int row, int newRow)
+        {
+            return col == newCol && newRow < row;
         }
     }
 }

@@ -30,7 +30,7 @@
                 throw new ArgumentException("Invalid move!");
             }
 
-            if (currentFigure is Bishop)
+            if (currentFigure is Bishop || currentFigure is Rook)
             {
                 GlobalConstants.StartPosition = currentPosition;
                 GlobalConstants.Destination = newPosition;

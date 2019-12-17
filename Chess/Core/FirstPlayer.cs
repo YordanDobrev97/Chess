@@ -3,32 +3,34 @@
     using Chess.Common;
     using Chess.Figures;
     using Chess.Interfaces;
+    using System;
     using System.Collections.Generic;
 
     public class FirstPlayer : IPlayer
     {
-        private Color color;
 
         public FirstPlayer(string name, Color color)
         {
             this.Name = name;
-            this.color = color;
+            this.Color = color;
             this.Figures = new List<IFigure>();
-            GlobalConstants.FiguresOfFirstPlayer = Figures;
+           // GlobalConstants.FiguresOfFirstPlayer = Figures;
         }
 
         public string Name { get; set; }
 
         public List<IFigure> Figures { get; set; }
 
+        public Color Color { get; }
+
         public void SaveCoordinates()
         {
             var firstRook = new Rook();
             var firstKnight = new Knight();
-            var firstBishop = new Bishop();
+            var firstBishop = new Bishop(this,new Position());
             var queen = new Queen();
             var king = new King();
-            var secondBishop = new Bishop();
+            var secondBishop = new Bishop(this,new Position());
             var secondKnight = new Knight();
             var secondRook = new Rook();
 
@@ -43,7 +45,7 @@
 
             for (int i = 0; i < 8; i++)
             {
-                var pawn = new Pawn();
+                var pawn = new Pawn(this);
                 this.Figures.Add(pawn);
             }
 
@@ -76,7 +78,7 @@
             foreach (var item in this.Figures)
             {
                 var currentFigure = item;
-                currentFigure.Color = Color.DarkYellow;
+                currentFigure.Color = this.Color;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿namespace Chess.Figures
+﻿
+namespace Chess.Figures
 {
     using Chess.Common;
     using Chess.Interfaces;
@@ -7,8 +8,9 @@
 
     public class Pawn : IFigure
     {
-        public Pawn()
+        public Pawn(IPlayer player)
         {
+            this.Player = player;
             this.HasInitialState = true;
         }
 
@@ -20,12 +22,14 @@
 
         public Color Color { get; set; }
 
+        public IPlayer Player { get; }
+
         public void Move(bool isSecondPlayer, int row, int col, int newRow,
             int newCol, IFigure[,] board, IFigure figure)
         {
             if (isSecondPlayer)
             {
-                if (RevivalInNewFigure(newRow, newCol, board))
+               /* if (RevivalInNewFigure(newRow, newCol, board))
                 {
                     IFigure newFigure = Painter.RevivalNewFigure();
                     newFigure.Color = Color.Yellow;
@@ -37,7 +41,7 @@
                     GlobalConstants.FiguresOfSecondPlayer.Add(newFigure);
                     board[newRow, newCol] = newFigure;
                     return;
-                }
+                } */
 
                 int move = 3; //default value one move up
                 if (row - 2 == newRow && this.HasInitialState)

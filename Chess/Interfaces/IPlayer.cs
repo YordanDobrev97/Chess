@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Chess.Common;
 
 namespace Chess.Interfaces
 {
@@ -6,6 +7,7 @@ namespace Chess.Interfaces
     {
         string Name { get; set; }
 
+        Color Color { get; }
         List<IFigure> Figures { get; set; }
 
         void SaveCoordinates();

@@ -8,6 +8,8 @@ namespace Chess.Interfaces
 
         Position Position { get; set; }
 
+        IPlayer Player { get; }
+
         Color Color { get; set; }
 
         void Move(bool isFirstPlayer, int row, int col, int newRow, 

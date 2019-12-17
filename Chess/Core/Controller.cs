@@ -7,17 +7,19 @@
 
     public class Controller
     {
-        private IPlayer peshoPlayer;
-        private IPlayer goshoPlayer;
+        private IPlayer firstPlayer;
+        private IPlayer secondPlayer;
         private Board board;
         private IPlayer currentPlayer;
+        private Painter painter; // needs IPainter - ConsolePainter
 
-        public Controller(IPlayer peshoPlayer, IPlayer goshoPlayer, IPlayer currentPlayer, Board board)
+        public Controller(Board board, Painter painter)
         {
-            this.peshoPlayer = peshoPlayer;
-            this.goshoPlayer = goshoPlayer;
-            this.currentPlayer = currentPlayer;
+            this.firstPlayer = board.FirstPlayer;
+            this.secondPlayer = board.SecondPlayer;
+            this.currentPlayer = board.FirstPlayer;
             this.board = board;
+            this.painter = painter;
         }
 
         public void Start()
@@ -36,23 +38,12 @@
 
                 try
                 {
-                    board.MoveFigure(currentPosition,  newPosition,GlobalConstants.IsFirstPlayer);
-
+                    board.MoveFigure(currentPosition, newPosition, this.currentPlayer == firstPlayer);
                     ConsoleIO.ClearConsole();
-                    Painter.DrawBoard();
-                    Painter.DrawFigures(false, peshoPlayer, 0);
-                    Painter.DrawFigures(false, goshoPlayer, 1);
+                    painter.DrawBoard(board);
 
-                    if (GlobalConstants.IsFirstPlayer)
-                    {
-                        GlobalConstants.IsFirstPlayer = false;
-                        currentPlayer = peshoPlayer;
-                    }
-                    else
-                    {
-                        GlobalConstants.IsFirstPlayer = true;
-                        currentPlayer = goshoPlayer;
-                    }
+                    if (this.currentPlayer == firstPlayer) this.currentPlayer = secondPlayer;
+                    else this.currentPlayer = firstPlayer;
                 }
                 catch (System.Exception exception)
                 {
@@ -62,9 +53,7 @@
                     ConsoleIO.Sleep(3000);
                     ConsoleIO.ClearConsole();
                     Console.ForegroundColor = ConsoleColor.White;
-                    Painter.DrawBoard();
-                    Painter.DrawFigures(true, peshoPlayer, 0);
-                    Painter.DrawFigures(true, goshoPlayer, 1);
+                    painter.DrawBoard(board);
                 }
             }
         }

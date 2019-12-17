@@ -6,14 +6,9 @@
     using Chess.IO;
     using System;
 
-    public abstract class Painter
+    public class Painter
     {
-        public static IPlayer GetPlayerName(IPlayer player)
-        {
-            return player;
-        }
-
-        public static void DrawAdminPanel()
+        public void DrawAdminPanel()
         {
             Console.Write(new string(' ', 20));
             Console.WriteLine(new string('=', 50));
@@ -61,7 +56,7 @@
             Console.SetCursorPosition(39, 20);
         }
 
-        public static IFigure RevivalNewFigure()
+        public IFigure RevivalNewFigure()
         {
             ConsoleIO.WriteConsole("Queen: 1   ");
             ConsoleIO.WriteConsole("Knight: 2  ");
@@ -83,19 +78,19 @@
                     figure = new Rook();
                     break;
                 case 4:
-                    figure = new Bishop();
+                    //figure = new Bishop();
                     break;
             }
 
             return figure;
         }
 
-        public static void DrawFigures(bool isDefault, IPlayer player, int numberPlayer)
+        public void DrawFigures(bool isDefault, IPlayer player, int numberPlayer)
         {
             PrintFiguresOfPlayer(player, numberPlayer);
         }
 
-        public static void DrawBoard()
+        public void DrawBoard(Board board)
         {
             int countSpacePaip = GlobalConstants.CountSpacePaipDrawBoard;
             ConsoleIO.WriteLineConsole(string.Empty);
@@ -118,9 +113,11 @@
                 ConsoleIO.WriteConsole(symbol);
                 countSpace += GlobalConstants.IncrementStartValuePawnPosition;
             }
+            this.PrintFiguresOfPlayer(board.FirstPlayer, 0);
+            this.PrintFiguresOfPlayer(board.SecondPlayer, 1);
         }
 
-        private static void PrintFiguresOfPlayer(IPlayer player, int numberPlayer)
+        private void PrintFiguresOfPlayer(IPlayer player, int numberPlayer)
         {
             foreach (var figure in player.Figures)
             {
@@ -128,9 +125,9 @@
                 int height = figure.Position.Height;
 
                 ConsoleIO.SetCursorPositionConsole(width, height);
-                ConsoleIO.ConsoleForegroundColor(ConsoleColor.Gray);
+                //ConsoleIO.ConsoleForegroundColor(ConsoleColor.Gray);??
                 var typeColor = (ConsoleColor)Enum.GetValues(typeof(Color))
-                    .GetValue(numberPlayer);
+                   .GetValue(numberPlayer);               
 
                 ConsoleIO.ConsoleForegroundColor(typeColor);
 
@@ -138,7 +135,7 @@
             }
         }
 
-        private static void DrawFront()
+        private void DrawFront()
         {
             for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
             {
@@ -151,7 +148,7 @@
             }
         }
 
-        private static void DrawBox(int countSpacePaip, int row, int num)
+        private void DrawBox(int countSpacePaip, int row, int num)
         {
             ConsoleIO.WriteConsole(new string(' ', countSpacePaip));
             DrawFront();

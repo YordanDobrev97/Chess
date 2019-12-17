@@ -11,6 +11,8 @@
 
         public Color Color { get; set; }
 
+        public IPlayer Player => throw new System.NotImplementedException();
+
         public void Move(bool isFirstPlayer, int row, int col, int newRow, 
             int newCol, IFigure[,] board, IFigure figure)
         {

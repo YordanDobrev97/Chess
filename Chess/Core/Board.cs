@@ -11,9 +11,13 @@
 
         public Board(IPlayer firstPlayer, IPlayer secondPlayer)
         {
+            this.FirstPlayer = firstPlayer;
+            this.SecondPlayer = secondPlayer;
             InitializeFigures(firstPlayer, secondPlayer);
         }
 
+        public IPlayer FirstPlayer { get; }
+        public IPlayer SecondPlayer { get; }
         public void MoveFigure(string currentPosition, string newPosition, 
             bool isFirstPlayer)
         {

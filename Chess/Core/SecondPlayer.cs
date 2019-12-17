@@ -22,20 +22,22 @@
 
         public List<IFigure> Figures { get; set; }
 
+        public Color Color { get; }
+
         public void SaveCoordinates()
         {
             for (int i = 0; i < 8; i++)
             {
-                var pawn = new Pawn();
+                var pawn = new Pawn(this);
                 this.Figures.Add(pawn);
             }
 
             this.Figures.Add(new Rook());
             this.Figures.Add(new Knight());
-            this.Figures.Add(new Bishop());
+            this.Figures.Add(new Bishop(this,new Position()));
             this.Figures.Add(new Queen());
             this.Figures.Add(new King());
-            this.Figures.Add(new Bishop());
+            this.Figures.Add(new Bishop(this,new Position()));
             this.Figures.Add(new Knight());
             this.Figures.Add(new Rook());
 

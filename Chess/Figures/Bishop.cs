@@ -8,14 +8,17 @@
     {
         public string StringRepresentation => "♝";
 
-        public Bishop()
+        public Bishop(IPlayer player, Position position)
         {
-            this.Position = new Position();
+            this.Player = player;
+            this.Position = position;
         }
 
         public Position Position { get; set; }
 
-        public Color Color { get; set; }
+        Color IFigure.Color { get; set; }
+
+        public IPlayer Player { get; }
 
         public void Move(bool isFirstPlayer,int row, int col, int newRow, int newCol, 
             IFigure[,] board, IFigure figure)
@@ -74,8 +77,7 @@
                 {
                     throw new ArgumentException(GlobalConstants.ThisFigureNotMoveMessage);
                 }
-            }
-            
+            }            
         }
 
         private static bool IsMoveLeft(int col, int newCol)

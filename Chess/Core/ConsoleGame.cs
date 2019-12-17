@@ -20,12 +20,18 @@
         private const int MAXIMIZE = 3;
         private const int MINIMIZE = 6;
         private const int RESTORE = 9;
+        private Painter painter;
+
+        public ConsoleGame()
+        {
+            this.painter = new Painter();
+        }
 
         public void StartMenu()
         {
             Console.ForegroundColor = ConsoleColor.White;
             FullScreen();
-            Painter.DrawAdminPanel();
+            painter.DrawAdminPanel();
 
             string userChoice = Console.ReadLine();
 
@@ -53,15 +59,17 @@
             IPlayer goshoPlayer = new SecondPlayer("Gosho", Color.DarkYellow);
             goshoPlayer.SaveCoordinates();
 
-            Painter.DrawBoard();
-            Painter.DrawFigures(true, peshoPlayer, 0);
-            Painter.DrawFigures(true, goshoPlayer, 1);
-
             Board board = new Board(peshoPlayer, goshoPlayer);
+
+            painter.DrawBoard(board);
+            painter.DrawFigures(true, peshoPlayer, 0);
+            painter.DrawFigures(true, goshoPlayer, 1);
+
+            
 
             IPlayer currentPlayer = goshoPlayer; //It starts first
 
-            Controller controller = new Controller(peshoPlayer, goshoPlayer, currentPlayer, board);
+            Controller controller = new Controller(board, painter);
             controller.Start();
         }
 

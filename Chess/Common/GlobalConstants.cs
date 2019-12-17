@@ -5,9 +5,9 @@ namespace Chess.Common
 {
     public static class GlobalConstants
     {
-        public static int DefaultValueSizeOfBoard = 8;
+        //public static int DefaultValueSizeOfBoard = 8;
 
-        public static int TimeSleepConsole = 1000;
+       // public static int TimeSleepConsole = 1000; not used
 
         public static int CurrentFigurePositionHeight = 6;
 
@@ -37,13 +37,13 @@ namespace Chess.Common
 
         public static int PositionHeight = 23;
 
-        public static int StartCountSpaces = 5;
+       // public static int StartCountSpaces = 5;
 
-        public static int CountSpacePaipDrawBoard = 2;
+       // public static int CountSpacePaipDrawBoard = 2;
 
-        public static int WidthCursorPositionDrawFigures = 25;
+       // public static int WidthCursorPositionDrawFigures = 25;
 
-        public static int CountSpaceDrawBox = 6;
+       // public static int CountSpaceDrawBox = 6;
 
         public static int WidthPositionDeadFigure = 85;
 
@@ -77,7 +77,7 @@ namespace Chess.Common
 
         public static List<IFigure> FiguresOfFirstPlayer { get; set; }
 
-        public static List<IFigure> FiguresOfSecondPlayer { get; set; }
+       // public static List<IFigure> FiguresOfSecondPlayer { get; set; }
 
         public static string StartPosition { get; set; }
 

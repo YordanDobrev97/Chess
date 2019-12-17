@@ -12,7 +12,7 @@
 
         Color IFigure.Color { get; set; }
 
-        public IPlayer Player => throw new NotImplementedException();
+        public IPlayer Player { get;}
 
         public void Move(bool isFirstPlayer, int row, int col, int newRow, 
             int newCol, IFigure[,] board, IFigure figure)

@@ -6,8 +6,14 @@
     using Chess.IO;
     using System;
 
-    public class Painter
+    public class ConsolePainter : IPainter
     {
+        private const int CountSpacePaipDrawBoard = 2;
+        private const int WidthCursorPositionDrawFigures = 25;
+        private const int CountSpaceDrawBox = 6;
+        private const int StartCountSpaces = 5;
+        private const int IncrementFiguresPosition = 10;
+
         public void DrawAdminPanel()
         {
             Console.Write(new string(' ', 20));
@@ -56,7 +62,7 @@
             Console.SetCursorPosition(39, 20);
         }
 
-        public IFigure RevivalNewFigure()
+       /* public IFigure RevivalNewFigure() Probably not on place. Should be in pawns and controller
         {
             ConsoleIO.WriteConsole("Queen: 1   ");
             ConsoleIO.WriteConsole("Knight: 2  ");
@@ -78,40 +84,35 @@
                     figure = new Rook();
                     break;
                 case 4:
-                    //figure = new Bishop();
+                   // figure = new Bishop();
                     break;
             }
 
             return figure;
-        }
-
-        public void DrawFigures(bool isDefault, IPlayer player, int numberPlayer)
-        {
-            PrintFiguresOfPlayer(player, numberPlayer);
-        }
+        } */
 
         public void DrawBoard(Board board)
         {
-            int countSpacePaip = GlobalConstants.CountSpacePaipDrawBoard;
+            int countSpacePaip = CountSpacePaipDrawBoard;
             ConsoleIO.WriteLineConsole(string.Empty);
 
             int row = 0;
-            int num = GlobalConstants.DefaultValueSizeOfBoard;
+            int num = board.BoardSize;
 
-            for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
+            for (int col = 0; col < board.BoardSize; col++)
             {
-                DrawBox(countSpacePaip, row, num);
+                DrawBox(countSpacePaip, row, num, board);
                 row++;
                 num--;
             }
 
-            int countSpace = GlobalConstants.StartCountSpaces;
+            int countSpace = StartCountSpaces;
             
             for (char symbol = 'a'; symbol <='h'; symbol++)
             {
-                ConsoleIO.SetCursorPositionConsole(countSpace, GlobalConstants.WidthCursorPositionDrawFigures);
+                ConsoleIO.SetCursorPositionConsole(countSpace, WidthCursorPositionDrawFigures);
                 ConsoleIO.WriteConsole(symbol);
-                countSpace += GlobalConstants.IncrementStartValuePawnPosition;
+                countSpace += IncrementFiguresPosition;
             }
             this.PrintFiguresOfPlayer(board.FirstPlayer, 0);
             this.PrintFiguresOfPlayer(board.SecondPlayer, 1);
@@ -135,32 +136,32 @@
             }
         }
 
-        private void DrawFront()
+        private void DrawFront(Board board)
         {
-            for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
+            for (int col = 0; col < board.BoardSize ; col++)
             {
-                for (int i = 0; i < GlobalConstants.DefaultValueSizeOfBoard; i++)
+                for (int i = 0; i < board.BoardSize; i++)
                 {
                     ConsoleIO.WriteConsole("=");
                 }
 
-                ConsoleIO.WriteConsole(new string(' ', GlobalConstants.CountSpacePaipDrawBoard));
+                ConsoleIO.WriteConsole(new string(' ', CountSpacePaipDrawBoard));
             }
         }
 
-        private void DrawBox(int countSpacePaip, int row, int num)
+        private void DrawBox(int countSpacePaip, int row, int num, Board board)
         {
             ConsoleIO.WriteConsole(new string(' ', countSpacePaip));
-            DrawFront();
+            DrawFront(board);
 
             ConsoleIO.WriteLineConsole(string.Empty);
             ConsoleIO.WriteConsole(num);
             ConsoleIO.WriteConsole(new string(' ', countSpacePaip - 1));
 
-            for (int col = 0; col < GlobalConstants.DefaultValueSizeOfBoard; col++)
+            for (int col = 0; col < board.BoardSize; col++)
             {
                 ConsoleIO.WriteConsole("|");
-                for (int i = 0; i < GlobalConstants.CountSpaceDrawBox; i++)
+                for (int i = 0; i < CountSpaceDrawBox; i++)
                 {
                     ConsoleIO.WriteConsole(" ");
                 }
@@ -171,7 +172,7 @@
 
             ConsoleIO.WriteLineConsole(string.Empty);
             ConsoleIO.WriteConsole(new string(' ', countSpacePaip));
-            DrawFront();
+            DrawFront(board);
 
             ConsoleIO.WriteLineConsole(string.Empty);
         }

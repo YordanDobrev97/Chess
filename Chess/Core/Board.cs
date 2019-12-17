@@ -7,15 +7,18 @@
 
     public class Board
     {
-        public static IFigure[,] board = new IFigure[GlobalConstants.DefaultValueSizeOfBoard, GlobalConstants.DefaultValueSizeOfBoard];
+        public IFigure[,] board;
 
-        public Board(IPlayer firstPlayer, IPlayer secondPlayer)
+        public Board(IPlayer firstPlayer, IPlayer secondPlayer, int size)
         {
             this.FirstPlayer = firstPlayer;
             this.SecondPlayer = secondPlayer;
-            InitializeFigures(firstPlayer, secondPlayer);
+            this.BoardSize = size;
+            this.board = new IFigure[BoardSize, BoardSize];
+            InitializeFigures(FirstPlayer, SecondPlayer);
         }
 
+        public int BoardSize { get; }
         public IPlayer FirstPlayer { get; }
         public IPlayer SecondPlayer { get; }
         public void MoveFigure(string currentPosition, string newPosition, 
@@ -44,9 +47,9 @@
             currentFigure.Move(isFirstPlayer, row, col, newRow, newCol, board, currentFigure);        
         }
 
-        private static int GetPositionRow(string currentPosition)
+        private int GetPositionRow(string currentPosition)
         {
-            return GlobalConstants.DefaultValueSizeOfBoard - (currentPosition[1] - '0');
+            return this.BoardSize - (currentPosition[1] - '0');
         }
 
         private static int GetPositionCol(string currentPosition)
@@ -54,7 +57,7 @@
             return currentPosition[0] - 'a';
         }
 
-        private static void InitializeFigures(IPlayer firstPlayer, IPlayer secondPlayer)
+        private void InitializeFigures(IPlayer firstPlayer, IPlayer secondPlayer)
         {
             int end = GlobalConstants.EndRowOfBoard;
             int row = GlobalConstants.StartRowOfBoard;
@@ -67,7 +70,7 @@
                     row++;
                     col = GlobalConstants.StartColOfBoard;
                 }
-                board[row, col++] = firstPlayer.Figures[i];
+                this.board[row, col++] = firstPlayer.Figures[i];
             }
 
             row = GlobalConstants.EndRowOfBoard - 2;
@@ -80,7 +83,7 @@
                     row++;
                     col = GlobalConstants.StartColOfBoard;
                 }
-                board[row, col++] = secondPlayer.Figures[i];
+                this.board[row, col++] = secondPlayer.Figures[i];
             }
         }
     }

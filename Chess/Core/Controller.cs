@@ -11,9 +11,9 @@
         private IPlayer secondPlayer;
         private Board board;
         private IPlayer currentPlayer;
-        private Painter painter; // needs IPainter - ConsolePainter
+        private IPainter painter; // needs IPainter - ConsolePainter
 
-        public Controller(Board board, Painter painter)
+        public Controller(Board board, IPainter painter)
         {
             this.firstPlayer = board.FirstPlayer;
             this.secondPlayer = board.SecondPlayer;

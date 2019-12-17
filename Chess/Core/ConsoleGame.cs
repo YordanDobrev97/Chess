@@ -20,11 +20,11 @@
         private const int MAXIMIZE = 3;
         private const int MINIMIZE = 6;
         private const int RESTORE = 9;
-        private Painter painter;
+        private IPainter painter;
 
         public ConsoleGame()
         {
-            this.painter = new Painter();
+            this.painter = new ConsolePainter();
         }
 
         public void StartMenu()
@@ -59,15 +59,9 @@
             IPlayer goshoPlayer = new SecondPlayer("Gosho", Color.DarkYellow);
             goshoPlayer.SaveCoordinates();
 
-            Board board = new Board(peshoPlayer, goshoPlayer);
+            Board board = new Board(peshoPlayer, goshoPlayer,8);
 
-            painter.DrawBoard(board);
-            painter.DrawFigures(true, peshoPlayer, 0);
-            painter.DrawFigures(true, goshoPlayer, 1);
-
-            
-
-            IPlayer currentPlayer = goshoPlayer; //It starts first
+            painter.DrawBoard(board); 
 
             Controller controller = new Controller(board, painter);
             controller.Start();

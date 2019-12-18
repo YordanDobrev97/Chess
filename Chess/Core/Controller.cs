@@ -4,7 +4,6 @@
     using Chess.Interfaces;
     using Chess.IO;
     using System;
-    using System.Text;
 
     public class Controller
     {
@@ -25,8 +24,6 @@
 
         public void Start()
         {
-            Console.OutputEncoding = Encoding.UTF8;
-
             while (true)
             {
                 ConsoleIO.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
@@ -35,18 +32,21 @@
                 Console.ForegroundColor = ConsoleColor.White;
                 ConsoleIO.WriteConsole($"{currentPlayer.Name} - You're on the move ");
 
-                string[] userMove = ConsoleIO.ReadFromConsole().Split();
-                string currentPosition = userMove[0];
-                string newPosition = userMove[1];
+                string[] userMove = ConsoleIO.ReadFromConsole().Split(); 
 
                 try
                 {
-                    board.MoveFigure(currentPosition, newPosition, this.currentPlayer == firstPlayer);
-                    ConsoleIO.ClearConsole();
-                    painter.DrawBoard(board);
+                    string currentPosition = userMove[0];
+                    string newPosition = userMove[1];
+                    if (board.MoveFigure(currentPosition, newPosition, currentPlayer))
+                    {
+                        ConsoleIO.ClearConsole();
+                        painter.DrawBoard(board);
 
-                    if (this.currentPlayer == firstPlayer) this.currentPlayer = secondPlayer;
-                    else this.currentPlayer = firstPlayer;
+                        //swap player if move is valid
+                        if (this.currentPlayer == firstPlayer) this.currentPlayer = secondPlayer;
+                        else this.currentPlayer = firstPlayer;
+                    }
                 }
                 catch (System.Exception exception)
                 {

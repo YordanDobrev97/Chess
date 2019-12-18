@@ -13,6 +13,8 @@
         private const int CountSpaceDrawBox = 6;
         private const int StartCountSpaces = 5;
         private const int IncrementFiguresPosition = 10;
+        private const int StartValuePawnPosition = 5;
+        private const int IncrementStartValuePawnPosition = 10;
 
         public void DrawAdminPanel()
         {
@@ -99,6 +101,7 @@
             int row = 0;
             int num = board.BoardSize;
 
+            // print boxes rows
             for (int col = 0; col < board.BoardSize; col++)
             {
                 DrawBox(countSpacePaip, row, num, board);
@@ -106,6 +109,7 @@
                 num--;
             }
 
+            // print labels
             int countSpace = StartCountSpaces;
             
             for (char symbol = 'a'; symbol <='h'; symbol++)
@@ -114,6 +118,14 @@
                 ConsoleIO.WriteConsole(symbol);
                 countSpace += IncrementFiguresPosition;
             }
+
+            //print names of players
+            countSpace += IncrementFiguresPosition;
+            ConsoleIO.SetCursorPositionConsole(countSpace, WidthCursorPositionDrawFigures);
+            ConsoleIO.WriteConsole(board.FirstPlayer.Name);            
+            ConsoleIO.SetCursorPositionConsole(countSpace, 1);
+            ConsoleIO.WriteConsole(board.SecondPlayer.Name);
+
             this.PrintFiguresOfPlayer(board.FirstPlayer, 0);
             this.PrintFiguresOfPlayer(board.SecondPlayer, 1);
         }
@@ -122,14 +134,15 @@
         {
             foreach (var figure in player.Figures)
             {
-                int width = figure.Position.Width;
-                int height = figure.Position.Height;
+            
+                int width = (StartValuePawnPosition)+(figure.Position.Width*IncrementStartValuePawnPosition);
+                int height = 23 - figure.Position.Height*3;
 
                 ConsoleIO.SetCursorPositionConsole(width, height);
                 //ConsoleIO.ConsoleForegroundColor(ConsoleColor.Gray);??
-                var typeColor = (ConsoleColor)Enum.GetValues(typeof(Color))
-                   .GetValue(numberPlayer);               
-
+                // var typeColor = (ConsoleColor)Enum.GetValues(typeof(Color))
+                //   .GetValue(numberPlayer);               
+                var typeColor = (ConsoleColor)figure.Color;
                 ConsoleIO.ConsoleForegroundColor(typeColor);
 
                 ConsoleIO.WriteConsole(figure.StringRepresentation + " ");

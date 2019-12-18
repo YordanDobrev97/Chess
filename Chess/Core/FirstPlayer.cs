@@ -8,7 +8,6 @@
 
     public class FirstPlayer : IPlayer
     {
-
         public FirstPlayer(string name, Color color)
         {
             this.Name = name;
@@ -25,14 +24,14 @@
 
         public void SaveCoordinates()
         {
-            var firstRook = new Rook();
-            var firstKnight = new Knight();
-            var firstBishop = new Bishop(this,new Position());
-            var queen = new Queen();
-            var king = new King();
-            var secondBishop = new Bishop(this,new Position());
-            var secondKnight = new Knight();
-            var secondRook = new Rook();
+            var firstRook = new Rook(this,new Position("a1"));
+            var firstKnight = new Knight(this, new Position("b1"));
+            var firstBishop = new Bishop(this,new Position("c1"));
+            var queen = new Queen(this, new Position("d1"));
+            var king = new King(this, new Position("e1"));
+            var secondBishop = new Bishop(this,new Position("f1"));
+            var secondKnight = new Knight(this, new Position("g1"));
+            var secondRook = new Rook(this, new Position("h1"));
 
             this.Figures.Add(firstRook);
             this.Figures.Add(firstKnight);
@@ -45,40 +44,20 @@
 
             for (int i = 0; i < 8; i++)
             {
-                var pawn = new Pawn(this);
+                var currentWidth = 'a' + i;
+                var pawn = new Pawn(this,new Position($"{(char)currentWidth}2"));
+                pawn.HasInitialState = true;
                 this.Figures.Add(pawn);
             }
 
-            AddColorOfFigures();
-
-            int startDefaultPosition = GlobalConstants.StartValuePawnPosition;
-
-            for (int i = 0; i < GlobalConstants.EndRowOfBoard; i++)
-            {
-                var figure = this.Figures[i];
-                figure.Position.Width = startDefaultPosition;
-                figure.Position.Height = 2;
-                startDefaultPosition += GlobalConstants.IncrementStartValuePawnPosition;
-            }
-
-            int pawnStartValue = GlobalConstants.StartValuePawnPosition;
-            int startIndex = GlobalConstants.EndRowOfBoard;
-            for (int i = 0; i < GlobalConstants.EndRowOfBoard; i++)
-            {
-                var pawn = this.Figures[startIndex];
-                pawn.Position.Width = pawnStartValue;
-                pawn.Position.Height = GlobalConstants.StartValuePawnPosition;
-                pawnStartValue += GlobalConstants.IncrementStartValuePawnPosition;
-                startIndex++;
-            }
+            AddColorOfFigures();           
         }
 
         private void AddColorOfFigures()
         {
             foreach (var item in this.Figures)
             {
-                var currentFigure = item;
-                currentFigure.Color = this.Color;
+                item.Color = this.Color;
             }
         }
     }

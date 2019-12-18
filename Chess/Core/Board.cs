@@ -4,87 +4,63 @@
     using Chess.Figures;
     using Chess.Interfaces;
     using System;
+    using System.Linq;
 
     public class Board
     {
-        public IFigure[,] board;
-
         public Board(IPlayer firstPlayer, IPlayer secondPlayer, int size)
         {
             this.FirstPlayer = firstPlayer;
             this.SecondPlayer = secondPlayer;
             this.BoardSize = size;
-            this.board = new IFigure[BoardSize, BoardSize];
-            InitializeFigures(FirstPlayer, SecondPlayer);
         }
 
         public int BoardSize { get; }
         public IPlayer FirstPlayer { get; }
         public IPlayer SecondPlayer { get; }
-        public void MoveFigure(string currentPosition, string newPosition, 
-            bool isFirstPlayer)
+
+        public bool MoveFigure(string currentPosition, string newPosition, IPlayer currentPlayer)
         {
-            int col = GetPositionCol(currentPosition);
-            int row = GetPositionRow(currentPosition);
+            //check for InBoard
+            var currentPos = new Position(currentPosition);
+            if (!isInBoard(currentPos)) throw new ArgumentException($"Coordinates otside board {currentPosition}");
+            var newPos = new Position(newPosition);
+            if (!isInBoard(newPos)) throw new ArgumentException($"Coordinates otside board {currentPosition}");
 
-            int newCol = GetPositionCol(newPosition);
-            int newRow = GetPositionRow(newPosition);
+            //Check for current Figure
+            // To Do ovveride the Equals func of Possition class for better comparation
+            IFigure figure = currentPlayer.Figures.FirstOrDefault
+                (x => x.Position.Width == currentPos.Width &&
+                x.Position.Height == currentPos.Height);
 
-            IFigure currentFigure = board[row, col];
+            if (figure == null) throw new ArgumentException($"Player {currentPlayer.Name} doesn't have figure on {currentPosition}");
 
-            if (currentFigure == null)
+            //Move Figure
+            if (figure.Move(new Position(newPosition), this))
             {
-                throw new ArgumentException("Invalid move!");
-            }
+                // Basic check to take other player figure
+                IPlayer oppositePlayer = GetOppositePlayer(currentPlayer);
+                IFigure checkFigure = oppositePlayer.Figures.FirstOrDefault
+                    (x => x.Position.Width == newPos.Width 
+                    && x.Position.Height == newPos.Height);
+                if (checkFigure != null) oppositePlayer.Figures.Remove(checkFigure);
+                return true;
+            }  
 
-            if (currentFigure is Bishop || currentFigure is Rook)
-            {
-                GlobalConstants.StartPosition = currentPosition;
-                GlobalConstants.Destination = newPosition;
-                //HACK
-            }
-
-            currentFigure.Move(isFirstPlayer, row, col, newRow, newCol, board, currentFigure);        
+            return false;
         }
 
-        private int GetPositionRow(string currentPosition)
+        private IPlayer GetOppositePlayer(IPlayer currentPlayer)
         {
-            return this.BoardSize - (currentPosition[1] - '0');
+            if (this.FirstPlayer == currentPlayer) return this.SecondPlayer;
+            return this.FirstPlayer;
         }
 
-        private static int GetPositionCol(string currentPosition)
+        private bool isInBoard(Position checkPos)
         {
-            return currentPosition[0] - 'a';
-        }
-
-        private void InitializeFigures(IPlayer firstPlayer, IPlayer secondPlayer)
-        {
-            int end = GlobalConstants.EndRowOfBoard;
-            int row = GlobalConstants.StartRowOfBoard;
-            int col = GlobalConstants.StartColOfBoard;
-
-            for (int i = 0; i < firstPlayer.Figures.Count; i++)
-            {
-                if (i == end)
-                {
-                    row++;
-                    col = GlobalConstants.StartColOfBoard;
-                }
-                this.board[row, col++] = firstPlayer.Figures[i];
-            }
-
-            row = GlobalConstants.EndRowOfBoard - 2;
-            col = GlobalConstants.StartColOfBoard;
-
-            for (int i = 0; i < secondPlayer.Figures.Count; i++)
-            {
-                if (i == end)
-                {
-                    row++;
-                    col = GlobalConstants.StartColOfBoard;
-                }
-                this.board[row, col++] = secondPlayer.Figures[i];
-            }
+            if (this.BoardSize < checkPos.Height+1 || this.BoardSize < checkPos.Width) return false;
+            if (checkPos.Height < 0 || checkPos.Width < 0) return false;
+            return true;
         }
     }
 }

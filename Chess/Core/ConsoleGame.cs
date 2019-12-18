@@ -53,10 +53,10 @@
             Console.OutputEncoding = Encoding.UTF8;
 
             SystemSetting.SetSettingOfFontMsGothic();
-            IPlayer peshoPlayer = new FirstPlayer("Pesho", Color.Yellow);
+            IPlayer peshoPlayer = new FirstPlayer("Pesho", Color.DarkYellow);
             peshoPlayer.SaveCoordinates();
 
-            IPlayer goshoPlayer = new SecondPlayer("Gosho", Color.DarkYellow);
+            IPlayer goshoPlayer = new SecondPlayer("Gosho", Color.Yellow);
             goshoPlayer.SaveCoordinates();
 
             Board board = new Board(peshoPlayer, goshoPlayer,8);

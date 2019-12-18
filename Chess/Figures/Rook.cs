@@ -17,10 +17,10 @@
         public void Move(bool isFirstPlayer, int row, int col, int newRow, 
             int newCol, IFigure[,] board, IFigure figure)
         {
-            if (board[newRow,newCol] != null)
-            {
-                throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
-            }
+            //if (board[newRow,newCol] != null)
+            //{
+            //    throw new ArgumentException(GlobalConstants.MessageForBusyPlace);
+            //}
 
             if (isFirstPlayer)
             {
@@ -34,15 +34,19 @@
                 }
                 else if (MoveDown(col, newCol, row, newRow))
                 {
-                    figure.Position.Height += move * (numberStartPosition - numberDestination); ;
+                    figure.Position.Height += move * (numberStartPosition - numberDestination);
                 }
-                else if (MoveLeft())
+                else if (MoveLeft(col, newCol))
                 {
 
                 }
-                else if (MoveRigt())
+                else if (MoveRigt(col, newCol))
                 {
+                    move = 9;
+                    numberStartPosition = GlobalConstants.StartPosition[0];
+                    numberDestination = GlobalConstants.Destination[0];
 
+                    figure.Position.Width += move * (numberDestination - numberStartPosition) * 2;
                 }
                 else
                 {
@@ -57,14 +61,14 @@
             board[newRow, newCol] = figure;
         }
 
-        private bool MoveRigt()
+        private bool MoveRigt(int col, int newCol)
         {
-            throw new NotImplementedException();
+            return newCol > col;   
         }
 
-        private bool MoveLeft()
+        private bool MoveLeft(int col, int newCol)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         private bool MoveDown(int col, int newCol, int row, int newRow)

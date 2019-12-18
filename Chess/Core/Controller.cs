@@ -4,6 +4,7 @@
     using Chess.Interfaces;
     using Chess.IO;
     using System;
+    using System.Text;
 
     public class Controller
     {
@@ -24,6 +25,8 @@
 
         public void Start()
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             while (true)
             {
                 ConsoleIO.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,

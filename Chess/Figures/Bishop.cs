@@ -8,7 +8,8 @@
     {
         public override string StringRepresentation => "♝";
 
-        public Bishop(IPlayer player, Position pos) : base(player, pos)
+        public Bishop(IPlayer player, Position pos) 
+            : base(player, pos)
         {
         }        
 

@@ -15,7 +15,7 @@ namespace Chess.Figures
 
         public Position Position { get ; set; }
 
-        public IPlayer Player { get; protected set; }
+        public IPlayer Player { get;}
 
         public Color Color { get; set; }
         public virtual bool Move(Position newPos,Board board)

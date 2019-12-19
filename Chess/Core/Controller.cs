@@ -26,11 +26,7 @@
         {
             while (true)
             {
-                ConsoleIO.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
-                        GlobalConstants.CursorHeightPositionOfConsole);
-
-                Console.ForegroundColor = ConsoleColor.White;
-                ConsoleIO.WriteConsole($"{currentPlayer.Name} - You're on the move ");
+                this.painter.DrawMessage($"{currentPlayer.Name} - You're on the move ");
 
                 string[] userMove = ConsoleIO.ReadFromConsole().Split(); 
 
@@ -40,7 +36,6 @@
                     string newPosition = userMove[1];
                     if (board.MoveFigure(currentPosition, newPosition, currentPlayer))
                     {
-                        ConsoleIO.ClearConsole();
                         painter.DrawBoard(board);
 
                         //swap player if move is valid
@@ -50,12 +45,8 @@
                 }
                 catch (System.Exception exception)
                 {
-                    ConsoleIO.SetCursorPositionConsole(1, 28);
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    ConsoleIO.WriteConsole(exception.Message);
+                    painter.DrawErrorMessage(exception.Message);
                     ConsoleIO.Sleep(3000);
-                    ConsoleIO.ClearConsole();
-                    Console.ForegroundColor = ConsoleColor.White;
                     painter.DrawBoard(board);
                 }
             }

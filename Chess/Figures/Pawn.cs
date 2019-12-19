@@ -9,7 +9,6 @@ namespace Chess.Figures
         public Pawn(IPlayer player, Position pos)
             :base(player,pos)
         {
-            this.HasInitialState = true;
         }
 
         public override string StringRepresentation => "♙";

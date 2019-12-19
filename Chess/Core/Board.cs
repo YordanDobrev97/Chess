@@ -25,7 +25,7 @@
             var currentPos = new Position(currentPosition);
             if (!isInBoard(currentPos)) throw new ArgumentException($"Coordinates otside board {currentPosition}");
             var newPos = new Position(newPosition);
-            if (!isInBoard(newPos)) throw new ArgumentException($"Coordinates otside board {currentPosition}");
+            if (!isInBoard(newPos)) throw new ArgumentException($"Coordinates otside board {newPos}");
 
             //Check for current Figure
             // To Do ovveride the Equals func of Possition class for better comparation
@@ -45,8 +45,7 @@
                     && x.Position.Height == newPos.Height);
                 if (checkFigure != null) oppositePlayer.Figures.Remove(checkFigure);
                 return true;
-            }  
-
+            }
             return false;
         }
 

@@ -95,6 +95,7 @@
 
         public void DrawBoard(Board board)
         {
+            ConsoleIO.ClearConsole();
             int countSpacePaip = CountSpacePaipDrawBoard;
             ConsoleIO.WriteLineConsole(string.Empty);
 
@@ -130,6 +131,22 @@
             this.PrintFiguresOfPlayer(board.SecondPlayer, 1);
         }
 
+        public void DrawMessage(string message)
+        {
+            ConsoleIO.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
+                        GlobalConstants.CursorHeightPositionOfConsole);
+
+            Console.ForegroundColor = ConsoleColor.White;
+            ConsoleIO.WriteConsole(message);
+        }
+
+        public void DrawErrorMessage(string message)
+        {
+            ConsoleIO.SetCursorPositionConsole(1, 28);
+            Console.ForegroundColor = ConsoleColor.Red;
+            ConsoleIO.WriteConsole(message);            
+            Console.ForegroundColor = ConsoleColor.White;
+        }
         private void PrintFiguresOfPlayer(IPlayer player, int numberPlayer)
         {
             foreach (var figure in player.Figures)

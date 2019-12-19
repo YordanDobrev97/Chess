@@ -21,11 +21,31 @@ namespace Chess.Figures
         public virtual bool Move(Position newPos,Board board)
         {
             // basic Move function -> everywhere except over his own figures
-            if (this.Player.Figures.Any(x => x.Position.Width == newPos.Width && x.Position.Height == newPos.Height))
-                return false;
+            if (this.PlayerHasFigureOnRequestedField(newPos)) return false;
 
             this.Position = newPos;
             return true;
+        }
+
+        protected bool PlayerHasFigureOnRequestedField(Position newPos)
+        {
+            if (this.Player.Figures.Any(x => x.Position.Width == newPos.Width && x.Position.Height == newPos.Height))
+                return true;
+            return false;
+        }
+
+        protected IFigure[,] GetBoardMatrix(Board board)
+        {
+            var matrix = new IFigure[board.BoardSize, board.BoardSize];
+            foreach (var item in board.FirstPlayer.Figures)
+            {
+                matrix[item.Position.Width, item.Position.Height] = item;
+            }
+            foreach (var item in board.SecondPlayer.Figures)
+            {
+                matrix[item.Position.Width, item.Position.Height] = item;
+            }
+            return matrix;
         }
     }
 }

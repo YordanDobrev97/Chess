@@ -23,9 +23,9 @@ namespace Chess.Common
 
        // public static int StartColOfBoard = 0;
 
-        public static int CursorWidthPositionOfConsole = 2;
+      //  public static int CursorWidthPositionOfConsole = 2;
 
-        public static int CursorHeightPositionOfConsole = 27;
+      //  public static int CursorHeightPositionOfConsole = 27;
 
       //  public static bool DefaultSaveCordinatesFigures = true;
 

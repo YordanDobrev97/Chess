@@ -46,7 +46,8 @@
                 if (checkFigure != null) oppositePlayer.Figures.Remove(checkFigure);
                 return true;
             }
-            return false;
+            throw new ArgumentException($"Figure {figure.StringRepresentation}  on {currentPosition} cannot move to {newPosition}! Please follow chess rules!");
+           // return false;
         }
 
         private IPlayer GetOppositePlayer(IPlayer currentPlayer)

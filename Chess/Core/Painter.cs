@@ -1,7 +1,5 @@
 ﻿namespace Chess
 {
-    using Chess.Common;
-    using Chess.Figures;
     using Chess.Interfaces;
     using Chess.IO;
     using System;
@@ -15,6 +13,8 @@
         private const int IncrementFiguresPosition = 10;
         private const int StartValuePawnPosition = 5;
         private const int IncrementStartValuePawnPosition = 10;
+        public static int CursorWidthPositionOfConsole = 2;
+        public static int CursorHeightPositionOfConsole = 27;
 
         public void DrawAdminPanel()
         {
@@ -133,9 +133,7 @@
 
         public void DrawMessage(string message)
         {
-            ConsoleIO.SetCursorPositionConsole(GlobalConstants.CursorWidthPositionOfConsole,
-                        GlobalConstants.CursorHeightPositionOfConsole);
-
+            ConsoleIO.SetCursorPositionConsole(CursorWidthPositionOfConsole,CursorHeightPositionOfConsole);
             Console.ForegroundColor = ConsoleColor.White;
             ConsoleIO.WriteConsole(message);
         }
@@ -155,10 +153,7 @@
                 int width = (StartValuePawnPosition)+(figure.Position.Width*IncrementStartValuePawnPosition);
                 int height = 23 - figure.Position.Height*3;
 
-                ConsoleIO.SetCursorPositionConsole(width, height);
-                //ConsoleIO.ConsoleForegroundColor(ConsoleColor.Gray);??
-                // var typeColor = (ConsoleColor)Enum.GetValues(typeof(Color))
-                //   .GetValue(numberPlayer);               
+                ConsoleIO.SetCursorPositionConsole(width, height);    
                 var typeColor = (ConsoleColor)figure.Color;
                 ConsoleIO.ConsoleForegroundColor(typeColor);
 
@@ -174,7 +169,6 @@
                 {
                     ConsoleIO.WriteConsole("=");
                 }
-
                 ConsoleIO.WriteConsole(new string(' ', CountSpacePaipDrawBoard));
             }
         }
@@ -183,7 +177,6 @@
         {
             ConsoleIO.WriteConsole(new string(' ', countSpacePaip));
             DrawFront(board);
-
             ConsoleIO.WriteLineConsole(string.Empty);
             ConsoleIO.WriteConsole(num);
             ConsoleIO.WriteConsole(new string(' ', countSpacePaip - 1));
@@ -203,7 +196,6 @@
             ConsoleIO.WriteLineConsole(string.Empty);
             ConsoleIO.WriteConsole(new string(' ', countSpacePaip));
             DrawFront(board);
-
             ConsoleIO.WriteLineConsole(string.Empty);
         }
     }

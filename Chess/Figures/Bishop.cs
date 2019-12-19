@@ -1,8 +1,6 @@
 ﻿namespace Chess.Figures
 {
-    using Chess.Common;
     using Chess.Interfaces;
-    using System;
 
     public class Bishop : BasicFigure
     {

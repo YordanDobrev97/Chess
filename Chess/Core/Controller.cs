@@ -11,7 +11,7 @@
         private IPlayer secondPlayer;
         private Board board;
         private IPlayer currentPlayer;
-        private IPainter painter; // needs IPainter - ConsolePainter
+        private IPainter painter;
 
         public Controller(Board board, IPainter painter)
         {

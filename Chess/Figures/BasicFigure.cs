@@ -29,7 +29,8 @@ namespace Chess.Figures
 
         protected bool PlayerHasFigureOnRequestedField(Position newPos)
         {
-            if (this.Player.Figures.Any(x => x.Position.Width == newPos.Width && x.Position.Height == newPos.Height))
+            if (this.Player.Figures.Any(x => x.Position.Width == newPos.Width 
+            && x.Position.Height == newPos.Height))
                 return true;
             return false;
         }

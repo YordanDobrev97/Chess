@@ -1,7 +1,5 @@
 ﻿namespace Chess.Figures
 {
-    using System;
-    using System.Linq;
     using Chess.Interfaces;
 
     public class Bishop : BasicFigure
@@ -13,11 +11,13 @@
         {
         }
 
+        public static IFigure CurrentBishop { get; set; }
+
         public override bool Move(Position newPos, Board board)
         {
             if (this.PlayerHasFigureOnRequestedField(newPos)) return false;
 
-            if (IsMoveDiagonal(newPos) && IsNotBlockedAnotherFigure(newPos, board))
+            if (IsMoveDiagonal(newPos) && !IsBlockedAnotherFigure(newPos, board))
             {
                 this.Position = newPos;
 
@@ -27,9 +27,30 @@
             return false;
         }
 
-        private bool IsNotBlockedAnotherFigure(Position newPos, Board board)
+        private bool IsBlockedAnotherFigure(Position newPos, Board board)
         {
-            //TODO - Add logic to when a figure is blocked by another and cannot be moved
+            foreach (var figure in this.Player.Figures)
+            {
+                var height = CurrentBishop.Position.Height;
+                var width = CurrentBishop.Position.Width;
+
+                var newHeight = newPos.Height;
+                var newWidth = newPos.Width;
+
+                var isRightBlocked = height + 1 == figure.Position.Height
+                    && width + 1 == figure.Position.Width;
+
+                bool isLeftBlocked = figure.Position.Height == height + 1
+                    && figure.Position.Width == width - 1
+                    && newHeight - 1 == figure.Position.Height
+                    && newWidth + 1 == figure.Position.Width;
+
+                if (isLeftBlocked || isRightBlocked)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 

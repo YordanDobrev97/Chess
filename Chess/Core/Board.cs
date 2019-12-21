@@ -23,9 +23,9 @@
         {
             //check for InBoard
             var currentPos = new Position(currentPosition);
-            if (!isInBoard(currentPos)) throw new ArgumentException($"Coordinates otside board {currentPosition}");
+            if (!IsInBoard(currentPos)) throw new ArgumentException($"Coordinates otside board {currentPosition}");
             var newPos = new Position(newPosition);
-            if (!isInBoard(newPos)) throw new ArgumentException($"Coordinates otside board {newPos}");
+            if (!IsInBoard(newPos)) throw new ArgumentException($"Coordinates otside board {newPos}");
 
             //Check for current Figure
             // To Do ovveride the Equals func of Possition class for better comparation
@@ -56,7 +56,7 @@
             return this.FirstPlayer;
         }
 
-        private bool isInBoard(Position checkPos)
+        private bool IsInBoard(Position checkPos)
         {
             if (this.BoardSize < checkPos.Height+1 || this.BoardSize < checkPos.Width) return false;
             if (checkPos.Height < 0 || checkPos.Width < 0) return false;

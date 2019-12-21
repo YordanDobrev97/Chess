@@ -20,25 +20,15 @@
 
             var matrix = this.GetBoardMatrix(board);
 
-            if (TryMoveWithoutObstacles(1, 1, matrix, newPos)) //upRight
+            var widthDirection = newPos.Width.CompareTo(this.Position.Width);
+            var heightDirection = newPos.Height.CompareTo(this.Position.Height);
+            if (widthDirection != 0 && heightDirection != 0)
             {
-                this.Position = newPos;
-                return true;
-            }
-            if (TryMoveWithoutObstacles(-1, 1, matrix, newPos)) //upLeft
-            {
-                this.Position = newPos;
-                return true;
-            }
-            if (TryMoveWithoutObstacles(1, -1, matrix, newPos)) //downRight
-            {
-                this.Position = newPos;
-                return true;
-            }
-            if (TryMoveWithoutObstacles(-1, -1, matrix, newPos)) //downLeft
-            {
-                this.Position = newPos;
-                return true;
+                if (TryMoveWithoutObstacles(widthDirection, heightDirection, matrix, newPos))
+                {
+                    this.Position = newPos;
+                    return true;
+                }
             }
 
             return false;

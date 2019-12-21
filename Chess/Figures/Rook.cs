@@ -1,7 +1,6 @@
 ﻿namespace Chess.Figures
 {
     using Chess.Interfaces;
-    using System;
 
     public class Rook : BasicFigure
     {

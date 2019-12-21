@@ -35,12 +35,6 @@
 
             if (figure == null) throw new ArgumentException($"Player {currentPlayer.Name} doesn't have figure on {currentPosition}");
 
-            //I need from bishop for calculate him current place and new place and check has blocked figure
-            if (figure is Bishop)
-            {
-                Bishop.CurrentBishop = figure;
-            }
-
             //Move Figure
             if (figure.Move(new Position(newPosition), this))
             {

@@ -19,24 +19,18 @@ namespace Chess.Figures
             if (this.PlayerHasFigureOnRequestedField(newPos)) return false;
             int direction = GetPawnsDirection(board);
             var matrix = this.GetBoardMatrix(board);
-            if (this.HasInitialState)
-            {
-                if(newPos.Width == this.Position.Width 
+            
+            if((newPos.Width == this.Position.Width 
                     && newPos.Height == this.Position.Height+(direction*2))
+                    && this.HasInitialState)
                 {
-                    if (matrix[this.Position.Width, this.Position.Height + direction] != null) return false;
+                    if (matrix[this.Position.Width, this.Position.Height + direction] != null 
+                        || matrix[this.Position.Width, this.Position.Height + (direction*2)] != null) 
+                        return false;                        
                     this.MoveToNewPosition(newPos);
-                    return true;
-                }
-                if (newPos.Width == this.Position.Width
-                    && newPos.Height == this.Position.Height+direction)
-                {
-                    this.MoveToNewPosition(newPos);
-                    return true;
-                }
-            }
-            else 
-            {
+                    return true;                
+                }            
+           
                if (newPos.Width == this.Position.Width && newPos.Height == this.Position.Height+direction)
                 {
                     if (matrix[this.Position.Width, this.Position.Height + direction] != null) return false;
@@ -58,7 +52,7 @@ namespace Chess.Figures
                         this.MoveToNewPosition(newPos);
                         return true;
                     }
-                }
+                
             }
             return false;
         }

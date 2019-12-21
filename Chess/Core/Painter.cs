@@ -120,12 +120,34 @@
                 countSpace += IncrementFiguresPosition;
             }
 
-            //print names of players
-            countSpace += IncrementFiguresPosition;
+            //print names  and figs taken of players
             ConsoleIO.SetCursorPositionConsole(countSpace, WidthCursorPositionDrawFigures);
-            ConsoleIO.WriteConsole(board.FirstPlayer.Name);            
+            ConsoleIO.WriteConsole(board.FirstPlayer.Name);
+            if (board.FirstPlayer.FiguresTaken.Count > 0)
+            {
+               ConsoleIO.SetCursorPositionConsole(countSpace, WidthCursorPositionDrawFigures+1);
+               ConsoleIO.ConsoleForegroundColor((ConsoleColor)board.SecondPlayer.Color);
+               ConsoleIO.WriteConsole("Figs:");
+                foreach (var fig in board.FirstPlayer.FiguresTaken)
+                {
+                    ConsoleIO.WriteConsole(fig + " ");
+                }   
+                Console.ForegroundColor = ConsoleColor.White;
+            }            
+
             ConsoleIO.SetCursorPositionConsole(countSpace, 1);
             ConsoleIO.WriteConsole(board.SecondPlayer.Name);
+            if (board.SecondPlayer.FiguresTaken.Count > 0)
+            {
+                ConsoleIO.SetCursorPositionConsole(countSpace, 2);
+                ConsoleIO.ConsoleForegroundColor((ConsoleColor)board.FirstPlayer.Color);
+                ConsoleIO.WriteConsole("Figs:");
+                foreach (var fig in board.SecondPlayer.FiguresTaken)
+                {
+                    ConsoleIO.WriteConsole(fig + " ");
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+            }
 
             this.PrintFiguresOfPlayer(board.FirstPlayer, 0);
             this.PrintFiguresOfPlayer(board.SecondPlayer, 1);

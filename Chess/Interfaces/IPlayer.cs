@@ -10,6 +10,7 @@ namespace Chess.Interfaces
         Color Color { get; }
         List<IFigure> Figures { get; set; }
 
+        List<string> FiguresTaken { get; set; }
         void SaveCoordinates();
     }
 }

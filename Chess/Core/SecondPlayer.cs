@@ -12,12 +12,14 @@
             this.Name = name;
             this.Color = color;
             this.Figures = new List<IFigure>();
+            this.FiguresTaken = new List<string>();
         }
 
         public string Name { get; set; }
 
         public List<IFigure> Figures { get; set; }
 
+        public List<string> FiguresTaken { get; set; }
         public Color Color { get; }
 
         public void SaveCoordinates()

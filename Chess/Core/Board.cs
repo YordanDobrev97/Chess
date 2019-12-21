@@ -43,7 +43,11 @@
                 IFigure checkFigure = oppositePlayer.Figures.FirstOrDefault
                     (x => x.Position.Width == newPos.Width 
                     && x.Position.Height == newPos.Height);
-                if (checkFigure != null) oppositePlayer.Figures.Remove(checkFigure);
+                if (checkFigure != null)
+                {
+                    oppositePlayer.Figures.Remove(checkFigure);
+                    currentPlayer.FiguresTaken.Add(checkFigure.StringRepresentation);
+                }
                 return true;
             }
             throw new ArgumentException($"Figure {figure.StringRepresentation}  on {currentPosition} cannot move to {newPosition}! Please follow chess rules!");

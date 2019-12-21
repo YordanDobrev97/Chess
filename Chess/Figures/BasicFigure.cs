@@ -48,5 +48,23 @@ namespace Chess.Figures
             }
             return matrix;
         }
+
+        // A basic check route function
+        // Directions can be:
+        // * widthDirection  =-1 -> left; =0 -> no change; =1 -> right
+        // * heightDirection =-1 -> down; =0 -> no change; =1 -> up
+        protected bool TryMoveWithoutObstacles(int widthDirection, int heightDirection, IFigure[,] matrix, Position newPos)
+        {
+            int width = this.Position.Width + widthDirection;
+            int height = this.Position.Height + heightDirection;
+            while (width >= 0 && width < matrix.GetLength(0) && height >= 0 && height < matrix.GetLength(1))
+            {
+                if (width == newPos.Width && height == newPos.Height) return true; //reached requested field
+                if (matrix[width, height] != null) return false; // a figure on route
+                width += widthDirection;
+                height += heightDirection;
+            }
+            return false; // requested field not on route
+        }
     }
 }

@@ -14,6 +14,7 @@
         public override bool Move(Position newPos, Board board)
         {
             //TODO - You have to think about how to reduce the copying of code, because things are repeated in a lot of places
+            // the logic of TryMoveWithoutObstacles is not suitable for knights. They allways jump over other figures.
             if (this.PlayerHasFigureOnRequestedField(newPos)) return false;
 
             var matrix = this.GetBoardMatrix(board);

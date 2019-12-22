@@ -29,20 +29,24 @@
 
         public void StartMenu()
         {
-            Console.ForegroundColor = ConsoleColor.White;
-            FullScreen();
-            painter.DrawAdminPanel();
-
-            string userChoice = Console.ReadLine();
-
-            if (userChoice == "Start Game")
+            while (true)
             {
                 Console.Clear();
-                StartGame();
-            }
-            else if (userChoice == "Exit")
-            {
-                Environment.Exit(0);
+                Console.ForegroundColor = ConsoleColor.White;
+                FullScreen();
+                painter.DrawAdminPanel();
+
+                string userChoice = Console.ReadLine();
+
+                if (userChoice == "Start Game")
+                {
+                    Console.Clear();
+                    StartGame();
+                }
+                else if (userChoice == "Exit")
+                {
+                    Environment.Exit(0);
+                }
             }
         }
 

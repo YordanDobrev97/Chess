@@ -41,6 +41,14 @@
                         //swap player if move is valid
                         if (this.currentPlayer == firstPlayer) this.currentPlayer = secondPlayer;
                         else this.currentPlayer = firstPlayer;
+
+                        if (board.Winner != null)
+                        {
+                            painter.DrawBoard(board);
+                            painter.DrawMessage($"{board.Winner.Name} - wins the game! Press enter. ");
+                            ConsoleIO.ReadFromConsole();
+                            return;
+                        }
                     }
                 }
                 catch (System.Exception exception)

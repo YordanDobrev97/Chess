@@ -1,5 +1,6 @@
 ﻿namespace Chess
-{    
+{
+    using Chess.Figures;
     using Chess.Interfaces;
     using System;
     using System.Linq;
@@ -17,13 +18,15 @@
         public IPlayer FirstPlayer { get; }
         public IPlayer SecondPlayer { get; }
 
+        public IPlayer Winner { get; private set; }
+
         public bool MoveFigure(string currentPosition, string newPosition, IPlayer currentPlayer)
         {
             //check for InBoard
             var currentPos = new Position(currentPosition);
             if (!IsInBoard(currentPos)) throw new ArgumentException($"Coordinates otside board {currentPosition}");
             var newPos = new Position(newPosition);
-            if (!IsInBoard(newPos)) throw new ArgumentException($"Coordinates otside board {newPos}");
+            if (!IsInBoard(newPos)) throw new ArgumentException($"Coordinates otside board {newPosition}");
 
             //Check for current Figure
             // To Do ovveride the Equals func of Possition class for better comparation
@@ -45,6 +48,7 @@
                 {
                     oppositePlayer.Figures.Remove(checkFigure);
                     currentPlayer.FiguresTaken.Add(checkFigure.StringRepresentation);
+                    if (checkFigure is King) this.Winner = currentPlayer;
                 }
                 return true;
             }

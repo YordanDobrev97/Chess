@@ -1,6 +1,5 @@
 ﻿namespace Chess
 {
-    using Chess.Common;
     using Chess.Interfaces;
     using Chess.IO;
     using System;
@@ -38,17 +37,32 @@
                     {
                         painter.DrawBoard(board);
 
-                        //swap player if move is valid
-                        if (this.currentPlayer == firstPlayer) this.currentPlayer = secondPlayer;
-                        else this.currentPlayer = firstPlayer;
-
-                        if (board.Winner != null)
+                        if (board.Winner != null) // check for end game
                         {
                             painter.DrawBoard(board);
                             painter.DrawMessage($"{board.Winner.Name} - wins the game! Press enter. ");
                             ConsoleIO.ReadFromConsole();
                             return;
                         }
+
+                        if (board.RevivalPawn != null)
+                        {
+                            while (true)
+                            {
+                                painter.DrawMessage($"Pawn to {board.RevivalPawn.Position} can revive in: Queen, Bishop, Rook, Knight.Enter your choise:");
+                                var userChoise = ConsoleIO.ReadFromConsole();
+                                if (userChoise =="Queen" || userChoise == "Bishop" || userChoise == "Rook" || userChoise == "Knight")
+                                {
+                                    board.ReviveNewFigure(currentPlayer, userChoise);                                
+                                    painter.DrawBoard(board);
+                                    break;
+                                }
+                            }
+                        }
+
+                        //swap player if move is valid
+                        if (this.currentPlayer == firstPlayer) this.currentPlayer = secondPlayer;
+                        else this.currentPlayer = firstPlayer;
                     }
                 }
                 catch (System.Exception exception)

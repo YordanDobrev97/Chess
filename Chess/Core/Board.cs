@@ -20,6 +20,8 @@
 
         public IPlayer Winner { get; private set; }
 
+        public Pawn RevivalPawn { get; private set; }
+
         public bool MoveFigure(string currentPosition, string newPosition, IPlayer currentPlayer)
         {
             //check for InBoard
@@ -48,12 +50,39 @@
                 {
                     oppositePlayer.Figures.Remove(checkFigure);
                     currentPlayer.FiguresTaken.Add(checkFigure.StringRepresentation);
-                    if (checkFigure is King) this.Winner = currentPlayer;
+                    if (checkFigure is King) this.Winner = currentPlayer; // check for winner
+                }
+                if (figure is Pawn)
+                { 
+                    if (figure.Position.Height == 0 || figure.Position.Height == this.BoardSize - 1)
+                    this.RevivalPawn = (Pawn)figure;
                 }
                 return true;
             }
             throw new ArgumentException($"Figure {figure.StringRepresentation}  on {currentPosition} cannot move to {newPosition}! Please follow chess rules!");
            // return false;
+        }
+
+        public bool ReviveNewFigure(IPlayer currentPlayer, string figure)
+        {
+            if (this.RevivalPawn != null)
+            {                
+                IFigure newFig = null;
+                switch (figure)
+                {
+                    case "Queen": newFig = new Queen(currentPlayer, new Position(RevivalPawn.Position.ToString()));break;
+                    case "Rook": newFig = new Rook(currentPlayer, new Position(RevivalPawn.Position.ToString())); break;
+                    case "Bishop": newFig = new Bishop(currentPlayer, new Position(RevivalPawn.Position.ToString())); break;
+                    case "Knight": newFig = new Knight(currentPlayer, new Position(RevivalPawn.Position.ToString())); break;
+                    default: throw new ArgumentException($"No such figure : {figure}");
+                }
+                currentPlayer.Figures.Remove(this.RevivalPawn);
+                this.RevivalPawn = null;
+                newFig.Color = currentPlayer.Color;
+                currentPlayer.Figures.Add(newFig);
+                return true;
+            }
+            throw new ArgumentException("No reviving pawn rised!");
         }
 
         private IPlayer GetOppositePlayer(IPlayer currentPlayer)

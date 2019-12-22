@@ -25,5 +25,11 @@
                 this.height = value -'1';
             }
         }
+
+        public override string ToString()
+        {
+            var currentWidth = 'a' + this.Width;
+            return $"{(char)currentWidth}{this.height+1}";
+        }
     }
 }

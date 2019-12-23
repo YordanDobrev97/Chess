@@ -14,4 +14,4 @@
 
 **The victor is the one who first kills the king, is not the typical matting as usual**
 
-![finally gif chess](https://user-images.githubusercontent.com/42092212/71376011-c9599680-25c8-11ea-8a26-e8cb6390d6ee.gif)
+![Hnet-image](https://user-images.githubusercontent.com/42092212/71378321-02493980-25d0-11ea-8922-32543be14c65.gif)
